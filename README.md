@@ -1,4 +1,4 @@
-# no coupon works!!!!
+# Grocery Simulator
 
 ## Roster:
 **Yu Lu** -  Project Manager <br>
