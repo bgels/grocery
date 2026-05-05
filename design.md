@@ -1,6 +1,6 @@
 grocery: Yu Lu, Jun Jie Li, Ricky Lin, Emily Mai
 
-# COSTGO🤑 by 
+# COSTGO🤑 by Grocery
 # TARGET SHIP DATE:
 
 
