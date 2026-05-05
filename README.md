@@ -7,10 +7,10 @@ JS and Tailwind for site interactivity<br>
 **Emily Mai** -  Database manager<br>
 builds and maintains Sqlite database + integration with middleware<br>
 <br>
-**Jun Jie Li** -  Middleware <br>
+**Jun Jie Li** -  Front-end <br>
 Frontend visuals, game assets and design<br>
 <br>
-**Ricky Lin** - Front-end <br>
+**Ricky Lin** - Middleware <br>
 Flask middleware, Sqlite queries, and page routing<br>
 <br>
 
