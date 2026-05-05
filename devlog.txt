@@ -4,4 +4,5 @@ Yu Lu -- 2026-04-30 4:15
 Resturant Simulator -- 2026-05-04 10:40
 -- Copyfail fix on all droplets
 
-Ricky Lin 
+rickyL -- 2026-05-5 10:40
+-- Worked on design.md and organization
