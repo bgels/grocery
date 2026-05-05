@@ -1,6 +1,6 @@
 grocery: Yu Lu, Jun Jie Li, Ricky Lin, Emily Mai
 
-# COSTGO🤑 by Grocery
+# COSTGO🤑 by Resturant Simulator
 # TARGET SHIP DATE:
 
 
