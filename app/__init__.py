@@ -32,3 +32,5 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# query the sqlite for yu and so he can use stuff from the database
