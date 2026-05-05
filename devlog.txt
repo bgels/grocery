@@ -3,10 +3,10 @@ Yu Lu -- 2026-04-30 4:15
 
 Resturant Simulator -- 2026-05-04 10:40
 Designated Primary VM: Yu Lu's 164.90.255.3 @ https://nocoupon.works/
--- Wipe box clean (re-image)? YES|**NO**
-Serve multiple apps concurrently? YES|**NO**
-**Flask**|Node?
-Has any team member provisioned SSL certificates to facilitate httpS traffic? **YES**|NO
+-- Wipe box clean (re-image)? No
+Serve multiple apps concurrently? No
+Flask
+Has any team member provisioned SSL certificates to facilitate httpS traffic? Yes
 
 rickyL -- 2026-05-5 10:40
 -- Worked on design.md and organization
