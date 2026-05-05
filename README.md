@@ -1,4 +1,4 @@
-# Grocery Simulator
+# Resturant Simulator
 
 ## Roster:
 **Yu Lu** -  Project Manager <br>
