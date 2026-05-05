@@ -1,13 +1,13 @@
 grocery: Yu Lu, Jun Jie Li, Ricky Lin, Emily Mai
 
-COSTGO🤑
-TARGET SHIP DATE:
-Alr
+# COSTGO🤑 by 
+# TARGET SHIP DATE:
 
-Description:
+
+# Description:  
 We plan to create a grocery store management simulator. The player will primarily play in two roles, the cashier and the manager. Customers will come into the store daily and buy goods before going to the register to pay, the cashier will calculate and total the goods and give them back any leftover change. When the day ends, the manager will be responsible for buying new stock for tomorrow and order new upgrades for the store that will improve customer mood and store efficiency!!!11
 
-Program Components:
+# Program Components:
 * Frontend
   * HTML Templates
     * Posts
@@ -35,7 +35,7 @@ Program Components:
 
 
 
-Database Organization: (emily)
+# Database Organization: (emily)
 
 
 
@@ -51,21 +51,21 @@ Component Map: (rickly)
 
 
 
-Task Breakdown:
+# Task Breakdown:
 
-Yu Lu - Project Manager
-Create javascript
+Yu Lu - Project Manager  
+- Create javascript
 
-Emily Mai - Database manager
-builds and maintains Sqlite database + integration with middleware
+Emily Mai - Database manager  
+- builds and maintains Sqlite database + integration with middleware
 
-Jun Jie Li - Middleware
-Frontend visuals, game assets and design
+Jun Jie Li - Middleware  
+- Frontend visuals, game assets and design
 
-Ricky Lin - Front-end
-Flask middleware, Sqlite queries, and page
+Ricky Lin - Front-end  
+- Flask middleware, Sqlite queries, and page  
 
-DATASETS: https://www.kaggle.com/datasets/kritikseth/fruit-and-vegetable-image-recognition
+**DATASETS:** https://www.kaggle.com/datasets/kritikseth/fruit-and-vegetable-image-recognition
 
 
 junjiel26@nycstudents.net
