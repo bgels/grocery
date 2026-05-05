@@ -1,5 +1,7 @@
 Yu Lu -- 2026-04-30 4:15
 -- Added inital codebase setup
 
-Grocery Simulator -- 2026-05-04 10:40
+Resturant Simulator -- 2026-05-04 10:40
 -- Copyfail fix on all droplets
+
+Ricky Lin 
