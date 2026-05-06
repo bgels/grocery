@@ -29,11 +29,12 @@ const game = {
 };
 
 function getCustomer(){
-    //random name
+    // random name
     // random clothing
     // random trait
     // random budget
     // random cart under budget
+
 }
 
 function BudgetPool(multiplier){ // multiplier is decimal percentage of how muuch totla budget
@@ -106,3 +107,8 @@ function processPayment(changeGiven) {
 
     // check for return true/false for this funciton, thhen you can process
 }
+
+
+const test = document.getElementById("main");
+
+test.innerText = "hello?";
