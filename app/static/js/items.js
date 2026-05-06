@@ -1,20 +1,16 @@
-const ITEMS = [
-    {
-        id: "flour",
-        name: "Flour",
-        price: 199,
-        sprite: "static/images/items/"
+const PRODUCTS = {
+    apple: {
+        name: "Apple",
+        quantity: 20,
+        buyPrice: 1,
+        sellPrice: 2,
+        rarity: "common"
     },
-    {
-        id: "egg",
-        name: "A Dozen Eggs",
-        price: 199,
-        sprite: "static/images/items/"
-    },
-    {
-        id: "milk",
-        name: "Milk",
-        price: 399,
-        sprite: "static/images/items/"
-    },
-];
+    milk:{
+        name: "Milk", 
+        quantity: 10, 
+        buyPrice: 3, 
+        sellPrice: 5, 
+        rarity: "common"
+    }
+};

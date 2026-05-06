@@ -13,3 +13,7 @@ rickyL -- 2026-05-5 10:40
 
 yuL -- 2026-05-5 11:00
 -- Json
+
+yuL -- 2026-05-5 21:30
+-- readme in keys updated for no keys
+-- core game states and cashier day functions, just need to now create template and basic cashier ui to play
