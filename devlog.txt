@@ -12,7 +12,7 @@ rickyL -- 2026-05-5 10:40
 -- Worked on design.md and organization
 
 yuL -- 2026-05-5 11:00
--- Json
+-- Json structure proposal drafting in js file
 
 yuL -- 2026-05-5 21:30
 -- readme in keys updated for no keys
