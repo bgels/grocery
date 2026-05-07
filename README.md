@@ -1,4 +1,4 @@
-# Resturant Simulator
+# grocery simulator by Resturant Simulator
 
 ## Roster:
 **Yu Lu** -  Project Manager <br>
@@ -15,7 +15,7 @@ Flask middleware, Sqlite queries, and page routing<br>
 <br>
 
 ## Description:
-We plan to create a grocery store management simulator. The player will primarily play in two roles, the cashier and the manager. Customers will come into the store daily and buy goods before going to the register to pay, the cashier will calculate and total the goods and give them back any leftover change. When the day ends, the manager will be responsible for buying new stock for tomorrow and order new upgrades for the store that will improve customer mood and store efficiency 
+We plan to create a grocery store management simulator. The player will primarily play in two roles, the cashier and the manager. Customers will come into the store daily and buy goods before going to the register to pay, the cashier will calculate and total the goods and give them back any leftover change. When the day ends, the manager will be responsible for buying new stock for tomorrow and order new upgrades for the store that will improve customer mood and store efficiency
 
 #### [nocoupon.works](https://nocoupon.works/)
 
