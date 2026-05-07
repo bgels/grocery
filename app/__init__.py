@@ -27,9 +27,47 @@ def user_context(): # persistent info made avalible for all html templates
 # ROUTING BEGINS >>
 
 @app.get("/")
-def home():
-    return render_template("home.html")
+def main():
+    return redirect(url_for("home.html"))
 
+@app.get("/login", methods = ["GET", "POST"])
+def login():
+#    if 'username' in session:
+    #    return redirect("/")
+        return render_template("login.html")
+
+@app.route("/register", methods = ["GET", "POST"] )
+def register():
+    #wait for db
+    #if 'username' in session:
+        #return redirect("/home.html")
+    #if request.method == "POST":
+    #    username = request.form.get("username", "").strip()
+    #    password = request.form.get("password", "")
+    return render_template("register.html")
+
+@app.route("/logout")
+def logout():
+    # wait for db
+    #session.pop("username", None)
+    return redirect(url_for("home.html"))
+
+@app.route("/home")
+    def homepage():
+        return render_template("/home.html")
+
+@app.route("/profile")
+    def profile():
+        return render_template("/profile.html")
+
+@app.route("/manager")
+    def manager():
+        return render_template("/manager.html")
+@app.route("/cashier")
+    def cashier():
+        return render_template("/cashier.html")
+
+@app.route()
 if __name__ == "__main__":
     app.run(debug=True)
 
