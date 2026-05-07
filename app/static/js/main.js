@@ -26,6 +26,7 @@ const game = {
         revenue: 0,
         // more idk
     }
+    message: "Welcom" // For announcements or ststem messages
 };
 
 function getCustomer(){
@@ -112,3 +113,19 @@ function processPayment(changeGiven) {
 const test = document.getElementById("main");
 
 test.innerText = "hello?";
+
+
+function startDay() {
+    if (game.day >= game.maxDay) {
+        game.message = "The game is over.";
+        render();
+        return;
+    }
+
+    game.day++;
+    getQueue(5, 0.5); // chabge multipler later
+    game.message = `Day ${game.day} has started.`;
+    nextCustomer();
+}
+
+function render() { } // render text for now ig, event listeners for nextcusomter, change to give, and start next day
