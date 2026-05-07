@@ -1,18 +1,13 @@
 const CUSTOMERS = [
     {
-      id: "regular_1",
+      customer_id: "regular_1", //"regular_1", "special_1", etc
       name: "Regular Customer",
       sprite: "static/images/npc/",
-      traits: ""
+      traits: "",
+      budget: 0
     }
 ];
-const SPECIAL_CUSTOMERS = [
-  {
-    id: "regular_1",
-    name: "Regular Customer",
-    sprite: "static/images/npc/",
-  }
-];
+
 const NAME_PARTS = {
     first:[],
     last:[]
