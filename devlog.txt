@@ -17,3 +17,9 @@ yuL -- 2026-05-5 11:00
 yuL -- 2026-05-5 21:30
 -- readme in keys updated for no keys
 -- core game states and cashier day functions, just need to now create template and basic cashier ui to play
+
+rickyL -- 2026-05-06 21:00
+-- finished component map
+
+rickyL -- 2026-05-07 10:53
+-- Finished basic flask templates
