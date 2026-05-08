@@ -17,9 +17,9 @@ const game = {
     },
 
     stock:{
-        apple: { name: "Apple", quantity: 20, buyPrice: 1, sellPrice: 2.5, rarity: "common" },
-        milk: { name: "Milk", quantity: 10, buyPrice: 3, sellPrice: 5.5, rarity: "common" },
-        pilk: { name: "Pilk", quantity: 10, buyPrice: 3, sellPrice: 1.5, rarity: "common" },
+        apple: { name: "Apple", quantity: 20, buyPrice: 1, sellPrice: 2.45, rarity: "common" },
+        milk: { name: "Milk", quantity: 10, buyPrice: 3, sellPrice: 5.32, rarity: "common" },
+        pilk: { name: "Pilk", quantity: 10, buyPrice: 3, sellPrice: 1.12, rarity: "common" },
         banana: { name: "Bananana", quantity: 10, buyPrice: 3, sellPrice: 2, rarity: "common" }
     }, // prolly should add iamge link later, so need to change a lot fo structures in functions below
 
@@ -57,7 +57,7 @@ function getCustomer(budget){
     const trait = traits[Math.floor(Math.random() * traits.length)];
     const cart = getCart(budget);
     let totalCost = cart.reduce((sum, item) => sum + item.price, 0);
-    totalCost = roundMoney(totalCost * 1); // tax here
+    totalCost = roundMoney(totalCost * 1.11); // tax here
     let moneyGiven = bills.find(bill => bill >= totalCost);
 
     if (!moneyGiven) {
