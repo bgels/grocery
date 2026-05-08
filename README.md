@@ -1,5 +1,5 @@
 # grocery simulator by Resturant Simulator
-
+## [Play Here!](https://nocoupon.works/)
 ## Roster:
 **Yu Lu** -  Project Manager <br>
 JS and Tailwind for site interactivity<br>
