@@ -24,7 +24,14 @@ rickyL -- 2026-05-06 21:00
 rickyL -- 2026-05-07 10:53
 -- Finished basic flask templates
 
+emilyM -- 2026-05-07 10:53
+-- Worked on designing db diagrams (mermaid.js)
+-- Converted existing js db structure to db diagram
+
+junJieL -- 2026-05-07 10:53
+-- Worked on art assets (accessories for the characters)
+-- made base character model a removable layer, added assets to static folder
+
 yuL -- 2026-08-5 7:00
 -- Main game loop draft finished with text as display for now, need to polish code and add visuals later
 -- flask routes in __init__
-

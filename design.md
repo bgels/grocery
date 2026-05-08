@@ -18,7 +18,6 @@
 
 ---
 
- The player will primarily play
 # Summary
 We plan to create a grocery store management simulator where the play will play in two roles: the cashier and the manager. Customers will come into the store daily and buy goods before going to the register to pay, the cashier will calculate and total the goods and give them back any leftover change. When the day ends, the manager will be responsible for buying new stock for tomorrow and order new upgrades for the store that will improve customer mood and store efficiency.
 
@@ -37,7 +36,7 @@ Who will use this system?
 
 ## Why This Project Matters
 
-
+We aim to improve the decision making and mental math skill of users through a fun and interactive format!!111
 ---
 
 # Minimum Viable Product (MVP) Scope
@@ -57,7 +56,6 @@ Features that **must** be completed:
 
 Features intentionally excluded:
 - explicit save system
--
 
 ---
 
@@ -99,13 +97,13 @@ To be added
 
 ## Key User Stories
 ### eg0
-As a __________, I want to __________ so that...
+As a player, I want to be as rich as possible so that I can beat the objective of the game
 
 ### eg1
-As a __________, I want to __________ so that...
+As a developer, I want to make the game interactive and functional so that we can fufill the pleasures of our users
 
 ### eg2
-As a __________, I want to __________ so that...
+As a tester, I want to encounter and play through different games so that i can encounter scenarios with unintuitive/unexpected behaviors that developers might want to address
 
 
 
@@ -115,10 +113,13 @@ EMILY !
 
 
 # Testing Plan
-{Delineate here your plan for testing each component}
+ALWAYS check developer console for errors and consoleLogs opening during testing
+1. Play through 1 Day, serve customers and use the register and gun to see if they work as expected
+2. Play through 1 night, buying upgrades and stock, and see if it is updated the next day
+3. return to the website in another instance (or forced f5) to see if saves are working
 
 # Timeline
-## Week 1 Goals: Design document, preliminary setup of repo, core game loop, save
+## Week 1 Goals: Design document, preliminary setup of repo, core game loop, save system
 ## Week 2 Goals: Basic art assets added, mainscreen done, user save saved to database and read/setup during refreshes
 ## Week 3 Goals: Stretch goals
 ## Internal Deadlines:
