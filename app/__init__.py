@@ -1,5 +1,5 @@
-#Kiran Soemardjo, Mustafa Abdullah, Yu Lu, Eviss Wu
-#Orangutans
+#Ricky Lin, Yu lu, Emily Mai, Jun Jie Li
+#grocery
 
 # Imports >>
 from flask import Flask, render_template, request, flash, url_for, redirect, session, jsonify
