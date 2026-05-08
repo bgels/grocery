@@ -24,7 +24,7 @@ rickyL -- 2026-05-06 21:00
 rickyL -- 2026-05-07 10:53
 -- Finished basic flask templates
 
-yuL -- 2026-05-5 21:30
+yuL -- 2026-08-5 7:00
 -- Main game loop draft finished with text as display for now, need to polish code and add visuals later
 -- flask routes in __init__
 
