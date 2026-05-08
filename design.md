@@ -93,7 +93,7 @@ To be added
 # Site map
 
 To be added
-```
+
 
 ## Key User Stories
 ### eg0
@@ -108,8 +108,7 @@ As a tester, I want to encounter and play through different games so that i can 
 
 
 # Database Design
-
-EMILY !
+![database diagram](https://drive.google.com/file/d/1rb67aRrNRDZO-1AE4Aa8OO1mRvT6dLcI/view?usp=sharing)
 
 
 # Testing Plan
