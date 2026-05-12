@@ -29,10 +29,10 @@ const PRODUCTS = {
         rarity: "common"
     },
     milk:{
-        name: "Milk", 
-        quantity: 10, 
-        buyPrice: 3, 
-        sellPrice: 5, 
+        name: "Milk",
+        quantity: 10,
+        buyPrice: 3,
+        sellPrice: 5,
         rarity: "common"
     }
 };

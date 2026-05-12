@@ -168,6 +168,9 @@ function nextCustomer() {
     render();
 }
 
+async function changeUrl(url){
+  const response = a
+}
 // ----  Init and rendering starts below
 
 // main loop driver — advances game state on button click
@@ -228,6 +231,7 @@ function render() {
     if(game.state === GAMESTATE.NIGHT_START){
         main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
         gameMain.innerText = `${game.message}\n\n`;
+        document.location.href = standard
         return;
     }
 

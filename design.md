@@ -3,6 +3,7 @@
 ## TNPG: Restaurant Simulator
 ## project: grocery simulator
 ## Target ship date: {2026-06-01}
+## Project Manager: Yu Lu
 
 ---
 
@@ -104,7 +105,7 @@ Each member must own meaningful deliverables.
 # Key User Stories
 1. As a player, I want to be as rich as possible so that I can beat the objective of the game
 2. As a developer, I want to make the game interactive and functional so that we can fufill the pleasures of our users
-3. As a tester, I want to encounter and play through different games so that i can encounter scenarios with unintuitive/unexpected behaviors that developers might want to address 
+3. As a tester, I want to encounter and play through different games so that i can encounter scenarios with unintuitive/unexpected behaviors that developers might want to address
 
 
 # Testing Plan
@@ -114,11 +115,11 @@ Each member must own meaningful deliverables.
 3. return to the website in another instance (or forced f5) to see if saves are working
 
 ## Timeline
-# Week 1 Goals: 
+# Week 1 Goals:
 Design document, preliminary setup of repo, core game loop, save system
-# Week 2 Goals: 
+# Week 2 Goals:
 Basic art assets added, mainscreen done, user save saved to database and read/setup during refreshes
-# Week 3 Goals: 
+# Week 3 Goals:
 Stretch goals
 # Internal Deadlines:
 Special customers, game constants such as stock, prices, certain days, etc
