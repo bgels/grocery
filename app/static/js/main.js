@@ -168,13 +168,13 @@ function nextCustomer() {
     render();
 }
 
-async function changeUrl(url){
-  const response = a
+function changeUrl(url){
+  window.location.href = "/route/" + url;
 }
 
 const isLocalhost = () => {
   const hostname = window.location.hostname;
-  // Check for localhost, 127.0.0.1 (IPv4), or ::1 (IPv6)
+  // Check for localhost, 127.0.0.1 (IPv4), or ::1 (IP6)
   return (
     hostname === 'localhost' ||
     hostname === '127.0.0.1' ||
@@ -184,7 +184,7 @@ const isLocalhost = () => {
 
 // ----  Init and rendering starts below
 
-// main loop driver — advances game state on button click
+// Trys to advance game state when user clicks
 function advanceGame() {
     switch(game.state){
 
@@ -196,6 +196,7 @@ function advanceGame() {
             break;
 
         case GAMESTATE.DAY_END:
+            changeUrl("manager");
             startNight();
             break;
 

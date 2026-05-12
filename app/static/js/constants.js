@@ -16,6 +16,9 @@ export const CUSTOMER_PRESETS = {
     bills : [5, 10, 20, 50]
 };
 
+export const URLS = {
+
+}
 
 
 

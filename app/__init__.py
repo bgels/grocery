@@ -67,9 +67,9 @@ def manager():
 def cashier():
     return render_template("/cashier.html")
 
-@app.get("/route/{url}")
+@app.route("/route/<url>")
 def route(url):
-    print("Redirecting");
+    print(f"Redirecting to {url}");
     return redirect(url_for(url));
 
 if __name__ == "__main__":
