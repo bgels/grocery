@@ -171,6 +171,17 @@ function nextCustomer() {
 async function changeUrl(url){
   const response = a
 }
+
+const isLocalhost = () => {
+  const hostname = window.location.hostname;
+  // Check for localhost, 127.0.0.1 (IPv4), or ::1 (IPv6)
+  return (
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '[::1]' // IPv6 loopback (note the brackets)
+  );
+};
+
 // ----  Init and rendering starts below
 
 // main loop driver — advances game state on button click
