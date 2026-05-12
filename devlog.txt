@@ -40,3 +40,9 @@ yuL -- 2026-12-5 7:00
 -- design doc updated for images and revised some wordings
 -- javascript removed unused files and compiled some js files into one constants.js
 -- revised game loop to use state machines
+
+rickyL -- 2026-05-12 11:00
+- Added template for Register
+- Added template for Login
+- Moved the game to Cashier.html
+- Remade homepage to be a start game menu
