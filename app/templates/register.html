@@ -1,40 +1,113 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          Flowbite
-      </a>
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Sign in to your account
-              </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
-                  <div>
-                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                      <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
-                  </div>
-                  <div>
-                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                      <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                  </div>
-                  <div class="flex items-center justify-between">
-                      <div class="flex items-start">
-                          <div class="flex items-center h-5">
-                            <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
-                          </div>
-                          <div class="ml-3 text-sm">
-                            <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
-                          </div>
-                      </div>
-                      <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
-                  </div>
-                  <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
-                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Don’t have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
-                  </p>
-              </form>
-          </div>
-      </div>
+<!DOCTYPE html>
+<!--
+  Snorelacks' Traveling Itinerary Website // Snorelacks
+  Roster: Yu L, Ricky L, Andrew T, Mustafa A
+  SoftDev
+
+  Based off: Gato BLog // Ninja Cats
+ -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snorelacks - Register</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="fixed top-64 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
+      {% for message in messages %}
+        <div class="flash-container text-white px-6 py-3 rounded-lg shadow-lg mb-2 text-center">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+{% endblock %}
+
+
+<body class="h-screen overflow-hidden text-white relative">
+
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-black/60 z-10"></div>
+    <img src="static/images/city.jpg"  alt="City Background" class="w-full h-full object-cover">
   </div>
-</section>
+
+  <div class="relative z-20 h-full flex flex-col justify-center items-center px-4">
+
+    {% if logged_in %}
+      <div class="bg-black backdrop-blur-xl border border-white/10 p-10 rounded-2xl text-center max-w-md w-full shadow-2xl">
+        <div class="text-6xl text-blue-500 mb-4">
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        <h2 class="text-3xl mb-2 text-white">Already Registered</h2>
+        <p class="text-gray-400 mb-8">You are currently logged in.</p>
+
+        <a href="/" class="block w-full btn-primary py-3 rounded-xl text-center">
+          Return Home
+        </a>
+      </div>
+
+      {% else %}
+      <div class="bg-black backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4">
+
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-wider">
+          <span class="text-blue-400">REGIST</span>RATION
+        </h1>
+        <p class="text-blue-200/60 mt-2 text-xs uppercase tracking-widest">For a New user</p>
+      </div>
+
+      <form action="/register" method="POST" class="flex flex-col gap-3">
+
+      <div class="flex flex-col gap-1">
+        <label class="text-xs text-blue-300 uppercase ml-1 required">Username</label>
+        <input type="text"
+          name="username"
+          placeholder="Choose a Username..."
+          class="search-input w-full text-black p-3 rounded-xl"
+          required>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label class="text-xs text-blue-300 uppercase ml-1 required">Password</label>
+        <input type="password"
+          name="password"
+          placeholder="Create Password..."
+          class="search-input w-full text-black p-3 rounded-xl"
+          required>
+      </div>
+
+        <button type="submit" class="mt-2 w-full btn-primary py-3 rounded-xl text-lg tracking-widest">
+          Create Account
+        </button>
+      </form>
+
+      <div class="text-center text-sm pt-4 border-t border-white/10 text-gray-400">
+        <p class="mb-4">
+          Already have an account?
+          <a href="/login" class="text-blue-400 font-bold hover:text-white transition-colors">
+            Login Here
+          </a>
+        </p>
+        <a href="/" class="hover:text-white transition-colors flex items-center justify-center gap-2 opacity-70 hover:opacity-100">
+          <i class="fa-solid fa-arrow-left text-xs"></i>
+          Homepage
+        </a>
+      </div>
+
+    </div>
+    {% endif %}
+
+  </div>
+
+</body>
+</html>
