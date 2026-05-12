@@ -35,7 +35,6 @@
         <img src="/static/images/body/body-blue.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
         <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
         <img src="/static/images/mouth/mouth-u.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/accessories/accessories-hair1.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
       </div>
     </div>
 
@@ -58,6 +57,6 @@
       Made by Resturant Simulator, SoftDev P04 | 2026
       </a>
   </footer>
-  <script src="/static/js/main.js"></script>
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

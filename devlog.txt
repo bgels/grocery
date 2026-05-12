@@ -35,3 +35,8 @@ junJieL -- 2026-05-07 10:53
 yuL -- 2026-08-5 7:00
 -- Main game loop draft finished with text as display for now, need to polish code and add visuals later
 -- flask routes in __init__
+
+yuL -- 2026-12-5 7:00
+-- design doc updated for images and revised some wordings
+-- javascript removed unused files and compiled some js files into one constants.js
+-- revised game loop to use state machines
