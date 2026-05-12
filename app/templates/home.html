@@ -17,40 +17,47 @@
 <body class="min-h-screen flex flex-col my-8">
   <h2 class="mx-auto text-center text-2xl">Costgo!!</h2>
 
-  <main class="flex flex-col items-center justify-center">
-    <div style="display: flex; gap: 50px; align-items: center;">
-      <div style="position: relative; width: 300px; height: 300px;">
-        <img src="/static/images/body/body-yellow.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/mouth/mouth-p.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/accessories/accessories-brownHat.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+    <main class="flex flex-col items-center justify-center">
+      <div style="display: flex; gap: 50px; align-items: center;">
+        <div style="position: relative; width: 300px; height: 300px;">
+          <img src="/static/images/body/body-yellow.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/mouth/mouth-p.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/accessories/accessories-brownHat.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+        </div>
+        <div style="position: relative; width: 300px; height: 300px;">
+          <img src="/static/images/body/body-pink.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/mouth/mouth-line.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/accessories/accessories-necklace.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+        </div>
+        <div style="position: relative; width: 300px; height: 300px;">
+          <img src="/static/images/body/body-blue.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+          <img src="/static/images/mouth/mouth-u.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
+        </div>
       </div>
-      <div style="position: relative; width: 300px; height: 300px;">
-        <img src="/static/images/body/body-pink.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/mouth/mouth-line.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/accessories/accessories-necklace.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-      </div>
-      <div style="position: relative; width: 300px; height: 300px;">
-        <img src="/static/images/body/body-blue.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/eyes/eyes-special.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        <img src="/static/images/mouth/mouth-u.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
-      </div>
-    </div>
+<main>
+  <div class="flex justify-center items-center pt-6">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  <a href="/cashier" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Start Game</a>
+    </button>
+    <style>
+      .btn {
+        @apply font-bold py-2 px-4 rounded;
+      }
+      .btn-blue {
+        @apply bg-blue-500 text-white;
+      }
+      .btn-blue:hover {
+        @apply bg-blue-700;
+      }
+    </style>
 
-    <section class="flex flex-row mx-auto text-center text-2xl items-center justify-center">
-      <div class = "flex px-8">
-        <p id="main"> ... </p>
-      </div>
-      <div class = "flex flex-col px-8">
-        <p id="main2"> ... </p>
-        <input id="changeInput" type="number" placeholder="Enter change">
-        <button id="submitChange" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Give Change</button>
-        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next day</button>
-        <!--<button id="nextCustomer" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next Customer</button> -->
-      </div>
-    </section>
-  </main>
+</div>
+
+
+</main>
 
   <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
       <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
