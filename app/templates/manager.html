@@ -14,16 +14,29 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen flex flex-col bg-[var(--steam-bg)]" data-page="manager">
-  <main class="bg-no-repeat bg-cover flex-1 px-20 py-10 bg-white">
-    <h2 class="mx-auto text-center text-2xl">Costgo!!</h2>
-    <h2 class="mx-auto text-center text-2xl">Manager</h2>
+<body class="min-h-screen flex flex-col my-8" data-page="cashier">
+  <h2 class="mx-auto text-center text-2xl">Manager!!</h2>
+
+  <main class="flex flex-col items-center justify-center">
+    <div style="display: flex; gap: 50px; align-items: center;">
+    </div>
+
+    <section class="flex flex-row mx-auto text-center text-2xl items-center justify-center">
+      <div class = "flex px-8">
+        <p id="main"> Hasnt been changed </p>
+      </div>
+      <div class = "flex flex-col px-8">
+        <p id="main2"> This hasn't been changed </p>
+        <!--<button id="nextCustomer" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next Customer</button> -->
+      </div>
+    </section>
   </main>
 
   <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
       <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
-      Made by i forgot team name lol, SoftDev P04 | 2026
+      Made by Resturant Simulator, SoftDev P04 | 2026
       </a>
   </footer>
+  <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const page = document.body.dataset.page;
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-    loadGame(); // eventually save system loads this
+    // loadGame(); // eventually save system loads this
     if (page === "cashier") {
         initCashierPage(); // assign element references here
     }
@@ -15,12 +15,19 @@ function init() {
     render();
 }
 
-const main = document.getElementById("main"); // gameplay status on the left
-const gameMain = document.getElementById("main2") // console logs
-const changeInput = document.getElementById("changeInput"); // user change input box
-const submitChangeButton = document.getElementById("submitChange"); // user submit change to be checked button
-const advanceButton = document.getElementById("advanceGame"); // drives all state transitions
-// const nextCustomerButton = document.getElementById("nextCustomer");
+function initCashierPage(){
+  const main = document.getElementById("main"); // gameplay status on the left
+  const gameMain = document.getElementById("main2") // console logs
+  const changeInput = document.getElementById("changeInput"); // user change input box
+  const submitChangeButton = document.getElementById("submitChange"); // user submit change to be checked button
+  const advanceButton = document.getElementById("advanceGame"); // drives all state transitions
+  // const nextCustomerButton = document.getElementById("nextCustomer");
+}
+
+function initManagerPage(){
+  const manager_main = document.getElementById("main"); // gameplay status on the left
+  const manager_console = document.getElementById("main2") // console logs
+}
 
 // stuff to think about
 // should we calculate the gamestate upon ininitalization? or should store in db?
@@ -90,7 +97,7 @@ function generateCustomer(customerBudget){
     const traits = CUSTOMER_PRESETS.traits;
     const bills = CUSTOMER_PRESETS.bills;
 
-    const name = firstNames[Math.floor(Math.random() * firstNames.length)]; // BUG FIX: was names.length (undefined)
+    const name = firstNames[Math.floor(Math.random() * firstNames.length)];
     const trait = traits[Math.floor(Math.random() * traits.length)];
 
     const cart = getCart(customerBudget);
@@ -171,12 +178,12 @@ function roundMoney(amount) {
 
 // makes game go to next customer
 function nextCustomer() {
-    game.currentCustomer = game.customerQueue.shift() || null;
+    game.currentCustomer = game.customer    Queue.shift() || null;
     if(game.currentCustomer){
         game.state = GAMESTATE.CUSTOMER_CHECKOUT;
         game.message = `${game.currentCustomer.name} has arrived`;
     }else{
-        game.state = GAMESTATE.DAY_END; // BUG FIX: was game.GAMESTATE (wrong key, never took effect)
+        game.state = GAMESTATE.DAY_END;
         game.message = `No more customers for today. Head to the shop screen!`;
     }
 
@@ -256,9 +263,8 @@ function render() {
 
     // --- NIGHT_START screen (placeholder for shop/upgrade screen)
     if(game.state === GAMESTATE.NIGHT_START){
-        main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
-        gameMain.innerText = `${game.message}\n\n`;
-        document.location.href = standard
+        manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
+        manager_console.innerText = `${game.message}\n\n`;
         return;
     }
 
@@ -296,7 +302,5 @@ submitChangeButton.addEventListener("click", function(){
     processPayment(change);
     changeInput.value = "";
 })
-
-
 
 render();

@@ -2,7 +2,7 @@
 
 ## TNPG: Restaurant Simulator
 ## project: grocery simulator
-## Target ship date: {2026-06-01}
+## Target ship date: 2026-06-01
 ## Project Manager: Yu Lu
 
 ---
@@ -109,10 +109,10 @@ Each member must own meaningful deliverables.
 
 
 # Testing Plan
-0. ALWAYS check developer console for errors and consoleLogs opening during testing
-1. Play through 1 Day, serve customers and use the register and gun to see if they work as expected
-2. Play through 1 night, buying upgrades and stock, and see if it is updated the next day
-3. return to the website in another instance (or forced f5) to see if saves are working
+1. ALWAYS check developer console for errors and consoleLogs opening during testing
+2. Play through 1 Day, serve customers and use the register and gun to see if they work as expected
+3. Play through 1 night, buying upgrades and stock, and see if it is updated the next day
+4. return to the website in another instance (or forced f5) to see if saves are working
 
 ## Timeline
 # Week 1 Goals:
