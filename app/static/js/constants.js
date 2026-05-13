@@ -9,7 +9,7 @@ export const GAMESTATE = {
 };
 
 export const CUSTOMER_PRESETS = {
-    firstNames : ["You", "Joe", "Kevin", "SigmaBalls", "Grep", "AlrBuddy"],
+    firstNames : ["You", "Joe", "Kevin", "SigmaBalls", "Grep", "AlrBuddy", "Emily", "Yu"],
     middleNames : [],
     lastNames : [],
     traits : ["friendly", "rude", "tired", "quiet", "impatient", "confused"],

@@ -18,9 +18,11 @@ c.executescript("""
 
     DROP TABLE IF EXISTS Game;
     CREATE TABLE Game (
+        user_id TEXT,
         day TEXT,
         hour INTEGER,
         money INTEGER,
+        customer_id TEXT,
         served INTEGER,
         killed INTEGER,
         revenue INTEGER,
