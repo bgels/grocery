@@ -71,6 +71,7 @@ def cashier():
 def route(url):
     print(f"Redirecting to {url}");
     return redirect(url_for(url));
+
 if __name__ == "__main__":
     app.run(debug=True)
 

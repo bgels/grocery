@@ -1,5 +1,20 @@
 import { GAMESTATE, CUSTOMER_PRESETS } from "./constants.js";
 
+const page = document.body.dataset.page;
+
+document.addEventListener("DOMContentLoaded", init);
+
+function init() {
+    loadGame(); // eventually save system loads this
+    if (page === "cashier") {
+        initCashierPage(); // assign element references here
+    }
+    if (page === "manager") {
+        initManagerPage(); // assign element references here
+    }
+    render();
+}
+
 const main = document.getElementById("main"); // gameplay status on the left
 const gameMain = document.getElementById("main2") // console logs
 const changeInput = document.getElementById("changeInput"); // user change input box
