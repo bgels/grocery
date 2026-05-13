@@ -303,4 +303,4 @@ submitChangeButton.addEventListener("click", function(){
     changeInput.value = "";
 })
 
-render();
+init();
