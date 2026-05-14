@@ -50,6 +50,13 @@ rickyL -- 2026-05-12 11:00
 yuL -- 2026-05-13 8:15
 -- prelim Init function in javascript and minor changes to templates to get ready for dynamic element reference assignment
 
+junJieL -- 2026-05-13 8:15
+-- Cashier > register and calculator wip 
+-- prelim placement for cashier pov
+
+emilyM -- 2026-05-013 10:53
+-- Finished database functions
+
 Restaurant Simulator -- 2026-05-13 8:23
 Python:
 Which aspects of the style guide were most applicable to your codebase?
