@@ -9,6 +9,32 @@ DB_FILE="./data.db"
 
 db = sqlite3.connect(DB_FILE, check_same_thread=False)
 
+def add_user(username, password, country, currency):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    DB_CURSOR.execute("SELECT COUNT(*) FROM Users WHERE username = (?)", (username,))
+    cursorfetch = DB_CURSOR.fetchone()[0]
+    if cursorfetch == 1:
+        DB.commit()
+        DB.close()
+        return False
+    DB_CURSOR.execute("INSERT INTO Users VALUES(?, ?)", (username, password))
+    DB.commit()
+    DB.close()
+    return True
+
+def get_user(username):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    DB_CURSOR.execute("SELECT * FROM Users WHERE username = ?", (username,))
+    cursorfetch = DB_CURSOR.fetchone()
+    return cursorfetch
+
+def check_password(username, password):
+    return password == get_user(username)[1]
+
 #returns as list of dicts, where each item in the list is one row's entry, and each dict entry contains the selected data as the value for the column name as the key
 def select_query(query_string, parameters=()):
     c = db.cursor()
