@@ -1,2 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Lacquer&display=swap');
+
+body.title {
+    font-family: "Lacquer", system-ui, sans-serif;
+}
+
 :root {
 }
+
+@keyframes moveRight {
+    from {
+    transform: translateX(-200px);
+    }
+
+    to {
+    transform: translateX(calc(100vw + 200px));
+    }
+}
+
+.hover-letter {
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+.hover-letter:hover {
+    transform: translateY(-8px) rotate(-12deg) scale(1.2);
+}
+
+.animated-text {
+    animation: floatText 8s ease-in-out infinite;
+    }

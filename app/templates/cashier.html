@@ -15,7 +15,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col my-8" data-page="cashier">
-  <h2 class="mx-auto text-center text-2xl">Costgo!!</h2>
+  <h2 class="animated-text mx-auto text-center text-2xl">Costgo!!</h2>
 
   <main class="flex flex-col items-center justify-center">
     <div style="display: flex; gap: 50px; align-items: center;">
@@ -40,13 +40,13 @@
 
     <section class="flex flex-row mx-auto text-center text-2xl items-center justify-center">
       <div class = "flex px-8">
-        <p id="main"> ... </p>
+        <p id="main" class=""> ... </p>
       </div>
       <div class = "flex flex-col px-8">
         <p id="main2"> ... </p>
         <input id="changeInput" type="number" placeholder="Enter change">
-        <button id="submitChange" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Give Change</button>
-        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next day</button>
+        <button id="submitChange" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Give Change</button>
+        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Next</button>
         <!--<button id="nextCustomer" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next Customer</button> -->
       </div>
     </section>
@@ -58,5 +58,6 @@
       </a>
   </footer>
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
 </body>
 </html>

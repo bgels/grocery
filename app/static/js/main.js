@@ -1,34 +1,5 @@
 import { GAMESTATE, CUSTOMER_PRESETS } from "./constants.js";
 
-const page = document.body.dataset.page;
-
-document.addEventListener("DOMContentLoaded", init);
-
-function init() {
-    // loadGame(); // eventually save system loads this
-    if (page === "cashier") {
-        initCashierPage(); // assign element references here
-    }
-    if (page === "manager") {
-        initManagerPage(); // assign element references here
-    }
-    render();
-}
-
-function initCashierPage(){
-  const main = document.getElementById("main"); // gameplay status on the left
-  const gameMain = document.getElementById("main2") // console logs
-  const changeInput = document.getElementById("changeInput"); // user change input box
-  const submitChangeButton = document.getElementById("submitChange"); // user submit change to be checked button
-  const advanceButton = document.getElementById("advanceGame"); // drives all state transitions
-  // const nextCustomerButton = document.getElementById("nextCustomer");
-}
-
-function initManagerPage(){
-  const manager_main = document.getElementById("main"); // gameplay status on the left
-  const manager_console = document.getElementById("main2") // console logs
-}
-
 // stuff to think about
 // should we calculate the gamestate upon ininitalization? or should store in db?
 const game = {
@@ -37,7 +8,7 @@ const game = {
     money: 100,
     message: "Console here", // For announcements or system messages
     state: GAMESTATE.DAY_START,
-    hours: 12,
+    hours: 1,
 
     customerQueue: [],
     currentCustomer: null,
@@ -176,9 +147,8 @@ function roundMoney(amount) {
     return Math.round(amount * 100) / 100;
 }
 
-// makes game go to next customer
 function nextCustomer() {
-    game.currentCustomer = game.customer    Queue.shift() || null;
+    game.currentCustomer = game.customerQueue.shift() || null;
     if(game.currentCustomer){
         game.state = GAMESTATE.CUSTOMER_CHECKOUT;
         game.message = `${game.currentCustomer.name} has arrived`;
@@ -186,22 +156,21 @@ function nextCustomer() {
         game.state = GAMESTATE.DAY_END;
         game.message = `No more customers for today. Head to the shop screen!`;
     }
-
     render();
 }
 
 function changeUrl(url){
-  window.location.href = "/route/" + url;
+    window.location.href = "/route/" + url;
 }
 
 const isLocalhost = () => {
-  const hostname = window.location.hostname;
-  // Check for localhost, 127.0.0.1 (IPv4), or ::1 (IP6)
-  return (
+    const hostname = window.location.hostname;
+    // Check for localhost, 127.0.0.1 (IPv4), or ::1 (IP6)
+    return (
     hostname === 'localhost' ||
     hostname === '127.0.0.1' ||
     hostname === '[::1]' // IPv6 loopback (note the brackets)
-  );
+    );
 };
 
 // ----  Init and rendering starts below
@@ -218,14 +187,15 @@ function advanceGame() {
             break;
 
         case GAMESTATE.DAY_END:
-            changeUrl("manager");
             startNight();
+            changeUrl("manager");
             break;
 
         case GAMESTATE.NIGHT_START:
             game.state = GAMESTATE.DAY_START;
-            game.message = `Press start to begin Day ${game.day}.`;
-            render();
+            game.message = `Press Next to begin Day ${game.day}.`;
+            saveGame();
+            changeUrl("cashier");
             break;
 
         default:
@@ -248,6 +218,7 @@ function startNight(){
 
     game.state = GAMESTATE.NIGHT_START;
     game.message = `[Shop Screen] — End of day ${game.day - 1}. Preparing for Day ${game.day}.`; // placeholder for upgrade screen
+    saveGame();
     render();
 }
 
@@ -255,7 +226,7 @@ function render() {
     let text = "";
 
     // --- GAME_OVER screen
-    if(game.state === GAMESTATE.GAME_OVER){
+    if(game.state === GAMESTATE.GAME_OVER){ // need to change to home screen soon
         main.innerText = `GG! You survived all ${game.maxDay} days!\n\nFinal Stats:\n  Money: $${game.money.toFixed(2)}\n  Customers Served: ${game.stats.served}\n  Total Revenue: $${game.stats.revenue.toFixed(2)}`;
         gameMain.innerText = `Game Over.\n\n`;
         return;
@@ -263,9 +234,10 @@ function render() {
 
     // --- NIGHT_START screen (placeholder for shop/upgrade screen)
     if(game.state === GAMESTATE.NIGHT_START){
-        manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
-        manager_console.innerText = `${game.message}\n\n`;
-        return;
+        if(page === "manager"){
+            manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
+            manager_console.innerText = `${game.message}\n\n`;
+        }
     }
 
     // --- Normal gameplay screen (DAY_START, CUSTOMER_CHECKOUT, WAITING_FOR_CHANGE, DAY_END)
@@ -275,32 +247,111 @@ function render() {
     text += `Served: ${game.stats.served}\n`;
     text += `Revenue: $${game.stats.revenue.toFixed(2)}\n\n`;
 
-    if(game.currentCustomer){
-        const customer = game.currentCustomer;
-        text += `Customer: ${customer.name}\n`;
-        text += `Trait: ${customer.trait}\n\n`;
-        text += `Cart:\n`;
+    if (page === "cashier"){
+        if(game.currentCustomer){
+            const customer = game.currentCustomer;
+            text += `Customer: ${customer.name}\n`;
+            text += `Trait: ${customer.trait}\n\n`;
+            text += `Cart:\n`;
 
-        for(const i of customer.cart){
-            text += `  ${i.name}: $${i.price.toFixed(2)}\n`
+            for(const i of customer.cart){
+                text += `  ${i.name}: $${i.price.toFixed(2)}\n`
+            }
+
+            text += `\nTotal + tax: $${customer.totalCost.toFixed(2)}\n`;
+            text += `Customer gave you: $${customer.moneyGiven.toFixed(2)}\n`;
+            // text += `Change needed: $${customer.moneyGiven - customer.totalCost}\n`;
         }
-
-        text += `\nTotal + tax: $${customer.totalCost.toFixed(2)}\n`;
-        text += `Customer gave you: $${customer.moneyGiven.toFixed(2)}\n`;
-        // text += `Change needed: $${customer.moneyGiven - customer.totalCost}\n`;
-    }
     main.innerText = text;
     gameMain.innerText = `${game.message}\n\n`;
+    }
+    else if(page === "manager"){
+        let stock = "";
+        manager_main.innerText = text;
+        for (const i in game.stock){
+            stock += `${i}: ${game.stock[i].quantity}\n`;
+        }
+        manager_console.innerText += stock;
+    }
 }
 
 
 // -- Interactivity specifics
-advanceButton.addEventListener("click", advanceGame);
-// nextCustomerButton.addEventListener("click", nextCustomer);
-submitChangeButton.addEventListener("click", function(){
-    const change = Number(changeInput.value);
-    processPayment(change);
-    changeInput.value = "";
+// Cashier
+let main; // gameplay status on the left
+let gameMain; // console logs
+let changeInput; // user change input box
+let submitChangeButton; // user submit change to be checked button
+let advanceButton; // drives all state transitions
+// const nextCustomerButton = document.getElementById("nextCustomer");
+
+// Manager
+let manager_main; // gameplay status on the left
+let manager_console; // console logs
+
+const page = document.body.dataset.page;
+document.addEventListener("DOMContentLoaded", init);
+function init() {
+    loadGame();
+    if (page === "cashier") {
+        console.log("loading page cashier");
+        initCashierPage(); // assign element references here
+    }
+    if (page === "manager") {
+        console.log("loading page manager");
+        initManagerPage(); // assign element references here
+    }
+    render();
+}
+
+document.addEventListener("keydown", function(event){
+    console.log(event.key);
+    if(event.key === "r"){
+        console.log("Resetting save file...");
+        resetGame();
+    }
 })
 
-init();
+function saveGame(){
+    console.log("saving...")
+    localStorage.setItem("saveFile", JSON.stringify(game));
+}
+
+function loadGame(){
+    console.log("loading save file...")
+    const save = localStorage.getItem("saveFile");
+    if(save){
+        Object.assign(game, JSON.parse(save));
+    }else{
+        console.warn("WARNING! Save file could not be located in localStorage!");
+    }
+}
+
+function resetGame(){
+    localStorage.removeItem("saveFile");
+    changeUrl("homepage")
+}
+
+function initCashierPage(){
+    main = document.getElementById("main"); // gameplay status on the left
+    gameMain = document.getElementById("main2") // console logs
+    changeInput = document.getElementById("changeInput"); // user change input box
+    submitChangeButton = document.getElementById("submitChange"); // user submit change to be checked button
+    advanceButton = document.getElementById("advanceGame"); // drives all state transitions
+    // const nextCustomerButton = document.getElementById("nextCustomer");
+    advanceButton.addEventListener("click", advanceGame);
+    // nextCustomerButton.addEventListener("click", nextCustomer);
+    submitChangeButton.addEventListener("click", function(){
+        const change = Number(changeInput.value);
+        processPayment(change);
+        changeInput.value = "";
+    })
+}
+
+function initManagerPage(){
+    manager_main = document.getElementById("main");
+    manager_console = document.getElementById("main2");
+    advanceButton = document.getElementById("advanceGame");
+
+    advanceButton.addEventListener("click", advanceGame);
+}
