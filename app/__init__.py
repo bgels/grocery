@@ -32,24 +32,23 @@ def main():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
-#    if 'username' in session:
-    #    return redirect("/")
-        return render_template("login.html")
+    if 'username' in session:
+        return redirect(url_for("homepage"))
+    return render_template("login.html")
 
 @app.route("/register", methods = ["GET", "POST"] )
 def register():
-    #wait for db
-    #if 'username' in session:
-        #return redirect("/home.html")
-    #if request.method == "POST":
-    #    username = request.form.get("username", "").strip()
-    #    password = request.form.get("password", "")
+    if 'username' in session:
+        return redirect(url_for("homepage"))
+    if request.method == "POST":
+       username = request.form.get("username", "").strip()
+       password = request.form.get("password", "")
+
     return render_template("register.html")
 
 @app.route("/logout")
 def logout():
-    # wait for db
-    #session.pop("username", None)
+    session.pop("username", None)
     return redirect(url_for("homepage"))
 
 @app.route("/home")

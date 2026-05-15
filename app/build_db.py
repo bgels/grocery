@@ -8,6 +8,7 @@ DB_FILE = "data.db"
 
 db = sqlite3.connect(DB_FILE)
 c = db.cursor()
+c.execute("PRAGMA foreign_keys = ON;")
 
 c.executescript("""
     DROP TABLE IF EXISTS User;
