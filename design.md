@@ -120,7 +120,15 @@ Design document, preliminary setup of repo, core game loop, save system
 # Week 2 Goals:
 Basic art assets added, mainscreen done, user save saved to database and read/setup during refreshes
 # Week 3 Goals:
-Stretch goals
+Cashier polishing:
+1. Randomly generated customer appearances
+2. Art for cashier terminal, corresponding art for background
+3. chance for a misbehaving customer based on traits list
+Night manager stock system:
+1. Panel with ability to purchase stock/grocery for the next day
+2. Implementation of a upgrades system that can affect gameplay 
+3. Art for background of manager Panel
+Storing/Retrieving of all of this into the database should be targeted
 # Internal Deadlines:
 Special customers, game constants such as stock, prices, certain days, etc
 

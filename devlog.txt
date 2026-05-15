@@ -84,3 +84,16 @@ rickyL -- 2026-05-14 22:00
 
 yuL -- 2026-05-15 7:40
 -- added wip background bg for store inside
+
+Restaurant Simulator -- 2026-05-15 8:00
+Timeline shifts and goal reconsiderations
+-- Redefined "stretch goals" as strictly cashier system polishing and night manager stock system
+Cashier polishing:
+1. Randomly generated customer appearances
+2. Art for cashier terminal, corresponding art for background
+3. chance for a misbehaving customer based on traits list
+Night manager stock system:
+1. Panel with ability to purchase stock/grocery for the next day
+2. Implementation of a upgrades system that can affect gameplay 
+3. Art for background of manager Panel
+Storing/Retrieving of all of this into the database should be targeted
