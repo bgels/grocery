@@ -76,3 +76,11 @@ yuL -- 2026-05-14 7:40
 -- Revised main menu, revised and fixed all routing in the front-end, animate js
 -- Night page and day page loop established
 -- Basic save system done. stored in local storage
+
+rickyL -- 2026-05-14 22:00
+-- finished login flask functions  
+-- changed table to user and used user_id not usernames
+-- finished user functions
+
+yuL -- 2026-05-15 7:40
+-- added wip background bg for store inside

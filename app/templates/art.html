@@ -18,6 +18,9 @@
   <h2 class="animated-text mx-auto text-center text-2xl">Costgo!!</h2>
 
     <main class="flex flex-col items-center justify-center">
+        <div class="fixed inset-0 bg-black -z-10 overflow-hidden">
+          <img src="{{ url_for('static', filename='images/wipStoreInside.png') }}" class="absolute inset-0 w-full h-full object-cover scale-95">  <!-- change later between day/night-->
+        </div>
       <div style="display: flex; gap: 50px; align-items: center;">
         <div style="position: relative; width: 300px; height: 300px;">
           <img src="/static/images/body/body-yellow.png" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;"/>
