@@ -32,6 +32,7 @@ def main():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+    flash("heauyshd");
     if 'username' in session:
         return redirect(url_for("homepage"))
     if request.method == "POST":
@@ -81,8 +82,15 @@ def art():
 
 @app.route("/route/<url>")
 def route(url):
-    print(f"Redirecting to {url}");
-    return redirect(url_for(url));
+    print(f"Redirecting to {url}")
+    return redirect(url_for(url))
+
+
+@app.route('/save', methods=['POST'])
+def save():
+    data = request.json
+    print(data);
+    return jsonify(success=True)
 
 if __name__ == "__main__":
     app.run(debug=True)

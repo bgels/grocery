@@ -6,11 +6,11 @@ const game = {
     day: 1,         // starts at 1, increments each night. game ends after maxDay nights
     maxDay: 7,
     money: 100,
-    message: "Console here", // For announcements or system messages
-    state: GAMESTATE.DAY_START,
+    message: "Console here", // dont parse
+    state: GAMESTATE.DAY_START, // dont parse
     hours: 1,
 
-    customerQueue: [],
+    customerQueue: [],  // dont parse
     currentCustomer: null,
 
     upgrades:{
@@ -19,6 +19,10 @@ const game = {
         decor: 0,
         firepower: 0
         // more?
+    },
+
+    items:{
+      ammo: 20
     },
 
     stock:{
@@ -194,7 +198,6 @@ function advanceGame() {
         case GAMESTATE.NIGHT_START:
             game.state = GAMESTATE.DAY_START;
             game.message = `Press Next to begin Day ${game.day}.`;
-            saveGame();
             changeUrl("cashier");
             break;
 
@@ -315,9 +318,23 @@ document.addEventListener("keydown", function(event){
 function saveGame(){
     console.log("saving...")
     localStorage.setItem("saveFile", JSON.stringify(game));
+    let route = "";
+    if(isLocalhost()){
+      route = "http://127.0.0.1:5000/save";
+    } else {
+      route = "https://nocoupon.works/save";
+    }
+    fetch(route,
+    {
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json"
+      },
+      body: JSON.stringify(game),
+    }).then((response) => response.json()).then((json) => console.log(json));
 }
 
-function loadGame(){
+function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
     console.log("loading save file...")
     const save = localStorage.getItem("saveFile");
     if(save){
