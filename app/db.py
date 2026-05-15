@@ -4,27 +4,27 @@
 
 import sqlite3
 from urllib.request import Request, urlopen
-
+import build_db
 DB_FILE="./data.db"
 
 DB = sqlite3.connect(DB_FILE, check_same_thread=False)
 
 def add_user(username, password):
     DB_CURSOR = DB.cursor()
-    DB_CURSOR.execute("SELECT COUNT(*) FROM Users WHERE username = (?)", (username,))
+    DB_CURSOR.execute("SELECT COUNT(*) FROM User WHERE user_id = (?)", (username,))
     cursorfetch = DB_CURSOR.fetchone()[0]
     if cursorfetch != 0:
         DB.commit()
         DB_CURSOR.close()
         return False
-    DB_CURSOR.execute("INSERT INTO Users VALUES(?, ?)", (username, password))
+    DB_CURSOR.execute("INSERT INTO User VALUES(?, ?)", (username, password))
     DB.commit()
     DB_CURSOR.close()
     return True
 
 def get_user(username):
     DB_CURSOR = DB.cursor()
-    DB_CURSOR.execute("SELECT * FROM Users WHERE username = ?", (username,))
+    DB_CURSOR.execute("SELECT * FROM User WHERE user_id = ?", (username,))
     cursorfetch = DB_CURSOR.fetchone()
     DB_CURSOR.close()
     return cursorfetch

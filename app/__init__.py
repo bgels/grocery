@@ -4,7 +4,7 @@
 # Imports >>
 from flask import Flask, render_template, request, flash, url_for, redirect, session, jsonify
 import sqlite3, csv, json, pprint, os
-from db import select_query, insert_query, general_query
+import db
 #from api import
 from urllib.request import Request, urlopen
 import random
@@ -34,6 +34,12 @@ def main():
 def login():
     if 'username' in session:
         return redirect(url_for("homepage"))
+    if request.method == "POST":
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+        if db.get_user(username) != None and db.check_password(username, password):
+            session['username'] = username
+            return redirect(url_for("homepage"))
     return render_template("login.html")
 
 @app.route("/register", methods = ["GET", "POST"] )
@@ -43,7 +49,10 @@ def register():
     if request.method == "POST":
        username = request.form.get("username", "").strip()
        password = request.form.get("password", "")
-
+       if db.get_user(username) == None:
+           db.add_user(username, password)
+           return redirect(url_for("login"))
+        #maybe add flash msges here?
     return render_template("register.html")
 
 @app.route("/logout")
