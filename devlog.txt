@@ -90,15 +90,27 @@ Timeline shifts and goal reconsiderations
 -- Redefined "stretch goals" as strictly cashier system polishing and night manager stock system
 Cashier polishing:
 1. Randomly generated customer appearances
+
 2. Art for cashier terminal, corresponding art for background
+
 3. chance for a misbehaving customer based on traits list
+
 Night manager stock system:
 1. Panel with ability to purchase stock/grocery for the next day
+
 2. Implementation of a upgrades system that can affect gameplay 
+
 3. Art for background of manager Panel
+
 Storing/Retrieving of all of this into the database should be targeted
 
 emilyM -- 2026-05-17 21:00
 -- added save and load functions in __init__.py
 -- made save_game in db.py to insert local storage stuff into our database tables
 -- edited database tables
+
+yuL -- 2026-05-18 1:00
+-- revised customer cart to count quantity too instead of just appending every item as something unique (holy was inefficent)
+-- updated manager to have buy stock system, updated template aswell to prepare for art in manager page, moved avliable itesm u can purchase inside of constants so later we can easily create more grocery items
+-- added new renders for manager page as player interacts w it all, and moved page specific renders to other javascript files (keeping # of lines in mainjs lower)
+-- design doc final section updated, updated other wrong formatting

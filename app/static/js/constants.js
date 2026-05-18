@@ -22,24 +22,49 @@ export const URLS = {
 
 
 
-// old stuff below
-const PRODUCTS = {
+export const PRODUCT_CATALOG = {
     apple: {
         name: "Apple",
-        quantity: 20,
         buyPrice: 1,
+        sellPrice: 2.5,
+        rarity: "common"
+    },
+
+    milk: {
+        name: "Milk",
+        buyPrice: 3,
+        sellPrice: 5.5,
+        rarity: "common"
+    },
+
+    pilk: {
+        name: "Pilk",
+        buyPrice: 3,
+        sellPrice: 1.5,
+        rarity: "common"
+    },
+
+    banana: {
+        name: "Bananana",
+        buyPrice: 3,
         sellPrice: 2,
         rarity: "common"
     },
-    milk:{
-        name: "Milk",
-        quantity: 10,
-        buyPrice: 3,
-        sellPrice: 5,
+
+    bread: {
+        name: "Bread",
+        buyPrice: 2,
+        sellPrice: 4,
         rarity: "common"
+    },
+
+    steak: {
+        name: "Steak",
+        buyPrice: 8,
+        sellPrice: 13,
+        rarity: "rare"
     }
 };
-
 const CUSTOMERS = [
     {
       customer_id: "regular_1", //"regular_1", "special_1", etc

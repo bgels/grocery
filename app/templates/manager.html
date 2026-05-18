@@ -21,15 +21,51 @@
     <div style="display: flex; gap: 50px; align-items: center;">
     </div>
 
-    <section class="flex flex-row mx-auto text-center text-2xl items-center justify-center">
-      <div class = "flex px-8">
-        <p id="main"> Hasnt been changed </p>
+  <section class="grid grid-cols-3 gap-8 mx-auto w-full max-w-6xl px-8 text-center text-xl items-start justify-center">
+
+    <div class="flex flex-col px-4">
+      <h3 class="text-2xl mb-4">Store Info</h3>
+      <p id="main">Hasnt been changed</p>
+    </div>
+
+    <div class="flex flex-col px-4">
+      <h3 class="text-2xl mb-4">Buy Stock</h3>
+
+      <div id="productGrid" class="grid grid-cols-2 gap-4">
       </div>
-      <div class = "flex flex-col px-8">
-        <p id="main2"> This hasn't been changed </p>
-        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next</button>
+    </div>
+
+
+    <div class="flex flex-col px-4 gap-4">
+      <h3 class="text-2xl mb-4">Selected Item</h3>
+
+      <div class="border border-gray-400 rounded-xl p-4 min-h-[260px]">
+        <p id="selectedProductName" class="text-2xl mb-3">Select an item</p>
+        <p id="selectedProductOwned">Owned: --</p>
+        <p id="selectedProductBuyPrice">Buy Price: --</p>
+        <p id="selectedProductSellPrice">Sell Price: --</p>
+        <p id="selectedProductTotal">Total Cost: --</p>
+
+        <div class = "flex flex-row mt-8 px-4 gap-4">
+          <button id="buySelectedStock" class="flex border px-4 py-2 rounded hover:bg-gray-200 hover:text-black transition">
+            Buy
+          </button>
+          <div class="flex justify-center gap-2">
+            <button class="select-none buyAmountButton hover:bg-gray-200 hover:text-black transition" data-amount="1">x1</button>
+            <button class="select-none buyAmountButton hover:bg-gray-200 hover:text-black transition" data-amount="5">x5</button>
+            <button class="select-none buyAmountButton hover:bg-gray-200 hover:text-black transition" data-amount="10">x10</button>
+          </div>
+        </div>
       </div>
-    </section>
+
+      <p id="main2">This hasn't been changed</p>
+
+      <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">
+        Next
+      </button>
+    </div>
+
+  </section>
   </main>
 
   <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
@@ -38,5 +74,6 @@
       </a>
   </footer>
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
 </body>
 </html>

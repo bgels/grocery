@@ -2,7 +2,7 @@
 
 ## TNPG: Restaurant Simulator
 ## project: grocery simulator
-## Target ship date: 2026-06-01
+## Target ship date: 2026-05-25
 ## Project Manager: Yu Lu
 
 ---
@@ -45,7 +45,7 @@ Instead of practicing mental math through something like a worksheet, players ca
 # Minimum Viable Product (MVP) Scope
 
 ## Core Features (Required for Final Submission)
-Features that **must** be completed:
+# Features that **must** be completed:
 1. Day - Cashier system
 1. Customer generation
 1. Grocery stock system
@@ -93,14 +93,14 @@ Each member must own meaningful deliverables.
 
 ---
 
+# Database Design
+![Database Algorithm](https://www.dropbox.com/scl/fi/7mjuj7mddsr1s0fxbd4o6/database_diagram-Emily-Mai.png?rlkey=hd45j6xurq6l4g9v8vmwat27k&st=653ttjg8&raw=1){ width=40% }
+
 # Component map
 ![Component Map](https://www.dropbox.com/scl/fi/aqi3a8w8mifv67vmjqv3i/Screenshot-2026-05-12-051555-Ricky.png?rlkey=tqrsy5woufeyw7z3dcppncws9&st=m69otn3a&raw=1){ width=60% }
 
 # Site map
 ![Grocery Site Map](https://www.dropbox.com/scl/fi/7bgmgkzztr8y987mvw7vf/Grocery-Site-Map-jj.png?rlkey=shrket2ybkyu9upg42af10dfu&st=652a766d&raw=1){ width=50% }
-
-# Database Design
-![Database Algorithm](https://www.dropbox.com/scl/fi/7mjuj7mddsr1s0fxbd4o6/database_diagram-Emily-Mai.png?rlkey=hd45j6xurq6l4g9v8vmwat27k&st=653ttjg8&raw=1){ width=50% }
 
 # Key User Stories
 1. As a player, I want to be as rich as possible so that I can beat the objective of the game
@@ -117,32 +117,56 @@ Each member must own meaningful deliverables.
 ## Timeline
 # Week 1 Goals:
 Design document, preliminary setup of repo, core game loop, save system
+
 # Week 2 Goals:
 Basic art assets added, mainscreen done, user save saved to database and read/setup during refreshes
+
 # Week 3 Goals:
-Cashier polishing:
+## Cashier polishing:
 1. Randomly generated customer appearances
 2. Art for cashier terminal, corresponding art for background
 3. chance for a misbehaving customer based on traits list
-Night manager stock system:
+
+## Night manager stock system:
 1. Panel with ability to purchase stock/grocery for the next day
 2. Implementation of a upgrades system that can affect gameplay 
 3. Art for background of manager Panel
 Storing/Retrieving of all of this into the database should be targeted
+
 # Internal Deadlines:
 Special customers, game constants such as stock, prices, certain days, etc
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
-Project is considered complete when all of the following are true:
+# Project is considered complete when all of the following are true:
 1. Core game loop
-1. Management system
-1. Save system
+2. Management system
+3. Save system
 
 # Open Questions
-Should music/audio be added?
+1. should music/audio be added?
+2. how many customer traits should affect gameplay, and how strong should their effects be?
+3. should special NPCs appear on fixed days or randomly?
+4. should customer purchases be fully random?
 
 # Appendix
-N/A
+## Game Constants
+
+- Total game length: 7 days
+- Starting money: $100
+- Starting stock: apples, milk, pilk
+- Customers per day: 12
+- Core player actions: calculate total, give change, buy stock, buy upgrades
+
+## Traits 
+- Robber: will leave with the food without paying, giving fake money
+- Fat: buy much more food and money bonus
+
+## Upgrades
+
+- Shelf upgrade: increases stock capacity
+- Register upgrade: improves cashier efficiency
+- Decor upgrade: improves customer mood
+- Firepower: increases ammo count regeneration per day
 
 # Other
 No additional notes

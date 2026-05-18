@@ -1,9 +1,48 @@
-import { GAMESTATE, CUSTOMER_PRESETS } from "./constants.js";
+import { GAMESTATE, CUSTOMER_PRESETS, PRODUCT_CATALOG } from "./constants.js";
+import { initCashierPage } from "./cashierUI.js";
+import { initManagerPage } from "./managerUI.js";
+// To do:
+// GAME: 
+// 1. need to calculate game state as soon as game loads later on, also customer queue
+// 2. add image link to stock
 
-// stuff to think about
-// should we calculate the gamestate upon ininitalization? or should store in db?
+function saveGame(){
+    console.log("saving...")
+    localStorage.setItem("saveFile", JSON.stringify(game));
+    let route = "";
+    if(isLocalhost()){
+        route = "http://127.0.0.1:5000/save";
+    } else {
+        route = "https://nocoupon.works/save";
+    }
+    fetch(route,
+    {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(game),
+    }).then((response) => response.json()).then((json) => console.log(json));
+}
+
+function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
+    console.log("loading save file...")
+    const save = localStorage.getItem("saveFile");
+    if(save){
+        Object.assign(game, JSON.parse(save));
+    }else{
+        console.warn("WARNING! Save file could not be located in localStorage!");
+    }
+}
+
+function resetGame(){
+    localStorage.removeItem("saveFile");
+    changeUrl("homepage")
+}
+
+
 const game = {
-    day: 1,         // starts at 1, increments each night. game ends after maxDay nights
+    day: 1,
     maxDay: 7,
     money: 100,
     message: "Console here", // dont parse
@@ -18,26 +57,130 @@ const game = {
         register: 0,
         decor: 0,
         firepower: 0
-        // more?
     },
 
     items:{
-      ammo: 20
+        ammo: 20
     },
 
     stock:{
-        apple: { name: "Apple", quantity: 20, buyPrice: 1, sellPrice: 2.5, rarity: "common" },
-        milk: { name: "Milk", quantity: 10, buyPrice: 3, sellPrice: 5.5, rarity: "common" },
-        pilk: { name: "Pilk", quantity: 10, buyPrice: 3, sellPrice: 1.5, rarity: "common" },
-        banana: { name: "Bananana", quantity: 10, buyPrice: 3, sellPrice: 2, rarity: "common" }
+        apple: {...PRODUCT_CATALOG.apple, quantity: 20},
+        milk: {...PRODUCT_CATALOG.milk, quantity: 10},
+        pilk: {...PRODUCT_CATALOG.pilk, quantity: 10},
+        banana: {...PRODUCT_CATALOG.banana, quantity: 10}
     }, // prolly should add image link later, so need to change a lot of structures in functions below
     stats:{
         served: 0,
         killed: 0,
         revenue: 0,
-        // more idk
     },
 };
+// ----  Init and rendering starts below
+
+// Trys to advance game state when user clicks
+function advanceGame() {
+    switch(game.state){
+
+        case GAMESTATE.DAY_START:
+            getQueue(game.hours, 0.5); // change multiplier later
+            game.message = `Day ${game.day} has started!!!`;
+            game.state = GAMESTATE.CUSTOMER_CHECKOUT;
+            nextCustomer();
+            break;
+
+        case GAMESTATE.DAY_END:
+            startNight();
+            changeUrl("manager");
+            break;
+
+        case GAMESTATE.NIGHT_START:
+            game.state = GAMESTATE.DAY_START;
+            game.message = `Press Next to begin Day ${game.day}.`;
+            saveGame();
+            changeUrl("cashier");
+            break;
+
+        default:
+            game.message = "Cannot do that right now.";
+            render();
+            break;
+    }
+}
+
+function render() {
+    let text = "";
+
+    // --- GAME_OVER screen
+    if(game.state === GAMESTATE.GAME_OVER){ // need to change to home screen soon
+        main.innerText = `GG! You survived all ${game.maxDay} days!\n\nFinal Stats:\n  Money: $${game.money.toFixed(2)}\n  Customers Served: ${game.stats.served}\n  Total Revenue: $${game.stats.revenue.toFixed(2)}`;
+        gameMain.innerText = `Game Over.\n\n`;
+        return;
+    }
+
+    // --- NIGHT_START screen (placeholder for shop/upgrade screen)
+    if(game.state === GAMESTATE.NIGHT_START){
+        if(page === "manager"){
+            manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
+            manager_console.innerText = `${game.message}\n\n`;
+        }
+    }
+
+    // --- Normal gameplay screen
+    text += `Day: ${game.day} / ${game.maxDay}\n`;
+    text += `State: ${game.state}\n`;
+    text += `Money: $${game.money.toFixed(2)}\n`;
+    text += `Served: ${game.stats.served}\n`;
+    text += `Revenue: $${game.stats.revenue.toFixed(2)}\n\n`;
+
+    if (page === "cashier"){
+        if(game.currentCustomer){
+            const customer = game.currentCustomer;
+            text += `Customer: ${customer.name}\n`;
+            text += `Trait: ${customer.trait}\n\n`;
+            text += `Cart:\n`;
+
+            for(const i of customer.cart){
+                const subtotal = i.price * i.quantity;
+                text += `  ${i.name} x${i.quantity}: $${subtotal.toFixed(2)}\n`
+            }
+
+            text += `\nTotal + tax: $${customer.totalCost.toFixed(2)}\n`;
+            text += `Customer gave you: $${customer.moneyGiven.toFixed(2)}\n`;
+            // text += `Change needed: $${customer.moneyGiven - customer.totalCost}\n`;
+        }
+    main.innerText = text;
+    gameMain.innerText = `${game.message}\n\n`;
+    }
+    else if(page === "manager"){
+        let stock = "";
+        manager_main.innerText = text;
+        stock += `${game.message}\n\n`;
+        stock += "Current Stock:\n";
+        for (const i in game.stock){
+            stock += `${i}: ${game.stock[i].quantity}\n`;
+        }
+        manager_console.innerText = stock;
+        renderManagerShop();
+        renderSelectedProductPanel();
+    }
+}
+
+function startNight(){
+    game.day++; // +1 to day count at night
+    game.currentCustomer = null;
+    game.customerQueue = [];
+
+    if(game.day > game.maxDay){ // all days complete
+        game.state = GAMESTATE.GAME_OVER;
+        render();
+        return;
+    }
+
+    game.state = GAMESTATE.NIGHT_START;
+    game.message = `[Shop Screen] — End of day ${game.day - 1}. Preparing for Day ${game.day}.`; // placeholder for upgrade screen
+    saveGame();
+    render();
+}
 
 // ----- main functions
 
@@ -76,7 +219,9 @@ function generateCustomer(customerBudget){
     const trait = traits[Math.floor(Math.random() * traits.length)];
 
     const cart = getCart(customerBudget);
-    let totalCost = cart.reduce((sum, item) => sum + item.price, 0);
+    let totalCost = cart.reduce((sum, item) => {
+    return sum + item.price * item.quantity;
+    }, 0);
     totalCost = roundMoney(totalCost * 1); // tax here
 
     let moneyGiven = bills.find(bill => bill >= totalCost);
@@ -98,22 +243,41 @@ function generateCustomer(customerBudget){
 function getCart(cartBudget) {
     const cart = [];
     let remainingBudget = cartBudget;
-    const availableItems = Object.entries(game.stock).filter(([id, item]) => item.quantity > 0);
+
+    const tempStock = {};
+    for(const itemId in game.stock){
+        tempStock[itemId] = game.stock[itemId].quantity;
+    }
+    // const availableItems = Object.entries(game.stock).filter(([id, item]) => item.quantity > 0);
 
     let attempts = 0;
 
     while (remainingBudget > 0 && attempts < 20) { // how many attempts to retrieve stock?
+        const availableItems = Object.entries(game.stock).filter(([id, item]) => {
+            return tempStock[id] > 0 && item.sellPrice <= remainingBudget;
+        });
+
+        if (availableItems.length === 0) {
+            break;
+        }
+
         const [itemId, item] = availableItems[Math.floor(Math.random() * availableItems.length)];
 
-        if (item.sellPrice <= remainingBudget && item.quantity > 0) {
+        const cartItem = cart.find(cartEntry => cartEntry.id === itemId);
+        if(cartItem){
+            cartItem.quantity++;
+        }else{
             cart.push({
-                id: itemId,
-                name: item.name,
-                price: item.sellPrice
+            id: itemId,
+            name: item.name,
+            price: item.sellPrice,
+            quantity: 1
             });
-            remainingBudget = roundMoney(remainingBudget - item.sellPrice);
-            item.quantity--;
         }
+
+
+        tempStock[itemId]--;
+        remainingBudget = roundMoney(remainingBudget - item.sellPrice);
         attempts++;
     }
     return cart;
@@ -121,6 +285,7 @@ function getCart(cartBudget) {
 
 // checks if cashier's change is given correctly
 function processPayment(changeGiven) {
+    changeGiven = roundMoney(changeGiven);
     const customer = game.currentCustomer;
     if (!customer) {
         game.message = "There is no customer right now.";
@@ -129,9 +294,9 @@ function processPayment(changeGiven) {
     }
 
     game.state = GAMESTATE.WAITING_FOR_CHANGE; // waiting on result
-
     const expectedChange = roundMoney(customer.moneyGiven - customer.totalCost);
     if (changeGiven === expectedChange) {
+        removeStockFromCart(customer.cart);
         game.money += customer.totalCost;
         game.stats.served++;
         game.stats.revenue += customer.totalCost;
@@ -141,12 +306,60 @@ function processPayment(changeGiven) {
         game.state = GAMESTATE.CUSTOMER_CHECKOUT; // wrong — stay on this customer
         game.message = `Wrong change! Expected: $${expectedChange.toFixed(2)}`;
     }
+}
 
+function buyStock(productId, amount){
+    amount = Number(amount);
+    if(!PRODUCT_CATALOG[productId]){
+        game.message = "That product does not exist.";
+        render();
+        return false;
+    }
+    if(!Number.isInteger(amount) || amount <= 0){
+        game.message = "Enter a valid amount to buy";
+        render();
+        return false;
+    }
+    if(game.state !== GAMESTATE.NIGHT_START){
+        game.message = "You can only buy stock during the manager phase.";
+        render();
+        return false;
+    }
+    const product = PRODUCT_CATALOG[productId];
+    const totalCost = roundMoney(amount * product.buyPrice);
+    if(game.money < totalCost){
+        game.message = `not enough money to buy. need $${totalCost.toFixed(2)}`;
+        render();
+        return false;
+    }
+    if(!game.stock[productId]){
+        game.stock[productId] = createStockItem(productId, 0);
+    }
+    game.money = roundMoney(game.money - totalCost);
+    game.stock[productId].quantity += amount;
+
+    game.message = `Bought ${amount} ${product.name} for $${totalCost.toFixed(2)}.`;
     render();
+    return true;
 }
 
 // ---  helpers
+function createStockItem(productId, quantity = 0) {
+    const product = PRODUCT_CATALOG[productId];
+    if (!product) {
+        return null;
+    }
+    return {
+        ...product,
+        quantity: quantity
+    };
+}
 
+function removeStockFromCart(cart){
+    for(const item of cart){
+        game.stock[item.id].quantity -= item.quantity;
+    }
+}
 function roundMoney(amount) {
     return Math.round(amount * 100) / 100;
 }
@@ -177,120 +390,17 @@ const isLocalhost = () => {
     );
 };
 
-// ----  Init and rendering starts below
-
-// Trys to advance game state when user clicks
-function advanceGame() {
-    switch(game.state){
-
-        case GAMESTATE.DAY_START:
-            getQueue(game.hours, 0.5); // change multiplier later
-            game.message = `Day ${game.day} has started!!!`;
-            game.state = GAMESTATE.CUSTOMER_CHECKOUT;
-            nextCustomer();
-            break;
-
-        case GAMESTATE.DAY_END:
-            startNight();
-            changeUrl("manager");
-            break;
-
-        case GAMESTATE.NIGHT_START:
-            game.state = GAMESTATE.DAY_START;
-            game.message = `Press Next to begin Day ${game.day}.`;
-            changeUrl("cashier");
-            break;
-
-        default:
-            game.message = "Cannot do that right now.";
-            render();
-            break;
-    }
-}
-
-function startNight(){
-    game.day++; // +1 to day count at night
-    game.currentCustomer = null;
-    game.customerQueue = [];
-
-    if(game.day > game.maxDay){ // all days complete
-        game.state = GAMESTATE.GAME_OVER;
-        render();
-        return;
-    }
-
-    game.state = GAMESTATE.NIGHT_START;
-    game.message = `[Shop Screen] — End of day ${game.day - 1}. Preparing for Day ${game.day}.`; // placeholder for upgrade screen
-    saveGame();
-    render();
-}
-
-function render() {
-    let text = "";
-
-    // --- GAME_OVER screen
-    if(game.state === GAMESTATE.GAME_OVER){ // need to change to home screen soon
-        main.innerText = `GG! You survived all ${game.maxDay} days!\n\nFinal Stats:\n  Money: $${game.money.toFixed(2)}\n  Customers Served: ${game.stats.served}\n  Total Revenue: $${game.stats.revenue.toFixed(2)}`;
-        gameMain.innerText = `Game Over.\n\n`;
-        return;
-    }
-
-    // --- NIGHT_START screen (placeholder for shop/upgrade screen)
-    if(game.state === GAMESTATE.NIGHT_START){
-        if(page === "manager"){
-            manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
-            manager_console.innerText = `${game.message}\n\n`;
-        }
-    }
-
-    // --- Normal gameplay screen (DAY_START, CUSTOMER_CHECKOUT, WAITING_FOR_CHANGE, DAY_END)
-    text += `Day: ${game.day} / ${game.maxDay}\n`;
-    text += `State: ${game.state}\n`;
-    text += `Money: $${game.money.toFixed(2)}\n`;
-    text += `Served: ${game.stats.served}\n`;
-    text += `Revenue: $${game.stats.revenue.toFixed(2)}\n\n`;
-
-    if (page === "cashier"){
-        if(game.currentCustomer){
-            const customer = game.currentCustomer;
-            text += `Customer: ${customer.name}\n`;
-            text += `Trait: ${customer.trait}\n\n`;
-            text += `Cart:\n`;
-
-            for(const i of customer.cart){
-                text += `  ${i.name}: $${i.price.toFixed(2)}\n`
-            }
-
-            text += `\nTotal + tax: $${customer.totalCost.toFixed(2)}\n`;
-            text += `Customer gave you: $${customer.moneyGiven.toFixed(2)}\n`;
-            // text += `Change needed: $${customer.moneyGiven - customer.totalCost}\n`;
-        }
-    main.innerText = text;
-    gameMain.innerText = `${game.message}\n\n`;
-    }
-    else if(page === "manager"){
-        let stock = "";
-        manager_main.innerText = text;
-        for (const i in game.stock){
-            stock += `${i}: ${game.stock[i].quantity}\n`;
-        }
-        manager_console.innerText += stock;
-    }
-}
-
-
 // -- Interactivity specifics
 // Cashier
 let main; // gameplay status on the left
 let gameMain; // console logs
-let changeInput; // user change input box
-let submitChangeButton; // user submit change to be checked button
-let advanceButton; // drives all state transitions
-// const nextCustomerButton = document.getElementById("nextCustomer");
 
 // Manager
 let manager_main; // gameplay status on the left
 let manager_console; // console logs
+
+let renderManagerShop;
+let renderSelectedProductPanel;
 
 const page = document.body.dataset.page;
 document.addEventListener("DOMContentLoaded", init);
@@ -298,11 +408,28 @@ function init() {
     loadGame();
     if (page === "cashier") {
         console.log("loading page cashier");
-        initCashierPage(); // assign element references here
+        const cashierUI = initCashierPage({
+            advanceGame,
+            processPayment
+        });
+
+        main = cashierUI.main;
+        gameMain = cashierUI.gameMain;
     }
     if (page === "manager") {
         console.log("loading page manager");
-        initManagerPage(); // assign element references here
+        const managerUI = initManagerPage({
+            game,
+            PRODUCT_CATALOG,
+            advanceGame,
+            buyStock,
+            roundMoney
+        });
+
+        renderManagerShop = managerUI.renderManagerShop;
+        renderSelectedProductPanel = managerUI.renderSelectedProductPanel;
+        manager_main = managerUI.manager_main;
+        manager_console = managerUI.manager_console;
     }
     render();
 }
@@ -314,61 +441,3 @@ document.addEventListener("keydown", function(event){
         resetGame();
     }
 })
-
-function saveGame(){
-    console.log("saving...")
-    localStorage.setItem("saveFile", JSON.stringify(game));
-    let route = "";
-    if(isLocalhost()){
-      route = "http://127.0.0.1:5000/save";
-    } else {
-      route = "https://nocoupon.works/save";
-    }
-    fetch(route,
-    {
-      method: "POST",
-      headers: {
-      "Content-Type": "application/json"
-      },
-      body: JSON.stringify(game),
-    }).then((response) => response.json()).then((json) => console.log(json));
-}
-
-function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
-    console.log("loading save file...")
-    const save = localStorage.getItem("saveFile");
-    if(save){
-        Object.assign(game, JSON.parse(save));
-    }else{
-        console.warn("WARNING! Save file could not be located in localStorage!");
-    }
-}
-
-function resetGame(){
-    localStorage.removeItem("saveFile");
-    changeUrl("homepage")
-}
-
-function initCashierPage(){
-    main = document.getElementById("main"); // gameplay status on the left
-    gameMain = document.getElementById("main2") // console logs
-    changeInput = document.getElementById("changeInput"); // user change input box
-    submitChangeButton = document.getElementById("submitChange"); // user submit change to be checked button
-    advanceButton = document.getElementById("advanceGame"); // drives all state transitions
-    // const nextCustomerButton = document.getElementById("nextCustomer");
-    advanceButton.addEventListener("click", advanceGame);
-    // nextCustomerButton.addEventListener("click", nextCustomer);
-    submitChangeButton.addEventListener("click", function(){
-        const change = Number(changeInput.value);
-        processPayment(change);
-        changeInput.value = "";
-    })
-}
-
-function initManagerPage(){
-    manager_main = document.getElementById("main");
-    manager_console = document.getElementById("main2");
-    advanceButton = document.getElementById("advanceGame");
-
-    advanceButton.addEventListener("click", advanceGame);
-}
