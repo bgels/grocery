@@ -1,5 +1,6 @@
-#Ricky Lin, Yu lu, Emily Mai, Jun Jie Li
-#grocery
+# Restaurant Simulator
+# Yu Lu, Ricky Lin, Jun Jie Li, Emily Mai
+# SoftDev
 
 # Imports >>
 from flask import Flask, render_template, request, flash, url_for, redirect, session, jsonify
@@ -32,7 +33,7 @@ def main():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
-    flash("heauyshd");
+    flash("heauyshd")
     if 'username' in session:
         return redirect(url_for("homepage"))
     if request.method == "POST":
@@ -88,9 +89,24 @@ def route(url):
 
 @app.route('/save', methods=['POST'])
 def save():
-    data = request.json
-    print(data);
+    if 'username' not in session:
+        return jsonify({"error": "Not logged in"}), 401
+    username = session['username']
+    game_data = request.get_json() #python dictionary
+    print(game_data)
+    save_game(username, game_data)
     return jsonify(success=True)
+
+@app.route('/load', methods=['GET'])
+def load():
+    if 'username' not in session:
+        return jsonify({"error": "Not logged in"}), 401
+    username = session['username']
+    save_data = load_game(username)
+    if save_data:
+        return jsonify(save_data)
+    else:
+        return jsonify({"error": "No save found"}), 404
 
 if __name__ == "__main__":
     app.run(debug=True)
