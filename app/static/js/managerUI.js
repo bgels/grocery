@@ -45,7 +45,7 @@ export function initManagerPage({
             button.dataset.productId = productId;
 
             button.innerHTML = `
-                <p class="text-xl font-bold letter-hover-text">${product.name}</p>
+                <p class="sm:text-xs md:text-sm lg:text-xl font-bold letter-hover-text">${product.name}</p>
             `;
 
             button.addEventListener("click", function(){

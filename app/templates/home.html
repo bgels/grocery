@@ -28,10 +28,14 @@
 
     <main class="items-center justify-left mb-24 pl-6 pt-64 pb-24">
       <div class="flex flex-col">
-        <button class="flex bg-black/10 hover:bg-gray-400 text-gray-500 text-[2.5rem] font-bold py-4 px-4 pointer-events-none select-none"> <!-- change pointer events later after user_context-->
+        {% if loggedIn %}
+        {% block content %}
+        <button id="continue" class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
           <a href="/cashier" class="letter-hover-text">Continue tHe game</a>
         </button>
-        <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-800 hover:text-white hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
+        {% endblock %}
+        {% endif %}
+        <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
           <a href="/cashier" class="letter-hover-text">New game pls!</a>
         </button>
         <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[80px] px-2 select-none">
@@ -46,5 +50,6 @@
     </footer>
   </div>
   <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/homescreen.js') }}"></script>
 </body>
 </html>
