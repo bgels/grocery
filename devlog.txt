@@ -1,4 +1,4 @@
-yuL -- 2026-04-30 4:15
+yuL -- 2026-04-30 04:15
 -- Added inital codebase setup
 
 Restaurant Simulator -- 2026-05-04 10:40
@@ -8,13 +8,13 @@ Serve multiple apps concurrently? No
 Flask
 Has any team member provisioned SSL certificates to facilitate httpS traffic? Yes
 
-rickyL -- 2026-05-5 10:40
+rickyL -- 2026-05-05 10:40
 -- Worked on design.md and organization
 
-yuL -- 2026-05-5 11:00
+yuL -- 2026-05-05 11:00
 -- Json structure proposal drafting in js file
 
-yuL -- 2026-05-5 21:30
+yuL -- 2026-05-05 21:30
 -- readme in keys updated for no keys
 -- core game states and cashier day functions, just need to now create template and basic cashier ui to play
 
@@ -32,11 +32,11 @@ junJieL -- 2026-05-07 10:53
 -- Worked on art assets (accessories for the characters)
 -- made base character model a removable layer, added assets to static folder
 
-yuL -- 2026-08-5 7:00
+yuL -- 2026-05-08 07:00
 -- Main game loop draft finished with text as display for now, need to polish code and add visuals later
 -- flask routes in __init__
 
-yuL -- 2026-05-12 7:00
+yuL -- 2026-05-12 07:00
 -- design doc updated for images and revised some wordings
 -- javascript removed unused files and compiled some js files into one constants.js
 -- revised game loop to use state machines
@@ -47,17 +47,17 @@ rickyL -- 2026-05-12 11:00
 - Moved the game to Cashier.html
 - Remade homepage to be a start game menu
 
-yuL -- 2026-05-13 8:15
+yuL -- 2026-05-13 08:15
 -- prelim Init function in javascript and minor changes to templates to get ready for dynamic element reference assignment
 
-junJieL -- 2026-05-13 8:15
+junJieL -- 2026-05-13 08:15
 -- Cashier > register and calculator wip 
 -- prelim placement for cashier pov
 
-emilyM -- 2026-05-013 10:53
--- Finished database functions
+emilyM -- 2026-05-13 10:53
+-- Finished building database tables
 
-Restaurant Simulator -- 2026-05-13 8:23
+Restaurant Simulator -- 2026-05-13 08:23
 Python:
 Which aspects of the style guide were most applicable to your codebase?
 Readability
@@ -71,7 +71,7 @@ Which aspects of the style guide were most useful/appreciated by your Devos?
 In our code, the game object in main.js, around lines 24 to 55, keeps day, money, stock, customer queue, current customer, upgrades, and stats grouped together instead of scattered around the js file
 This was most appreciated because functions like getQueue(), generateCustomer(), processPayment(), and nextCustomer() make the cashier loop easier to decouple, debug, and extend
 
-yuL -- 2026-05-14 7:40
+yuL -- 2026-05-14 07:40
 -- Added wip main menu bg art
 -- Revised main menu, revised and fixed all routing in the front-end, animate js
 -- Night page and day page loop established
@@ -82,10 +82,10 @@ rickyL -- 2026-05-14 22:00
 -- changed table to user and used user_id not usernames
 -- finished user functions
 
-yuL -- 2026-05-15 7:40
+yuL -- 2026-05-15 07:40
 -- added wip background bg for store inside
 
-Restaurant Simulator -- 2026-05-15 8:00
+Restaurant Simulator -- 2026-05-15 08:00
 Timeline shifts and goal reconsiderations
 -- Redefined "stretch goals" as strictly cashier system polishing and night manager stock system
 Cashier polishing:
@@ -97,3 +97,8 @@ Night manager stock system:
 2. Implementation of a upgrades system that can affect gameplay 
 3. Art for background of manager Panel
 Storing/Retrieving of all of this into the database should be targeted
+
+emilyM -- 2026-05-17 21:00
+-- added save and load functions in __init__.py
+-- made save_game in db.py to insert local storage stuff into our database tables
+-- edited database tables
