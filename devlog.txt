@@ -109,6 +109,10 @@ emilyM -- 2026-05-17 21:00
 -- made save_game in db.py to insert local storage stuff into our database tables
 -- edited database tables
 
+junjieL -- 2026-05-17 23:20
+-- random goober display in art page
+-- to add new assets in list or accessory chance logic
+
 yuL -- 2026-05-18 1:00
 -- revised customer cart to count quantity too instead of just appending every item as something unique (holy was inefficent)
 -- updated manager to have buy stock system, updated template aswell to prepare for art in manager page, moved avliable itesm u can purchase inside of constants so later we can easily create more grocery items
