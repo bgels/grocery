@@ -15,9 +15,9 @@ function randomCharacter(container) {
     const mouth = pick(options.mouth);
     const acc = pick(options.accessories);
 
-    container.querySelector('[data-art-layer="body"]').src        = `/static/images/body/${body}.png`;
-    container.querySelector('[data-art-layer="eyes"]').src        = `/static/images/eyes/${eyes}.png`;
-    container.querySelector('[data-art-layer="mouth"]').src       = `/static/images/mouth/${mouth}.png`;
+    container.querySelector('[data-art-layer="body"]').src = `/static/images/body/${body}.png`;
+    container.querySelector('[data-art-layer="eyes"]').src = `/static/images/eyes/${eyes}.png`;
+    container.querySelector('[data-art-layer="mouth"]').src = `/static/images/mouth/${mouth}.png`;
     container.querySelector('[data-art-layer="accessories"]').src = `/static/images/accessories/${acc}.png`;
 }
 
