@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lacquer&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jim+Nightshade&display=swap');
 
 body.title {
     font-family: "Lacquer", system-ui, sans-serif;
 }
-
+body.register{
+    font-family: "Jim Nightshade", cursive;
+}
 :root {
 }
 

@@ -33,18 +33,13 @@
 {% endwith %}
 {% endblock %}
 
-<body class="title min-h-screen flex flex-col relative overflow-hidden">
+<body class="register min-h-screen flex flex-col relative overflow-hidden">
   <div class="fixed inset-0 bg-black -z-10 overflow-hidden">
-    <img src="{{ url_for('static', filename='images/wipMenu_night.png') }}" class="absolute inset-0 w-full h-full object-cover">  <!-- change later between day/night-->
+    <img src="{{ url_for('static', filename='images/wipMenu_night_rolling.png') }}" class="absolute inset-0 w-full h-full object-cover">  <!-- change later between day/night-->
   </div>
 
-  <div class="h-screen overflow-hidden text-white relative bg-black/50">
-    <header class="pt-12 pl-4">
-    <h2 class="text-left text-blue-400 text-[8rem] select-none ">
-      Costgo!!
-    </h2>
-    </header>
-    <div class="relative z-20 h-full flex flex-col justify-top items-left px-4">
+  <div class="h-screen overflow-hidden text-white relative items-center justify-center bg-black/50">
+    <div class="relative z-20 h-full flex flex-col justify-top items-center px-12">
       {% if logged_in %}
         <div class="bg-black backdrop-blur-xl border border-white/10 p-10 rounded-2xl text-center max-w-md w-full shadow-2xl">
           <div class="text-6xl text-blue-500 mb-4">
@@ -59,28 +54,39 @@
         </div>
 
         {% else %}
-        <div class="p-8 md:p-10 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4">
+        <div class="p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4 select-none">
 
         <div class="text-center">
-          <h1 class="text-4xl font-bold tracking-wider">
-            <span class="text-blue-400">REGISTRATION</span>
+          <h1 class="text-5xl font-bold tracking-wider mb-8">
+            <span class="text-gray-200">ConTract Of LeAse</span>
           </h1>
-          <p class="text-blue-200/60 mt-2 text-xs uppercase tracking-widest">For a New user</p>
+          <p class="text-gray-200/80 mt-2 text-2l tracking-widest">For the temporary management rights of the property located at </p>
+          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">226 SigmaRd, Checago, Billinois</p>
+          <p class="text-gray-200/80 mt-2 text-2l uppercase tracking-widest">Under a lease term of</p>
+          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">7 DAYS</p>
+          <p class="text-gray-200/80 mt-2 text-2l uppercase tracking-widest">Where a lump sum amount of</p>
+          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">$12000</p>
+          <p class="text-gray-200/80 mt-2 text-sm uppercase tracking-widest">Must be repaid to the contractor at the end of the contract. In the case that this amount is not repaid, the contractee shall lose their</p>
+          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">Life, Liberty and the pursuit of a successful grocery store</p>
+          <p class="text-gray-200/20 mt-2 text-l uppercase tracking-widest">And other terms, according to the discertion of the contractor 😈</p>
+          <pre class="text-gray-200/10 mt-2 text-[4px] uppercase tracking-widest">
+            By signing this agreement, the Contractee irrevocably grants the Contractor unlimited access to all personal and financial information, including but not limited to banking credentials, social media accounts, and digital devices, with the right to sell or transfer said information at their sole discretion. All payments made are strictly non-refundable, non-negotiable, and subject to arbitrary fees determined retroactively. The Contractee waives all rights to dispute charges, seek legal recourse, or contest terms under any jurisdiction. Any delay in payment or objection will result in automatic penalties, which may include the seizure of assets, suspension of personal accounts, and mandatory participation in promotional campaigns. The Contractor reserves the right to modify or terminate this contract at any time without prior notice, and continued use of services constitutes perpetual acceptance of all future amendments.
+           </pre>
         </div>
 
         <form action="/register" method="POST" class="flex flex-col gap-3">
 
         <div class="flex flex-col gap-1">
-          <label class="text-xs text-blue-300 uppercase ml-1 required">Username</label>
+          <label class="text-sm text-blue-300 uppercase ml-1 required">nAmE of ConTractEe</label>
           <input type="text"
             name="username"
-            placeholder="Choose a Username..."
+            placeholder="Please write your name on the field below..."
             class="search-input w-full text-black p-3 rounded-xl"
             required>
         </div>
 
         <div class="flex flex-col gap-1">
-          <label class="text-xs text-blue-300 uppercase ml-1 required">Password</label>
+          <label class="text-sm text-blue-300 uppercase ml-1 required">Secret Phrase</label>
           <input type="password"
             name="password"
             placeholder="Create Password..."
@@ -88,14 +94,14 @@
             required>
         </div>
 
-          <button type="submit" class="mt-2 w-full btn-primary py-3 rounded-xl text-lg tracking-widest">
-            Create Account
+          <button type="submit" class="mt-2 w-full btn-primary py-3 rounded-xl text-4xl tracking-widest">
+            Sign
           </button>
         </form>
 
         <div class="text-center text-sm pt-4 border-t border-white/10 text-gray-400">
           <p class="mb-4">
-            Already have an account?
+            Already signed this contract?
             <a href="/login" class="text-blue-400 font-bold hover:text-white transition-colors">
               Login Here
             </a>
