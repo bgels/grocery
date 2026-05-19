@@ -75,11 +75,16 @@ def profile():
 
 @app.route("/manager")
 def manager():
-    return render_template("/manager.html")
+    if 'username' in session:
+        return render_template("/manager.html")
+    else:
+        return redirect(url_for("login"))
 @app.route("/cashier")
 def cashier():
-    return render_template("/cashier.html")
-
+    if 'username' in session:
+        return render_template("/cashier.html")
+    else:
+        return redirect(url_for("login"))
 @app.route("/art")
 def art():
     return render_template("/art.html")
