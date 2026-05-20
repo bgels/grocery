@@ -33,7 +33,6 @@ def main():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
-    flash("heauyshd")
     if 'username' in session:
         return redirect(url_for("homepage"))
     if request.method == "POST":
@@ -55,7 +54,6 @@ def register():
            db.add_user(username, password)
            db.setup_tables(username)
            return redirect(url_for("login"))
-        #maybe add flash msges here?
     return render_template("register.html")
 
 @app.route("/logout")

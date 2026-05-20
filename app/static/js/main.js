@@ -2,7 +2,7 @@ import { GAMESTATE, CUSTOMER_PRESETS, PRODUCT_CATALOG } from "./constants.js";
 import { initCashierPage } from "./cashierUI.js";
 import { initManagerPage } from "./managerUI.js";
 // To do:
-// GAME: 
+// GAME:
 // 1. need to calculate game state as soon as game loads later on, also customer queue
 // 2. add image link to stock
 
@@ -27,12 +27,20 @@ function saveGame(){
 
 function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
     console.log("loading save file...")
+    let route = "";
     const save = localStorage.getItem("saveFile");
     if(save){
         Object.assign(game, JSON.parse(save));
     }else{
         console.warn("WARNING! Save file could not be located in localStorage!");
     }
+    if(isLocalhost()){
+
+        route = "http://127.0.0.1:5000/load";
+    } else {
+        route = "https://nocoupon.works/load";
+    }
+    fetch(route).then((response) => response.json()).then((json) => console.log(json));
 }
 
 function resetGame(){
@@ -47,7 +55,7 @@ const game = {
     money: 100,
     message: "Console here", // dont parse
     state: GAMESTATE.DAY_START, // dont parse
-    hours: 1,
+    hours: 2,
 
     customerQueue: [],  // dont parse
     currentCustomer: null,
