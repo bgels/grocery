@@ -53,6 +53,7 @@ def register():
        password = request.form.get("password", "")
        if db.get_user(username) == None:
            db.add_user(username, password)
+           db.setup_tables(username)
            return redirect(url_for("login"))
         #maybe add flash msges here?
     return render_template("register.html")

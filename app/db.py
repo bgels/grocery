@@ -35,6 +35,26 @@ def check_password(username, password):
         return False
     return password == user[1]
 
+def setup_tables(username):
+    c = DB.cursor()
+    c.execute('''
+        INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ''',
+    (
+        username,
+        1,
+        0,
+        0,
+        "None",
+        0,
+        0,
+        0
+    ))
+    c.close()
+    DB.commit()
+
+
 #puts game data into database tables
 def save_game(username, save_json):
     c = DB.cursor()
@@ -43,8 +63,8 @@ def save_game(username, save_json):
     c.execute('''
         INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ''', 
-    (   
+    ''',
+    (
         username,
         save_json.get('day', 1),
         save_json.get('hours', 1),
@@ -60,7 +80,7 @@ def save_game(username, save_json):
     c.execute('''
         INSERT INTO Upgrades (shelf, register, decor, firepower)
         VALUES (?, ?, ?, ?)
-    ''', 
+    ''',
     (
         upgrades.get('shelf', 0),
         upgrades.get('register', 0),
@@ -74,7 +94,7 @@ def save_game(username, save_json):
         INSERT INTO Items (username, name, amount)
         VALUES (?, ?, ?)
     ''',
-    (   
+    (
         username,
         'gun', #default, change later
         items.get('ammo', 0)
@@ -85,7 +105,7 @@ def save_game(username, save_json):
         c.execute('''
             INSERT OR REPLACE INTO Products (name, quantity, buy_price, sell_price, rarity)
             VALUES (?, ?, ?, ?, ?)
-        ''', 
+        ''',
         (
             data.get('name', product_name),
             data.get('quantity', 0),
@@ -99,6 +119,13 @@ def save_game(username, save_json):
 #retrieve game data from database and put into needed format
 def load_game(username):
     c = DB.cursor()
+    dict = {}
+    c.execute("SELECT * FROM Game WHERE username=?", (username,))
+    
+
+    c.close()
+    DB.commit()
+    return dict
 
 #returns as list of dicts, where each item in the list is one row's entry, and each dict entry contains the selected data as the value for the column name as the key
 def select_query(query_string, parameters=()):
