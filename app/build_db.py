@@ -11,13 +11,29 @@ c = db.cursor()
 c.execute("PRAGMA foreign_keys = ON;")
 
 c.executescript("""
+    DROP TABLE IF EXISTS Game;
+    DROP TABLE IF EXISTS Items;
     DROP TABLE IF EXISTS User;
+    DROP TABLE IF EXISTS Customers;
+    DROP TABLE IF EXISTS Products;
+    DROP TABLE IF EXISTS Upgrades;
+    """
+)
+
+c.executescript("""
     CREATE TABLE User (
         username TEXT PRIMARY KEY,
         password TEXT
     );
 
-    DROP TABLE IF EXISTS Game;
+    CREATE TABLE Customers (
+        customer_id TEXT PRIMARY KEY,
+        name TEXT,
+        sprite TEXT,
+        traits TEXT,
+        budget INTEGER
+    );
+
     CREATE TABLE Game (
         username TEXT,
         day INTEGER,
@@ -31,7 +47,6 @@ c.executescript("""
         FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
     );
 
-    DROP TABLE IF EXISTS Items;
     CREATE TABLE Items (
         username TEXT,
         name TEXT,
@@ -39,16 +54,6 @@ c.executescript("""
         FOREIGN KEY (username) REFERENCES User(username)
     );
 
-    DROP TABLE IF EXISTS Customers;
-    CREATE TABLE Customers (
-        customer_id TEXT PRIMARY KEY,
-        name TEXT,
-        sprite TEXT,
-        traits TEXT,
-        budget INTEGER
-    );
-
-    DROP TABLE IF EXISTS Products;
     CREATE TABLE Products (
         name TEXT PRIMARY KEY,
         quantity INTEGER,
@@ -57,7 +62,6 @@ c.executescript("""
         rarity TEXT
     );
 
-    DROP TABLE IF EXISTS Upgrades;
     CREATE TABLE Upgrades (
         shelf INTEGER,
         register INTEGER,

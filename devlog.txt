@@ -118,3 +118,7 @@ yuL -- 2026-05-18 1:00
 -- updated manager to have buy stock system, updated template aswell to prepare for art in manager page, moved avliable itesm u can purchase inside of constants so later we can easily create more grocery items
 -- added new renders for manager page as player interacts w it all, and moved page specific renders to other javascript files (keeping # of lines in mainjs lower)
 -- design doc final section updated, updated other wrong formatting
+
+emilyM --2026-05-20 09:55
+-- made load_game in db.py to convert stored data into json for javascript
+-- changed order of dropping/creating tables, hopefully no more errors

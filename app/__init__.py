@@ -103,7 +103,8 @@ def save():
     username = session['username']
     game_data = request.get_json() #python dictionary
     print(game_data)
-    save_game(username, game_data)
+    print("save")
+    db.save_game(username, game_data)
     return jsonify(success=True)
 
 @app.route('/load', methods=['GET'])
@@ -111,7 +112,9 @@ def load():
     if 'username' not in session:
         return jsonify({"error": "Not logged in"}), 401
     username = session['username']
-    save_data = load_game(username)
+    save_data = db.load_game(username)
+    print(save_data)
+    print("load")
     if save_data:
         return jsonify(save_data)
     else:

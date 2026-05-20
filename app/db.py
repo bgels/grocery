@@ -60,6 +60,7 @@ def save_game(username, save_json):
     c = DB.cursor()
     #Game table
     stats = save_json.get('stats', {})
+    c.execute('DELETE FROM Game WHERE username=?', (username,))
     c.execute('''
         INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
@@ -119,13 +120,52 @@ def save_game(username, save_json):
 #retrieve game data from database and put into needed format
 def load_game(username):
     c = DB.cursor()
-    dict = {}
-    c.execute("SELECT * FROM Game WHERE username=?", (username,))
-    
-
+    #Game table
+    c.execute('''
+        SELECT day, hour, money, customer_id, served, killed, revenue
+        FROM Game
+        WHERE username=?''', (username,))
+    row = c.fetchone()
+    if row:
+        day, hour, money, currentCustomer, served, killed, revenue = row
+    else:
+        return None
+    #Upgrades table
+    c.execute('SELECT shelf, register, decor, firepower FROM Upgrades')
+    row = c.fetchone()
+    upgrades = {'shelf': 0, 'register': 0, 'decor': 0, 'firepower': 0}
+    if row:
+        upgrades = {'shelf': row[0], 'register': row[1], 'decor': row[2], 'firepower': row[3]}
+    #Items table
+    c.execute('SELECT name, amount FROM Items WHERE username=?', (username,))
+    items = {name: amount for name, amount in c.fetchall()}
+    #Products table
+    c.execute('SELECT name, quantity, buy_price, sell_price, rarity FROM Products')
+    stock = {}
+    for name, quantity, buy_price, sell_price, rarity in c.fetchall():
+        stock[name] = {
+            'name': name,
+            'buyPrice': buy_price,
+            'sellPrice': sell_price,
+            'rarity': rarity,
+            'quantity': quantity,
+        }
     c.close()
     DB.commit()
-    return dict
+    return {
+        'day': day,
+        'maxday': 1,
+        'money': money,
+        'message': "Console here",
+        'state': "DAY_START",
+        'hours': hour,
+        'customerQueue': [],
+        'currentCustomer': currentCustomer,
+        'upgrades': upgrades,
+        'items': items,
+        'stock': stock,
+        'stats': {'served': served, 'killed': killed, 'revenue': revenue}
+    }
 
 #returns as list of dicts, where each item in the list is one row's entry, and each dict entry contains the selected data as the value for the column name as the key
 def select_query(query_string, parameters=()):
