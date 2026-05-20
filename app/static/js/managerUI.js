@@ -45,7 +45,8 @@ export function initManagerPage({
             button.dataset.productId = productId;
 
             button.innerHTML = `
-                <p class="sm:text-xs md:text-sm lg:text-xl font-bold letter-hover-text">${product.name}</p>
+                <p class="sm:text-xs md:text-sm lg:text-xl text-center font-bold letter-hover-text">${product.name}</p>
+                <img src="/static/images/ingredients/${product.name}.png" style="position: relative; top: 0%; left: 0%; width: 100%; height: 75%; image-rendering: pixelated;"/>
             `;
 
             button.addEventListener("click", function(){
