@@ -104,6 +104,10 @@ Night manager stock system:
 
 Storing/Retrieving of all of this into the database should be targeted
 
+rickyL -- 2026-05-17 10:00
+-- Changed format of register and login page
+-- Added background images
+
 emilyM -- 2026-05-17 21:00
 -- added save and load functions in __init__.py
 -- made save_game in db.py to insert local storage stuff into our database tables
@@ -112,6 +116,10 @@ emilyM -- 2026-05-17 21:00
 junjieL -- 2026-05-17 23:20
 -- random goober display in art page
 -- to add new assets in list or accessory chance logic
+
+rickyL --2026-05-18 10:00
+-- Added more products to the js constants
+-- changed routing in which when you click new game on the homepage, if you aren't logged in, it'll redirect you to login
 
 yuL -- 2026-05-18 1:00
 -- revised customer cart to count quantity too instead of just appending every item as something unique (holy was inefficent)
@@ -122,3 +130,6 @@ yuL -- 2026-05-18 1:00
 emilyM --2026-05-20 09:55
 -- made load_game in db.py to convert stored data into json for javascript
 -- changed order of dropping/creating tables, hopefully no more errors
+
+rickyL --2026-05-20 21:00
+-- Change routing for login, register, homepage, and such
