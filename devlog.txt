@@ -136,3 +136,8 @@ rickyL --2026-05-20 21:00
 -- Added settings.html 
 -- Unblock continue game
 -- added flash msges
+
+yuL -- 2026-05-21 8:00
+-- revised loading and saving logic in javascript and flask
+-- revised background image for homescreen
+

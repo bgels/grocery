@@ -123,18 +123,18 @@ Basic art assets added, mainscreen done, user save saved to database and read/se
 
 # Week 3 Goals:
 ## Cashier polishing:
-1. Randomly generated customer appearances
-2. Art for cashier terminal, corresponding art for background
+1. Randomly generated customer appearances (DONE)
+2. Art for cashier terminal, corresponding art for background 
 3. chance for a misbehaving customer based on traits list
 
 ## Night manager stock system:
-1. Panel with ability to purchase stock/grocery for the next day
+1. Panel with ability to purchase stock/grocery for the next day (DONE)
 2. Implementation of a upgrades system that can affect gameplay 
 3. Art for background of manager Panel
 Storing/Retrieving of all of this into the database should be targeted
 
 # Internal Deadlines:
-Special customers, game constants such as stock, prices, certain days, etc
+Dialogue constant that generates based on trait, better stock logic especially for customer picking up stock, money bonus and effects for certain traits
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 # Project is considered complete when all of the following are true:
