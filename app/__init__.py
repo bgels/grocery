@@ -41,6 +41,9 @@ def login():
         if db.get_user(username) != None and db.check_password(username, password):
             session['username'] = username
             return redirect(url_for("homepage"))
+        else:
+            flash("Username is taken or incorrect password")
+            return redirect(url_for("login"))
     return render_template("login.html")
 
 @app.route("/register", methods = ["GET", "POST"] )
@@ -54,6 +57,9 @@ def register():
            db.add_user(username, password)
            db.setup_tables(username)
            return redirect(url_for("login"))
+       else:
+            flash("Username is already taken")
+            return redirect(url_for("register"))
     return render_template("register.html")
 
 @app.route("/logout")
