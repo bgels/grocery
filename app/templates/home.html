@@ -28,18 +28,16 @@
 
     <main class="items-center justify-left mb-24 pl-6 pt-64 pb-24">
       <div class="flex flex-col">
-        {% if loggedIn %}
-        {% block content %}
+
         <button id="continue" class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
           <a href="/cashier" class="letter-hover-text">Continue tHe game</a>
         </button>
-        {% endblock %}
-        {% endif %}
+
         <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
           <a href="/cashier" class="letter-hover-text">New game pls!</a>
         </button>
         <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[80px] px-2 select-none">
-          <a href="" class="letter-hover-text">Yo, Settings!</a>
+          <a href="/setting" class="letter-hover-text">Yo, Settings!</a>
         </button>
       </div>
     </main>
