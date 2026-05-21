@@ -32,7 +32,7 @@ async function loadGame(){ // eventually, do a get request from a route that ret
         const response = await fetch(route);
         if (response.ok) {
             const savedData = await response.json();
-            Object.assign(game, savedData); 
+            Object.assign(game, savedData);
         } else {
             console.warn("WARNING! Save file could not be located on server!");
         }
@@ -104,7 +104,6 @@ function advanceGame() {
 
         case GAMESTATE.DAY_END:
             startNight();
-            saveGame();
             changeUrl("manager");
             break;
 
@@ -193,6 +192,7 @@ function startNight(){
 
     game.state = GAMESTATE.NIGHT_START;
     game.message = `[Shop Screen] — End of day ${game.day - 1}. Preparing for Day ${game.day}.`; // placeholder for upgrade screen
+    saveGame();
     render();
 }
 
