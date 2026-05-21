@@ -71,7 +71,6 @@ const game = {
         decor: 0,
         firepower: 0
     },
-
     items:{
         ammo: 20
     },
@@ -104,6 +103,7 @@ function advanceGame() {
 
         case GAMESTATE.DAY_END:
             startNight();
+            saveGame();
             changeUrl("manager");
             break;
 
@@ -192,7 +192,6 @@ function startNight(){
 
     game.state = GAMESTATE.NIGHT_START;
     game.message = `[Shop Screen] — End of day ${game.day - 1}. Preparing for Day ${game.day}.`; // placeholder for upgrade screen
-    saveGame();
     render();
 }
 
@@ -455,3 +454,5 @@ document.addEventListener("keydown", function(event){
         resetGame();
     }
 })
+
+saveGame();

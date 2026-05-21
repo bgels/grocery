@@ -55,7 +55,7 @@ def register():
         password = request.form.get("password", "")
         if db.get_user(username) == None:
             db.add_user(username, password)
-            db.setup_tables(username)
+            db.new_game(username)
             return redirect(url_for("login"))
         else:
             flash("Username is already taken")
@@ -109,17 +109,16 @@ def route(url):
     print(f"Redirecting to {url}")
     return redirect(url_for(url))
 
-
 @app.route('/save', methods=['POST'])
 def save():
     if 'username' not in session:
         return jsonify({"error": "Not logged in"}), 401
     username = session['username']
     game_data = request.get_json() #python dictionary
-    
+
     print(game_data)
     print("save")
-    
+
     db.save_game(username, game_data)
     return jsonify(success=True)
 
@@ -139,10 +138,10 @@ def load():
 @app.route('/reset', methods=['POST'])
 def reset():
     if 'username' not in session:
-        return jsonify({"error": "Not logged in"}), 401 
-    
+        return jsonify({"error": "Not logged in"}), 401
+
     username = session['username']
-    # db.reset_game(username) 
+    db.new_game(username)
     return jsonify(success=True)
 
 if __name__ == "__main__":

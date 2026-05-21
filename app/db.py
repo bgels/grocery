@@ -36,10 +36,12 @@ def check_password(username, password):
         return False
     return password == user[1]
 
-def setup_tables(username):
+#initialize database tables for a new game/replacing old game
+def new_game(username):
     c = DB.cursor()
+    #Game table
     c.execute('''
-        INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
+        UPDATE OR INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ''',
     (
@@ -52,6 +54,23 @@ def setup_tables(username):
         0,
         0
     ))
+    #Items tables
+    c.execute("DELETE FROM Items WHERE username = ?", (username,))
+    #Upgrades tables
+    c.execute('''
+        UPDATE OR INSERT INTO Upgrades (username, shelf, register, decor, firepower)
+        VALUES(?, ?, ?, ?, ?)
+    ''',
+    (
+        username,
+        0,
+        0,
+        0,
+        0
+    ))
+    
+
+
     c.close()
     DB.commit()
 
