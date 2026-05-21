@@ -133,3 +133,6 @@ emilyM --2026-05-20 09:55
 
 rickyL --2026-05-20 21:00
 -- Change routing for login, register, homepage, and such
+-- Added settings.html 
+-- Unblock continue game
+-- added flash msges
