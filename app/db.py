@@ -5,6 +5,7 @@
 import sqlite3
 from urllib.request import Request, urlopen
 import build_db
+import json
 DB_FILE="./data.db"
 
 DB = sqlite3.connect(DB_FILE, check_same_thread=False)
@@ -60,6 +61,8 @@ def save_game(username, save_json):
     c = DB.cursor()
     #Game table
     stats = save_json.get('stats', {})
+    current_customer = save_json.get('currentCustomer')
+    customer_db_val = json.dumps(current_customer) if current_customer else None
     c.execute('DELETE FROM Game WHERE username=?', (username,))
     c.execute('''
         INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
@@ -70,7 +73,7 @@ def save_game(username, save_json):
         save_json.get('day', 1),
         save_json.get('hours', 1),
         save_json.get('money', 0),
-        save_json.get('currentCustomer'),
+        customer_db_val,
         stats.get('served', 0),
         stats.get('killed', 0),
         stats.get('revenue', 0)
@@ -128,6 +131,10 @@ def load_game(username):
     row = c.fetchone()
     if row:
         day, hour, money, currentCustomer, served, killed, revenue = row
+        if currentCustomer and currentCustomer != "None":
+            currentCustomer = json.loads(currentCustomer)
+        else:
+            currentCustomer = None
     else:
         return None
     #Upgrades table

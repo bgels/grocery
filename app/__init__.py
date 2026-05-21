@@ -51,13 +51,13 @@ def register():
     if 'username' in session:
         return redirect(url_for("homepage"))
     if request.method == "POST":
-       username = request.form.get("username", "").strip()
-       password = request.form.get("password", "")
-       if db.get_user(username) == None:
-           db.add_user(username, password)
-           db.setup_tables(username)
-           return redirect(url_for("login"))
-       else:
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+        if db.get_user(username) == None:
+            db.add_user(username, password)
+            db.setup_tables(username)
+            return redirect(url_for("login"))
+        else:
             flash("Username is already taken")
             return redirect(url_for("register"))
     return render_template("register.html")
@@ -116,8 +116,10 @@ def save():
         return jsonify({"error": "Not logged in"}), 401
     username = session['username']
     game_data = request.get_json() #python dictionary
+    
     print(game_data)
     print("save")
+    
     db.save_game(username, game_data)
     return jsonify(success=True)
 
@@ -133,6 +135,15 @@ def load():
         return jsonify(save_data)
     else:
         return jsonify({"error": "No save found"}), 404
+
+@app.route('/reset', methods=['POST'])
+def reset():
+    if 'username' not in session:
+        return jsonify({"error": "Not logged in"}), 401 
+    
+    username = session['username']
+    # db.reset_game(username) 
+    return jsonify(success=True)
 
 if __name__ == "__main__":
     app.run(debug=True)

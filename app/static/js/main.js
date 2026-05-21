@@ -6,46 +6,51 @@ import { initManagerPage } from "./managerUI.js";
 // 1. need to calculate game state as soon as game loads later on, also customer queue
 // 2. add image link to stock
 
-function saveGame(){
-    console.log("saving...")
+async function saveGame(){
+    console.log("saving game to database...")
     localStorage.setItem("saveFile", JSON.stringify(game));
-    let route = "";
-    if(isLocalhost()){
-        route = "http://127.0.0.1:5000/save";
-    } else {
-        route = "https://nocoupon.works/save";
+    const route = isLocalhost() ? "http://127.0.0.1:5000/save" : "https://nocoupon.works/save";
+    try {
+        const response = await fetch(route, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(game),
+        });
+        const result = await response.json();
+        console.log(result);
+    } catch (error) {
+        console.error("Save failed:", error);
     }
-    fetch(route,
-    {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify(game),
-    }).then((response) => response.json()).then((json) => console.log(json));
 }
 
-function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
-    console.log("loading save file...")
-    let route = "";
-    const save = localStorage.getItem("saveFile");
-    if(save){
-        Object.assign(game, JSON.parse(save));
-    }else{
-        console.warn("WARNING! Save file could not be located in localStorage!");
+async function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
+    console.log("loading save file from database...")
+    const route = isLocalhost() ? "http://127.0.0.1:5000/load" : "https://nocoupon.works/load";
+    try {
+        const response = await fetch(route);
+        if (response.ok) {
+            const savedData = await response.json();
+            Object.assign(game, savedData); 
+        } else {
+            console.warn("WARNING! Save file could not be located on server!");
+        }
+    } catch (error) {
+        console.error("Fetch error during load:", error);
     }
-    if(isLocalhost()){
-
-        route = "http://127.0.0.1:5000/load";
-    } else {
-        route = "https://nocoupon.works/load";
-    }
-    fetch(route).then((response) => response.json()).then((json) => console.log(json));
 }
 
-function resetGame(){
-    localStorage.removeItem("saveFile");
-    changeUrl("homepage")
+async function resetGame(){
+    console.log("Resetting save from db");
+    const route = isLocalhost() ? "http://127.0.0.1:5000/reset" : "https://nocoupon.works/reset";
+    try{
+        fetch(route, {method: "POST"});
+        changeUrl("homepage");
+    }
+    catch (error){
+        console.error("Fetch error during reset:", error);
+    }
 }
 
 
@@ -94,10 +99,12 @@ function advanceGame() {
             game.message = `Day ${game.day} has started!!!`;
             game.state = GAMESTATE.CUSTOMER_CHECKOUT;
             nextCustomer();
+            saveGame();
             break;
 
         case GAMESTATE.DAY_END:
             startNight();
+            saveGame();
             changeUrl("manager");
             break;
 
@@ -186,7 +193,6 @@ function startNight(){
 
     game.state = GAMESTATE.NIGHT_START;
     game.message = `[Shop Screen] — End of day ${game.day - 1}. Preparing for Day ${game.day}.`; // placeholder for upgrade screen
-    saveGame();
     render();
 }
 
@@ -412,8 +418,8 @@ let renderSelectedProductPanel;
 
 const page = document.body.dataset.page;
 document.addEventListener("DOMContentLoaded", init);
-function init() {
-    loadGame();
+async function init() {
+    await loadGame();
     if (page === "cashier") {
         console.log("loading page cashier");
         const cashierUI = initCashierPage({
