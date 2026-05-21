@@ -86,7 +86,11 @@ def cashier():
         return redirect(url_for("login"))
 @app.route("/art")
 def art():
-    return render_template("/art.html")
+    if 'username' in session:
+        return render_template("/art.html")
+    else:
+        return redirect(url_for("login"))
+
 @app.route("/setting")
 def setting():
     if 'username' in session:
