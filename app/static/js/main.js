@@ -9,13 +9,11 @@ import { initManagerPage } from "./managerUI.js";
 async function saveGame(){
     console.log("saving game to database...")
     localStorage.setItem("saveFile", JSON.stringify(game));
-    const route = isLocalhost() ? "http://127.0.0.1:5000/save" : "https://nocoupon.works/save";
+    const route = "/save"; 
     try {
         const response = await fetch(route, {
             method: "POST",
-            headers: {
-            "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(game),
         });
         const result = await response.json();
@@ -25,9 +23,9 @@ async function saveGame(){
     }
 }
 
-async function loadGame(){ // eventually, do a get request from a route that returns a complete json, then parse that json and set it as game constant
+async function loadGame(){
     console.log("loading save file from database...")
-    const route = isLocalhost() ? "http://127.0.0.1:5000/load" : "https://nocoupon.works/load";
+    const route = "/load"; 
     try {
         const response = await fetch(route);
         if (response.ok) {
@@ -43,9 +41,9 @@ async function loadGame(){ // eventually, do a get request from a route that ret
 
 async function resetGame(){
     console.log("Resetting save from db");
-    const route = isLocalhost() ? "http://127.0.0.1:5000/reset" : "https://nocoupon.works/reset";
+    const route = "/reset"; 
     try{
-        fetch(route, {method: "POST"});
+        await fetch(route, {method: "POST"});
         changeUrl("homepage");
     }
     catch (error){
@@ -90,7 +88,7 @@ const game = {
 // ----  Init and rendering starts below
 
 // Trys to advance game state when user clicks
-function advanceGame() {
+async function advanceGame() {
     switch(game.state){
 
         case GAMESTATE.DAY_START:
@@ -98,19 +96,19 @@ function advanceGame() {
             game.message = `Day ${game.day} has started!!!`;
             game.state = GAMESTATE.CUSTOMER_CHECKOUT;
             nextCustomer();
-            saveGame();
+            await saveGame();
             break;
 
         case GAMESTATE.DAY_END:
             startNight();
-            saveGame();
+            await saveGame();
             changeUrl("manager");
             break;
 
         case GAMESTATE.NIGHT_START:
             game.state = GAMESTATE.DAY_START;
             game.message = `Press Next to begin Day ${game.day}.`;
-            saveGame();
+            await saveGame();
             changeUrl("cashier");
             break;
 

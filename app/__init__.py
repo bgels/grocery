@@ -104,10 +104,10 @@ def setting():
     else:
         return redirect(url_for("login"))
 
-@app.route("/route/<url>")
+@app.route("/route/<url>", methods=["GET", "POST"])
 def route(url):
     print(f"Redirecting to {url}")
-    return redirect(url_for(url))
+    return redirect(url_for(url), code=303)
 
 @app.route('/save', methods=['POST'])
 def save():

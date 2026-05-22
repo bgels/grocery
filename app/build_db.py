@@ -43,6 +43,7 @@ c.executescript("""
         served INTEGER,
         killed INTEGER,
         revenue INTEGER,
+        state TEXT,
         FOREIGN KEY (username) REFERENCES User(username),
         FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
     );
