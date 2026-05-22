@@ -56,18 +56,22 @@ c.executescript("""
     );
 
     CREATE TABLE Products (
+        username TEXT,
         name TEXT PRIMARY KEY,
         quantity INTEGER,
         buy_price INTEGER,
         sell_price INTEGER,
-        rarity TEXT
+        rarity TEXT,
+        FOREIGN KEY (username) REFERENCES User(username)
     );
 
     CREATE TABLE Upgrades (
+        username TEXT,
         shelf INTEGER,
         register INTEGER,
         decor INTEGER,
-        firepower INTEGER
+        firepower INTEGER,
+        FOREIGN KEY (username) REFERENCES User(username)
     );
 """)
 

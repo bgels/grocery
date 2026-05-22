@@ -40,9 +40,10 @@ def check_password(username, password):
 def new_game(username):
     c = DB.cursor()
     #Game table
+    c.execute("DELETE FROM Game WHERE username = ?", (username,))
     c.execute('''
-        UPDATE OR INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue, state)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''',
     (
         username,
@@ -52,13 +53,15 @@ def new_game(username):
         "None",
         0,
         0,
-        0
+        0,
+        "DAY_START"
     ))
     #Items tables
     c.execute("DELETE FROM Items WHERE username = ?", (username,))
     #Upgrades tables
+    c.execute("DELETE FROM Upgrades WHERE username = ?", (username,))
     c.execute('''
-        UPDATE OR INSERT INTO Upgrades (username, shelf, register, decor, firepower)
+        INSERT INTO Upgrades (username, shelf, register, decor, firepower)
         VALUES(?, ?, ?, ?, ?)
     ''',
     (
@@ -68,9 +71,8 @@ def new_game(username):
         0,
         0
     ))
-    
-
-
+    #Products table
+    c.execute("DELETE FROM Products WHERE username = ?", (username,))
     c.close()
     DB.commit()
 
