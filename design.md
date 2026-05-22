@@ -2,7 +2,7 @@
 
 ## TNPG: Restaurant Simulator
 ## project: grocery simulator
-## Target ship date: 2026-05-25
+## Target ship date: 2026-06-01
 ## Project Manager: Yu Lu
 
 ---
