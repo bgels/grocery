@@ -9,7 +9,7 @@ import { initManagerPage } from "./managerUI.js";
 async function saveGame(){
     console.log("saving game to database...")
     localStorage.setItem("saveFile", JSON.stringify(game));
-    const route = "/save"; 
+    const route = "/save";
     try {
         const response = await fetch(route, {
             method: "POST",
@@ -25,23 +25,25 @@ async function saveGame(){
 
 async function loadGame(){
     console.log("loading save file from database...")
-    const route = "/load"; 
-    try {
-        const response = await fetch(route);
-        if (response.ok) {
-            const savedData = await response.json();
-            Object.assign(game, savedData);
-        } else {
-            console.warn("WARNING! Save file could not be located on server!");
-        }
-    } catch (error) {
-        console.error("Fetch error during load:", error);
-    }
+    const route = "/load";
+    console.log(localStorage.getItem("saveFile"));
+    Object.assign(game, localStorage.getItem("saveFile"));
+    // try {
+    //     const response = await fetch(route);
+    //     if (response.ok) {
+    //         const savedData = await response.json();
+    //         Object.assign(game, savedData);
+    //     } else {
+    //         console.warn("WARNING! Save file could not be located on server!");
+    //     }
+    // } catch (error) {
+    //     console.error("Fetch error during load:", error);
+    // }
 }
 
 async function resetGame(){
     console.log("Resetting save from db");
-    const route = "/reset"; 
+    const route = "/reset";
     try{
         await fetch(route, {method: "POST"});
         changeUrl("homepage");
