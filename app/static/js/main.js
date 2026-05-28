@@ -117,7 +117,7 @@ async function advanceGame() {
 
         case GAMESTATE.DAY_START:
             getQueue(game.hours, 0.5); // change multiplier later
-            game.message = `Day ${game.day} has started!!!`;
+            game.message = `Day ${game.day} has begun.\n${game.customerQueue.length} customers today.`;
             game.state = GAMESTATE.CUSTOMER_CHECKOUT;
             nextCustomer();
             await saveGame();
@@ -126,7 +126,9 @@ async function advanceGame() {
         case GAMESTATE.DAY_END:
             startNight();
             await saveGame();
-            changeUrl("manager");
+            if (game.state !== GAMESTATE.GAME_OVER) {
+                changeUrl("manager");
+            }
             break;
 
         case GAMESTATE.NIGHT_START:
@@ -376,7 +378,7 @@ function render() {
     // --- NIGHT_START screen (placeholder for shop/upgrade screen)
     if(game.state === GAMESTATE.NIGHT_START){
         if(page === "manager"){
-            manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\nCustomers Served: ${game.stats.served}\nTotal Revenue: $${game.stats.revenue.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
+            manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
             manager_console.innerText = `${game.message}\n\n`;
             return;
         }
@@ -384,16 +386,16 @@ function render() {
 
     // --- Normal gameplay screen
     text += `Day: ${game.day} / ${game.maxDay}\n`;
-    text += `State: ${game.state}\n`;
+    // text += `State: ${game.state}\n`;
     text += `Money: $${game.money.toFixed(2)}\n`;
-    text += `Served: ${game.stats.served}\n`;
-    text += `Revenue: $${game.stats.revenue.toFixed(2)}\n\n`;
+    // text += `Served: ${game.stats.served}\n`;
+    // text += `Revenue: $${game.stats.revenue.toFixed(2)}\n\n`;
 
     if (page === "cashier"){
         if(game.currentCustomer){
             const customer = game.currentCustomer;
             text += `Customer: ${customer.name}\n`;
-            text += `Trait: ${customer.trait}\n\n`;
+            // text += `Trait: ${customer.trait}\n\n`;
             text += `Cart:\n`;
 
             for(const i of customer.cart){
@@ -401,8 +403,8 @@ function render() {
                 text += `  ${i.name} x${i.quantity}: $${subtotal.toFixed(2)}\n`
             }
 
-            text += `\nTotal + tax: $${customer.totalCost.toFixed(2)}\n`;
             text += `Customer gave you: $${customer.moneyGiven.toFixed(2)}\n`;
+            text += `\nTotal + tax: $${customer.totalCost.toFixed(2)}\n`;
             // text += `Change needed: $${customer.moneyGiven - customer.totalCost}\n`;
         }
     main.innerText = text;
