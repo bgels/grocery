@@ -144,3 +144,4 @@ yuL -- 2026-05-21 8:00
 junjieL -- 2026-05-27 23:24
 -- random goober now changes as new customer comes in
 -- the last customer watches you click go to manager page
+-- updated calculator
