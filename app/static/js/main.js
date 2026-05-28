@@ -1,6 +1,7 @@
 import { GAMESTATE, CUSTOMER_PRESETS, PRODUCT_CATALOG } from "./constants.js";
 import { initCashierPage } from "./cashierUI.js";
 import { initManagerPage } from "./managerUI.js";
+import { renderRandomCharacter } from "./animate.js";
 // To do:
 // GAME:
 // 1. need to calculate game state as soon as game loads later on, also customer queue
@@ -382,6 +383,7 @@ function nextCustomer() {
     if(game.currentCustomer){
         game.state = GAMESTATE.CUSTOMER_CHECKOUT;
         game.message = `${game.currentCustomer.name} has arrived`;
+        renderRandomCharacter();
     }else{
         game.state = GAMESTATE.DAY_END;
         game.message = `No more customers for today. Head to the shop screen!`;
@@ -454,5 +456,7 @@ document.addEventListener("keydown", function(event){
         resetGame();
     }
 })
+
+export { game };
 
 saveGame();
