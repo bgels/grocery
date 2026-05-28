@@ -5,7 +5,7 @@
 # Imports >>
 from flask import Flask, render_template, request, flash, url_for, redirect, session, jsonify
 import sqlite3, csv, json, pprint, os
-# import db
+import db
 #from api import
 from urllib.request import Request, urlopen
 import random
