@@ -15,8 +15,10 @@
 </head>
 
 <body class="title min-h-screen flex flex-col relative overflow-hidden">
-  <div class="fixed inset-0 bg-black -z-10 overflow-hidden" style="background-image: url('{{ url_for('static', filename='images/wipMenu_night_rolling.png') }}');">
-    <img src="{{ url_for('static', filename='images/night_MainMenu.png') }}" class="absolute inset-0 w-full h-full object-cover">  <!-- change later between day/night-->
+  <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-black">
+    <div class="absolute inset-0 sky-scroll opacity-70" style="background-image: url('{{ url_for('static', filename='images/clouds.gif') }}');"></div>
+    <img src="{{ url_for('static', filename='images/tnight_MainMenu.png') }}" class="absolute inset-0 w-full h-full object-cover render-pixel">
+    <div class="absolute inset-0 mix-blend-overlay opacity-50" style="background-image: url('{{ url_for('static', filename='images/grain.gif') }}');"></div>
   </div>
 
   <div class="min-h-screen flex flex-col bg-black/65">

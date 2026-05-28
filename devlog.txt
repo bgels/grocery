@@ -145,3 +145,8 @@ junjieL -- 2026-05-27 23:24
 -- random goober now changes as new customer comes in
 -- the last customer watches you click go to manager page
 -- updated calculator
+
+yuL -- 2026-05-27 8:00
+-- conditionals for localstorage vs db saving
+-- fixed rendering logic where manager could load some stuff from cahsier page
+-- added new bg and grain effect

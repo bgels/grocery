@@ -20,6 +20,22 @@ body.register{
     }
 }
 
+.sky-scroll {
+    background-repeat: repeat-x;
+    background-size: cover;
+    will-change: background-position; 
+}
+
+@keyframes panSky {
+    0% { background-position: 0 0; }
+    100% { background-position: -100vw 0; }
+}
+
+.render-pixel {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
 .hover-letter {
     display: inline-block;
     transition: transform 0.15s ease;
