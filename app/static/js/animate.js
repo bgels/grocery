@@ -43,7 +43,13 @@ function randomCharacter(container) {
     container.querySelector('[data-art-layer="eyes"]').src = `/static/images/eyes/${eyes}.png`;
     container.querySelector('[data-art-layer="mouth"]').src = `/static/images/mouth/${mouth}.png`;
     container.querySelector('[data-art-layer="accessories"]').src = `/static/images/accessories/${acc}.png`;
-    };
+    }
+    else{
+    container.querySelector('[data-art-layer="body"]').src = `/static/images/empty.png`;
+    container.querySelector('[data-art-layer="eyes"]').src = `/static/images/empty.png`;
+    container.querySelector('[data-art-layer="mouth"]').src = `/static/images/empty.png`;
+    container.querySelector('[data-art-layer="accessories"]').src = `/static/images/empty.png`;
+    }
 }
 
 export function renderRandomCharacter() {

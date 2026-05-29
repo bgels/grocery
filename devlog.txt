@@ -150,3 +150,7 @@ yuL -- 2026-05-27 8:00
 -- conditionals for localstorage vs db saving
 -- fixed rendering logic where manager could load some stuff from cahsier page
 -- added new bg and grain effect
+
+junjieL -- 2026-05-27 00:25
+-- art page showcases goobers again
+-- the last customer dissapears when day ends

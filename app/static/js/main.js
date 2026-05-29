@@ -263,6 +263,7 @@ function processPayment(changeGiven) {
         game.stats.revenue += customer.totalCost;
         game.message = `Correct change! +$${customer.totalCost.toFixed(2)}`;
         nextCustomer(); // sets state to CUSTOMER_CHECKOUT or DAY_END
+        renderRandomCharacter();
     } else {
         game.state = GAMESTATE.CUSTOMER_CHECKOUT; // wrong — stay on this customer
         game.message = `Wrong change! Expected: $${expectedChange.toFixed(2)}`;
