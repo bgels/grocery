@@ -195,6 +195,14 @@ def load_game(username):
         'stats': {'served': served, 'killed': killed, 'revenue': revenue}
     }
 
+#def get_leaderboard():
+#    list = {}
+#    c = DB.cursor()
+#    c.execute('SELECT username, revenue FROM Game ORDER BY revenue ASC')
+#    list = c.fetchall()
+#    c.close()
+#    return list
+
 #returns as list of dicts, where each item in the list is one row's entry, and each dict entry contains the selected data as the value for the column name as the key
 def select_query(query_string, parameters=()):
     c = DB.cursor()
