@@ -1,3 +1,5 @@
+import { game } from "./main.js";
+
 function letterHover() {
     const elements = document.querySelectorAll(".letter-hover-text");
 
@@ -31,6 +33,7 @@ function pick(arr) {
 }
 
 function randomCharacter(container) {
+    if (game.currentCustomer){
     const body = pick(options.body);
     const eyes = pick(options.eyes);
     const mouth = pick(options.mouth);
@@ -40,6 +43,15 @@ function randomCharacter(container) {
     container.querySelector('[data-art-layer="eyes"]').src = `/static/images/eyes/${eyes}.png`;
     container.querySelector('[data-art-layer="mouth"]').src = `/static/images/mouth/${mouth}.png`;
     container.querySelector('[data-art-layer="accessories"]').src = `/static/images/accessories/${acc}.png`;
+    }
+    else{
+    container.querySelector('[data-art-layer="body"]').src = `/static/images/empty.png`;
+    container.querySelector('[data-art-layer="eyes"]').src = `/static/images/empty.png`;
+    container.querySelector('[data-art-layer="mouth"]').src = `/static/images/empty.png`;
+    container.querySelector('[data-art-layer="accessories"]').src = `/static/images/empty.png`;
+    }
 }
 
+export function renderRandomCharacter() {
     document.querySelectorAll('.character').forEach(randomCharacter);
+}

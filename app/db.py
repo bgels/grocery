@@ -86,8 +86,8 @@ def save_game(username, save_json):
     customer_db_val = json.dumps(current_customer) if current_customer else None
     c.execute('DELETE FROM Game WHERE username=?', (username,))
     c.execute('''
-        INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO Game (username, day, hour, money, customer_id, served, killed, revenue, state)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''',
     (
         username,
@@ -97,16 +97,18 @@ def save_game(username, save_json):
         customer_db_val,
         stats.get('served', 0),
         stats.get('killed', 0),
-        stats.get('revenue', 0)
+        stats.get('revenue', 0),
+        save_json.get('state', 'DAY_START')
     ))
     #Upgrades table
     upgrades = save_json.get('upgrades', {})
-    c.execute('DELETE FROM Upgrades')
+    c.execute('DELETE FROM Upgrades WHERE username=?', (username,))
     c.execute('''
-        INSERT INTO Upgrades (shelf, register, decor, firepower)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO Upgrades (username, shelf, register, decor, firepower)
+        VALUES (?, ?, ?, ?, ?)
     ''',
     (
+        username,
         upgrades.get('shelf', 0),
         upgrades.get('register', 0),
         upgrades.get('decor', 0),
@@ -121,11 +123,12 @@ def save_game(username, save_json):
     ''',
     (
         username,
-        'gun', #default, change later
+        'ammo', #default, change later
         items.get('ammo', 0)
     ))
     #Products table
     stock = save_json.get('stock', {})
+    c.execute('DELETE FROM Products WHERE username=?', (username,))
     for product_name, data in stock.items():
         c.execute('''
             INSERT OR REPLACE INTO Products (name, quantity, buy_price, sell_price, rarity)
@@ -146,12 +149,12 @@ def load_game(username):
     c = DB.cursor()
     #Game table
     c.execute('''
-        SELECT day, hour, money, customer_id, served, killed, revenue
+        SELECT day, hour, money, customer_id, served, killed, revenue, state
         FROM Game
         WHERE username=?''', (username,))
     row = c.fetchone()
     if row:
-        day, hour, money, currentCustomer, served, killed, revenue = row
+        day, hour, money, currentCustomer, served, killed, revenue, state = row
         if currentCustomer and currentCustomer != "None":
             currentCustomer = json.loads(currentCustomer)
         else:
@@ -159,7 +162,7 @@ def load_game(username):
     else:
         return None
     #Upgrades table
-    c.execute('SELECT shelf, register, decor, firepower FROM Upgrades')
+    c.execute('SELECT shelf, register, decor, firepower FROM Upgrades WHERE username=?', (username,))
     row = c.fetchone()
     upgrades = {'shelf': 0, 'register': 0, 'decor': 0, 'firepower': 0}
     if row:
@@ -168,7 +171,7 @@ def load_game(username):
     c.execute('SELECT name, amount FROM Items WHERE username=?', (username,))
     items = {name: amount for name, amount in c.fetchall()}
     #Products table
-    c.execute('SELECT name, quantity, buy_price, sell_price, rarity FROM Products')
+    c.execute('SELECT name, quantity, buy_price, sell_price, rarity FROM Products WHERE username=?', (username,))
     stock = {}
     for name, quantity, buy_price, sell_price, rarity in c.fetchall():
         stock[name] = {
@@ -182,10 +185,10 @@ def load_game(username):
     DB.commit()
     return {
         'day': day,
-        'maxday': 1,
+        'maxDay': 7,
         'money': money,
         'message': "Console here",
-        'state': "DAY_START",
+        'state': state,
         'hours': hour,
         'customerQueue': [],
         'currentCustomer': currentCustomer,
