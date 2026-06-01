@@ -82,7 +82,7 @@ const game = {
     money: 100,
     message: "Console here", // dont parse
     state: GAMESTATE.DAY_START, // dont parse
-    hours: 2,
+    hours: 12,
 
     customerQueue: [],  // dont parse
     currentCustomer: null,
