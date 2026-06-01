@@ -82,7 +82,7 @@ const game = {
     money: 100,
     message: "Console here", // dont parse
     state: GAMESTATE.DAY_START, // dont parse
-    hours: 6,
+    hours: 2,
 
     customerQueue: [],  // dont parse
     currentCustomer: null,
@@ -165,7 +165,7 @@ function getQueue(customerCount, multiplier){
 
     for (let i = 0; i < customerCount; i++) {
         const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
-        const customerBudget = Math.max(3, averageBudget + budgetVariance); 
+        const customerBudget = Math.max(3, averageBudget + budgetVariance);
 
         const customer = generateCustomer(customerBudget);
         game.customerQueue.push(customer);
@@ -263,7 +263,6 @@ function processPayment(changeGiven) {
         game.stats.revenue += customer.totalCost;
         game.message = `Correct change! +$${customer.totalCost.toFixed(2)}`;
         nextCustomer(); // sets state to CUSTOMER_CHECKOUT or DAY_END
-        renderRandomCharacter();
     } else {
         game.state = GAMESTATE.CUSTOMER_CHECKOUT; // wrong — stay on this customer
         game.message = `Wrong change! Expected: $${expectedChange.toFixed(2)}`;
@@ -367,6 +366,7 @@ let renderManagerShop;
 let renderSelectedProductPanel;
 
 function render() {
+  console.log(game.state);
     let text = "";
 
     // --- GAME_OVER screen
@@ -482,3 +482,6 @@ document.addEventListener("keydown", function(event){
 })
 
 // saveGame();
+
+
+// add elementreference 

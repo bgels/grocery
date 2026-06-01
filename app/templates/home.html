@@ -16,12 +16,11 @@
 
 <body class="title min-h-screen flex flex-col relative overflow-hidden">
   <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-black">
-    <div class="absolute inset-0 sky-scroll opacity-70" style="background-image: url('{{ url_for('static', filename='images/clouds.gif') }}');"></div>
-    <img src="{{ url_for('static', filename='images/tnight_MainMenu.png') }}" class="absolute inset-0 w-full h-full object-cover render-pixel">
-    <div class="absolute inset-0 mix-blend-overlay opacity-50" style="background-image: url('{{ url_for('static', filename='images/grain.gif') }}');"></div>
+    <div class="absolute inset-0 sky-scroll" style="background-image: url('{{ url_for('static', filename='images/clouds.gif') }}');"></div>
+    <img src="{{ url_for('static', filename='images/tnight_MainMenu.png') }}" class="absolute inset-0 w-full h-full object-cover render-pixel">``
   </div>
 
-  <div class="min-h-screen flex flex-col bg-black/65">
+  <div class="min-h-screen flex flex-col bg-black/30">
       <header class="pt-12 pl-12">
       <h2 class="text-left text-white text-[8rem] select-none ">
         Costgo!!
@@ -31,14 +30,14 @@
     <main class="items-center justify-left mb-24 pl-6 pt-64">
       <div class="flex flex-col">
 
-        <button id="continue" class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
+        <button id="continue" class="flex bg-black/30 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[40px] px-2 select-none">
           <a href="/cashier" class="letter-hover-text">Continue tHe game</a>
         </button>
 
-        <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[60px] px-2 select-none">
+        <button class="flex bg-black/30 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[60px] px-2 select-none">
           <a href="/art" class="letter-hover-text">New game pls!</a>
         </button>
-        <button class="flex bg-black/10 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[80px] px-2 select-none">
+        <button class="flex bg-black/30 transition-all duration-300 ease-out hover:bg-gray-400 hover:text-black hover:-translate-y-2 text-white text-[2.5rem] font-bold py-4 mx-[80px] px-2 select-none">
           <a href="/setting" class="letter-hover-text">Yo, Settings!</a>
         </button>
       </div>

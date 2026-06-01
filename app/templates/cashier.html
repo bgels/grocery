@@ -16,7 +16,6 @@
 
 <body class="min-h-screen flex flex-col relative overflow-hidden bg-black/20" data-page="cashier">
   <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-    <div class="absolute inset-0 mix-blend-overlay opacity-10" style="background-image: url('{{ url_for('static', filename='images/grain.gif') }}');"></div>
     <img src="{{ url_for('static', filename='images/wipStoreInside.png') }}" class="absolute inset-0 w-full h-full object-cover render-pixel opacity-30">
   </div>
 
@@ -42,6 +41,29 @@
       </div>
       <div class = "flex flex-col px-8">
         <p id="main2"> ... </p>
+        <section class = "flex flex-col">
+          <div class ="flex flex-row">
+            <input id="numpad_1" type="button" value ="1" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_2" type="button" value ="2" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_3" type="button" value ="3" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+          </div>
+          <div class ="flex flex-row">
+            <input id="numpad_4" type="button" value ="4" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_5" type="button" value ="5" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_6" type="button" value ="6" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+          </div>
+          <div class ="flex flex-row">
+            <input id="numpad_7" type="button" value ="7" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_8" type="button" value ="8" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_9" type="button" value ="9" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+          </div>
+          <div class ="flex flex-row">
+            <input id="numpad_decimal" type="button" value ="." class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_0" type="button" value ="9" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+            <input id="numpad_clear" type="button" value ="C" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
+          </div>
+            <input id="numpad_submit" type="button" placeholder="1">
+        </section>
         <input id="changeInput" type="number" placeholder="Enter change">
         <button id="submitChange" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Give Change</button>
         <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Next</button>
