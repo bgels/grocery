@@ -80,14 +80,8 @@ def new_game(username):
         buyPrice = product["buyPrice"]
         sellPrice = product["sellPrice"]
         rarity = product["rarity"]
-        if (rarity == "common"):
-            quantity = 6
-        elif (rarity == "uncommon"):
-            quantity = 5
-        elif (rarity == "rare"):
-            quantity = 2
-        elif (rarity == "epic"):
-            quantity = 1
+        if (name == "milk" or name == "pilk" or name == "banana" or name == "apple"):
+            quantity = 3
         else:
             quantity = 0
         c.execute('''INSERT INTO Products (username, name, quantity, buy_price, sell_price, rarity) VALUES(?, ?, ?, ?, ?, ?)''',
