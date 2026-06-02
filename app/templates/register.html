@@ -22,7 +22,7 @@
 {% block content %}
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <div class="fixed top-64 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
+    <div class="fixed bottom-64 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md bg-black/50">
       {% for message in messages %}
         <div class="flash-container text-white px-6 py-3 rounded-lg shadow-lg mb-2 text-center">
           {{ message }}
@@ -54,22 +54,22 @@
         </div>
 
         {% else %}
-        <div class="p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4 select-none">
+        <div class="p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4 select-none transition-all duration-300 ease-out hover:translate-y-1">
 
         <div class="text-center">
           <h1 class="text-5xl font-bold tracking-wider mb-8">
             <span class="text-gray-200">ConTract Of LeAse</span>
           </h1>
-          <p class="text-gray-200/80 mt-2 text-2l tracking-widest">For the temporary management rights of the property located at </p>
-          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">226 SigmaRd, Checago, Billinois</p>
-          <p class="text-gray-200/80 mt-2 text-2l uppercase tracking-widest">Under a lease term of</p>
-          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">7 DAYS</p>
-          <p class="text-gray-200/80 mt-2 text-2l uppercase tracking-widest">Where a lump sum amount of</p>
-          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">$12000</p>
-          <p class="text-gray-200/80 mt-2 text-sm uppercase tracking-widest">Must be repaid to the contractor at the end of the contract. In the case that this amount is not repaid, the contractee shall lose their</p>
-          <p class="text-blue-400/80 mt-2 text-2xl uppercase tracking-widest">Life, Liberty and the pursuit of a successful grocery store</p>
-          <p class="text-gray-200/20 mt-2 text-l uppercase tracking-widest">And other terms, according to the discertion of the contractor 😈</p>
-          <pre class="text-gray-200/10 mt-2 text-[4px] uppercase tracking-widest">
+          <p class="text-gray-200/80 font-bold mt-2 text-2l tracking-widest">For the temporary management rights of the property located at </p>
+          <p class="text-blue-400/80 font-bold mt-2 text-2xl uppercase tracking-widest">226 SigmaRd, Checago, Billinois</p>
+          <p class="text-gray-200/80 font-bold mt-2 text-2l uppercase tracking-widest">Under a lease term of</p>
+          <p class="text-blue-400/80 font-bold mt-2 text-2xl uppercase tracking-widest">7 DAYS</p>
+          <p class="text-gray-200/80 font-bold mt-2 text-2l uppercase tracking-widest">Where a lump sum amount of</p>
+          <p class="text-blue-400/80 font-bold mt-2 text-2xl uppercase tracking-widest">$12000</p>
+          <p class="text-gray-200/80 font-bold mt-2 text-sm uppercase tracking-widest">Must be repaid to the contractor at the end of the contract. In the case that this amount is not repaid, the contractee shall lose their</p>
+          <p class="text-blue-400/80 font-bold mt-2 text-2xl uppercase tracking-widest">Life, Liberty and the pursuit of a successful grocery store</p>
+          <p class="text-gray-200/20 font-bold mt-2 text-l uppercase tracking-widest">And other terms, according to the discertion of the contractor 😈</p>
+          <pre class="text-gray-200/10 mt-2 text-[12px] text-wrap uppercase tracking-widest">
             By signing this agreement, the Contractee irrevocably grants the Contractor unlimited access to all personal and financial information, including but not limited to banking credentials, social media accounts, and digital devices, with the right to sell or transfer said information at their sole discretion. All payments made are strictly non-refundable, non-negotiable, and subject to arbitrary fees determined retroactively. The Contractee waives all rights to dispute charges, seek legal recourse, or contest terms under any jurisdiction. Any delay in payment or objection will result in automatic penalties, which may include the seizure of assets, suspension of personal accounts, and mandatory participation in promotional campaigns. The Contractor reserves the right to modify or terminate this contract at any time without prior notice, and continued use of services constitutes perpetual acceptance of all future amendments.
            </pre>
         </div>
@@ -77,7 +77,7 @@
         <form action="/register" method="POST" class="flex flex-col gap-3">
 
         <div class="flex flex-col gap-1">
-          <label class="text-sm text-blue-300 uppercase ml-1 required">nAmE of ConTractEe</label>
+          <label class="text-sm font-bold text-blue-300 uppercase ml-1 required">nAmE of ConTractEe</label>
           <input type="text"
             name="username"
             placeholder="Please write your name on the field below..."
@@ -86,7 +86,7 @@
         </div>
 
         <div class="flex flex-col gap-1">
-          <label class="text-sm text-blue-300 uppercase ml-1 required">Secret Phrase</label>
+          <label class="text-sm font-bold text-blue-300 uppercase ml-1 required">Secret Phrase</label>
           <input type="password"
             name="password"
             placeholder="Create Password..."
@@ -94,19 +94,19 @@
             required>
         </div>
 
-          <button type="submit" class="mt-2 w-full btn-primary py-3 rounded-xl text-4xl tracking-widest">
+          <button type="submit" class="mt-2 w-full btn-primary py-3 text-red-600 font-bold rounded-xl text-4xl tracking-widest hover:translate-y-1 border transition-transform">
             Sign
           </button>
         </form>
 
         <div class="text-center text-sm pt-4 border-t border-white/10 text-gray-400">
-          <p class="mb-4">
+          <p class="mb-4 font-bold">
             Already signed this contract?
             <a href="/login" class="text-blue-400 font-bold hover:text-white transition-colors">
               Login Here
             </a>
           </p>
-          <a href="/" class="hover:text-white transition-colors flex items-center justify-center gap-2 opacity-70 hover:opacity-100">
+          <a href="/" class="hover:text-white font-bold transition-colors flex items-center justify-center gap-2 opacity-70 hover:opacity-100">
             <i class="fa-solid fa-arrow-left text-xs"></i>
             Homepage
           </a>
@@ -115,5 +115,6 @@
       {% endif %}
     </div>
   </div>
+  <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
 </body>
 </html>

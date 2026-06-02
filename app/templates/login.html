@@ -24,9 +24,9 @@
 {% block content %}
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <div class="fixed top-64 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
+    <div class="fixed bottom-64 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md bg-black/50 border border-rounded">
       {% for message in messages %}
-        <div class="flash-container text-white px-6 py-3 rounded-lg shadow-lg mb-2 text-center">
+        <div class="flash-container text-white px-6 py-3 rounded-lg shadow-lg text-xl text-center">
           {{ message }}
         </div>
       {% endfor %}
@@ -53,18 +53,17 @@
     </div>
 
     {% else %}
-    <div class="p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4 select-none">
+    <div class="p-8 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-4 select-none transition-all duration-300 ease-out hover:translate-y-1">
 
     <div class="text-center">
       <h1 class="text-4xl font-bold tracking-wider">
-        <span class="text-3xl mb-2 text-white">USER LOGIN
+        <span class="text-4xl mb-2 text-white">CONTRACT RENEWAL
       </h1>
-        <p class="text-blue-200/60 mt-2 text-xs uppercase tracking-widest">Into an existing account</p>
     </div>
 
     <form action="/login" method="POST" class="flex flex-col gap-5">
       <div class="flex flex-col gap-1">
-        <label class="text-sm text-blue-300 uppercase ml-1 required">nAmE of ConTractEe</label>
+        <label class="text-sm font-bold text-blue-300 uppercase ml-1 required">nAmE of ConTractEe</label>
         <input type="text"
           name="username"
           placeholder="Enter Username..."
@@ -73,7 +72,7 @@
       </div>
 
       <div class="flex flex-col gap-1">
-        <label class="text-sm text-blue-300 uppercase ml-1 required">Secret Phrase</label>
+        <label class="text-sm font-bold text-blue-300 uppercase ml-1 required">Secret Phrase</label>
         <input type="password"
           name="password"
           placeholder="Enter Password..."
@@ -81,19 +80,19 @@
           required>
       </div>
 
-        <button type="submit" class="mt-2 w-full btn-primary py-3 rounded-xl text-lg tracking-widest">
+        <button type="submit" class="mt-2 w-full btn-primary py-3 rounded-xl border font-bold text-4xl tracking-widest hover:translate-y-1 transition-transform">
           Login
         </button>
     </form>
 
     <div class="text-center text-sm pt-4 border-t border-white/10 text-gray-400">
-      <p class="mb-4">
-        New User?
+      <p class="mb-4 font-bold">
+        New Contracteee?
         <a href="/register" class="text-blue-400 font-bold hover:text-white transition-colors">
-          Register Here!
+          Sign the contract here!
         </a>
       </p>
-      <a href="/" class="hover:text-white flex items-center justify-center gap-2 opacity-70 hover:opacity-100">
+      <a href="/" class="hover:text-white font-bold flex items-center justify-center gap-2 opacity-70 hover:opacity-100">
         <i class="fa-solid fa-arrow-left text-xs"></i>
         Homepage
       </a>
