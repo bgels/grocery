@@ -13,7 +13,7 @@ export const CUSTOMER_PRESETS = {
     middleNames : [],
     lastNames : [],
     traits : ["friendly", "rude", "tired", "quiet", "impatient", "confused"],
-    bills : [5, 10, 20, 50]
+    bills : [5, 7, 4.5, 11.5, 2.5, 8.5, 10, 20, 50, 3, 25, 40]
 };
 
 export const URLS = {

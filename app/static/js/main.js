@@ -366,7 +366,7 @@ let renderManagerShop;
 let renderSelectedProductPanel;
 
 function render() {
-  console.log(game.state);
+    console.log(game.state);
     let text = "";
 
     // --- GAME_OVER screen
