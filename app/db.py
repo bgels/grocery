@@ -73,6 +73,33 @@ def new_game(username):
     ))
     #Products table
     c.execute("DELETE FROM Products WHERE username = ?", (username,))
+    with open('constants.json', 'r') as file:
+        data = json.load(file)
+    for key, product in data.items():
+        name = product["name"]
+        buyPrice = product["buyPrice"]
+        sellPrice = product["sellPrice"]
+        rarity = product["rarity"]
+        if (rarity == "common"):
+            quantity = 6
+        elif (rarity == "uncommon"):
+            quantity = 5
+        elif (rarity == "rare"):
+            quantity = 2
+        elif (rarity == "epic"):
+            quantity = 1
+        else:
+            quantity = 0
+        c.execute('''INSERT INTO Products (username, name, quantity, buy_price, sell_price, rarity) VALUES(?, ?, ?, ?, ?, ?)''',
+            (
+                username,
+                name,
+                quantity,
+                buyPrice,
+                sellPrice,
+                rarity
+            )
+    )
     c.close()
     DB.commit()
 

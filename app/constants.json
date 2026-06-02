@@ -1,0 +1,140 @@
+{
+  "apple": {
+    "name": "Apple",
+    "buyPrice": 1,
+    "sellPrice": 2.5,
+    "rarity": "common"
+  },
+  "milk": {
+    "name": "Milk",
+    "buyPrice": 3,
+    "sellPrice": 5.5,
+    "rarity": "common"
+  },
+  "pilk": {
+    "name": "Pilk",
+    "buyPrice": 3,
+    "sellPrice": 4,
+    "rarity": "common"
+  },
+  "banana": {
+    "name": "Bananana",
+    "buyPrice": 1,
+    "sellPrice": 1.5,
+    "rarity": "common"
+  },
+  "bread": {
+    "name": "Bread",
+    "buyPrice": 2,
+    "sellPrice": 4,
+    "rarity": "common"
+  },
+  "steak": {
+    "name": "Steak",
+    "buyPrice": 8,
+    "sellPrice": 13,
+    "rarity": "rare"
+  },
+  "chips": {
+    "name": "Chips",
+    "buyPrice": 1,
+    "sellPrice": 3,
+    "rarity": "common"
+  },
+  "chocolate": {
+    "name": "Chocolate",
+    "buyPrice": 0.5,
+    "sellPrice": 1,
+    "rarity": "common"
+  },
+  "soda": {
+    "name": "Soda",
+    "buyPrice": 0.5,
+    "sellPrice": 1.5,
+    "rarity": "uncommon"
+  },
+  "oil": {
+    "name": "Oil",
+    "buyPrice": 20,
+    "sellPrice": 30,
+    "rarity": "epic"
+  },
+  "vegetables": {
+    "name": "Vegetables",
+    "buyPrice": 6,
+    "sellPrice": 14,
+    "rarity": "common"
+  },
+  "ramen": {
+    "name": "Cup of Ramen",
+    "buyPrice": 1,
+    "sellPrice": 3,
+    "rarity": "uncommon"
+  },
+  "canTuna": {
+    "name": "Can of Tuna",
+    "buyPrice": 4,
+    "sellPrice": 6,
+    "rarity": "uncommon"
+  },
+  "canBean": {
+    "name": "Can of Beans",
+    "buyPrice": 4,
+    "sellPrice": 9,
+    "rarity": "uncommon"
+  },
+  "egg": {
+    "name": "Eggs",
+    "buyPrice": 16,
+    "sellPrice": 22,
+    "rarity": "epic"
+  },
+  "bakedGoods": {
+    "name": "Baked Goods",
+    "buyPrice": 18,
+    "sellPrice": 32,
+    "rarity": "rare"
+  },
+  "iceCream": {
+    "name": "Ice Cream",
+    "buyPrice": 8,
+    "sellPrice": 11,
+    "rarity": "common"
+  },
+  "watermelon": {
+    "name": "Watermelon",
+    "buyPrice": 6,
+    "sellPrice": 8,
+    "rarity": "rare"
+  },
+  "pizza": {
+    "name": "Gold Pizza",
+    "buyPrice": 10000,
+    "sellPrice": 1000,
+    "rarity": "legendary"
+  },
+  "groceryStore": {
+    "name": "Grocery Store",
+    "buyPrice": 100000,
+    "sellPrice": 0,
+    "rarity": "hacker"
+  },
+  "bagel": {
+    "name": "Bagel",
+    "buyPrice": 9,
+    "sellPrice": 13,
+    "rarity": "uncommon"
+  },
+  "turkey": {
+    "name": "Turkey",
+    "buyPrice": 20,
+    "sellPrice": 30,
+    "rarity": "epic"
+  },
+  "kiwi": {
+    "name": "Kiwi",
+    "buyPrice": 5,
+    "sellPrice": 8,
+    "rarity": "common"
+  }
+}
