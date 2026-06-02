@@ -135,14 +135,23 @@ def load():
     else:
         return jsonify({"error": "No save found"}), 404
 
-@app.route('/reset', methods=['POST'])
-def reset():
+@app.route('/resetjson', methods=['POST'])
+def resetJson():
     if 'username' not in session:
         return jsonify({"error": "Not logged in"}), 401
 
     username = session['username']
     db.new_game(username)
     return jsonify(success=True)
+
+@app.route('/reset', methods=['GET'])
+def reset():
+    if 'username' not in session:
+        return redirect(url_for("login"))
+
+    username = session['username']
+    db.new_game(username)
+    return redirect(url_for("homepage"))
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
