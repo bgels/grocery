@@ -8,7 +8,7 @@ export { game };
 // 1. need to calculate game state as soon as game loads later on, also customer queue
 // 2. add image link to stock
 
-const usingLocalstorage = true;
+const usingLocalstorage = false;
 
 async function saveGame(){
     if(usingLocalstorage){
@@ -484,4 +484,4 @@ document.addEventListener("keydown", function(event){
 // saveGame();
 
 
-// add elementreference 
+// add elementreference

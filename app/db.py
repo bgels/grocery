@@ -48,8 +48,8 @@ def new_game(username):
     (
         username,
         1,
-        0,
-        0,
+        2,
+        100,
         "None",
         0,
         0,
