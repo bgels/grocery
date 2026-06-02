@@ -154,3 +154,8 @@ yuL -- 2026-05-27 8:00
 junjieL -- 2026-05-27 00:25
 -- art page showcases goobers again
 -- the last customer dissapears when day ends
+
+yuL -- 2026-06-01 23:00
+-- Frontend visuals for keypad and keypad display
+-- JS, now takes in keyboard input for change, linked buttons on the keypad to js to process
+

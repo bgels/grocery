@@ -34,38 +34,49 @@
         <img data-art-layer="accessories" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;" src=""/>
       </div>
     </div>
-    <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
     <section class="flex flex-row mx-auto text-center text-2xl items-center justify-center">
       <div class = "flex px-8">
         <p id="main" class=""> ... </p>
       </div>
       <div class = "flex flex-col px-8">
         <p id="main2"> ... </p>
-        <section class = "flex flex-col">
-          <div class ="flex flex-row">
-            <input id="numpad_1" type="button" value ="1" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_2" type="button" value ="2" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_3" type="button" value ="3" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-          </div>
-          <div class ="flex flex-row">
-            <input id="numpad_4" type="button" value ="4" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_5" type="button" value ="5" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_6" type="button" value ="6" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-          </div>
-          <div class ="flex flex-row">
-            <input id="numpad_7" type="button" value ="7" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_8" type="button" value ="8" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_9" type="button" value ="9" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-          </div>
-          <div class ="flex flex-row">
-            <input id="numpad_decimal" type="button" value ="." class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_0" type="button" value ="9" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-            <input id="numpad_clear" type="button" value ="C" class="px-4 hover:text-gray-300 hover:-translate-y-1 transition">
-          </div>
-            <input id="numpad_submit" type="button" placeholder="1">
-        </section>
-        <input id="changeInput" type="number" placeholder="Enter change">
-        <button id="submitChange" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Give Change</button>
+        <div id="keypad-container" class="relative z-40 mt-4 select-none">
+          <section class="flex flex-col items-center justify-center w-[375px] h-[250px] rounded-lg shadow-2xl bg-[length:100%_100%] bg-no-repeat bg-center" style="background-image: url('{{ url_for('static', filename='images/keypad/keypadbase.png') }}'); image-rendering: pixelated;">
+            <div class="flex flex-row gap-[0px] w-full justify-left">
+              <div class="ml-[31px] grid grid-cols-[60px_14px_55px_20px_56px] grid-rows-[40px_45px_40px_40px] gap-x-[0px] gap-y-[11px]">
+                <button id="numpad_1" type="button" value="1" class="relative flex items-center justify-center w-full h-[full] text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;">1</button>
+                <div></div>
+                <button id="numpad_2" type="button" value="2" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;">2</button>
+                <div></div>
+                <button id="numpad_3" type="button" value="3" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;">3</button>
+                
+                <button id="numpad_4" type="button" value="4" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton2.png') }}'); image-rendering: pixelated;">4</button>
+                <div></div>
+                <button id="numpad_5" type="button" value="5" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton2.png') }}'); image-rendering: pixelated;">5</button>
+                <div></div>
+                <button id="numpad_6" type="button" value="6" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton2.png') }}'); image-rendering: pixelated;">6</button>
+
+                <button id="numpad_7" type="button" value="7" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton2.png') }}'); image-rendering: pixelated;">7</button>
+                <div></div>
+                <button id="numpad_8" type="button" value="8" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton2.png') }}'); image-rendering: pixelated;">8</button>
+                <div></div>
+                <button id="numpad_9" type="button" value="9" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton2.png') }}'); image-rendering: pixelated;">9</button>
+                
+                <button id="numpad_decimal" type="button" value="." class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;">.</button>
+                <div></div>
+                <button id="numpad_0" type="button" value="0" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;">0</button>
+                <div></div>
+                <button type="button" value="" class="relative flex items-center justify-center w-full h-full text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;"></button>
+              </div>
+              <div class="ml-[31px] flex flex-col w-[78px] grid-rows-[40px_45px_40px_40px] gap-y-[11px]">
+                <button type="button" value="C" class="flex-1 relative flex items-center justify-center w-full bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md"></button>
+                <button id="numpad_clear" type="button" value="C" class="flex-1 relative flex items-center justify-center w-full bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/clearButton.png') }}'); image-rendering: pixelated;"></button>
+                <button id="numpad_submit" type="button" class="flex-1 relative flex items-center justify-center w-full bg-[length:100%_100%] bg-no-repeat bg-center active:scale-[0.98] active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/enterButton.png') }}'); image-rendering: pixelated;"></button>
+                <button type="button" value="C" class="flex-1 relative flex items-center justify-center w-full bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md"></button>
+              </div>
+            </div>
+          </section>
+        </div>
         <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Next</button>
         <!--<button id="nextCustomer" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next Customer</button> -->
       </div>
@@ -77,6 +88,7 @@
       Made by Resturant Simulator, SoftDev P04 | 2026
       </a>
   </footer>
+  <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
 </body>
