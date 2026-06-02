@@ -98,7 +98,7 @@ const game = {
     },
 
     stock:{
-        apple: {...PRODUCT_CATALOG.apple, quantity: 20},
+        apple: {...PRODUCT_CATALOG.apple, quantity: 10},
         milk: {...PRODUCT_CATALOG.milk, quantity: 10},
         pilk: {...PRODUCT_CATALOG.pilk, quantity: 10},
         banana: {...PRODUCT_CATALOG.banana, quantity: 10}
