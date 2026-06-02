@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lacquer&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jim+Nightshade&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Pixels&display=swap');
 
-body.title {
-    font-family: "Lacquer", system-ui, sans-serif;
+main.title {
+  font-family: "Rubik Pixels", system-ui;
 }
 body.register{
     font-family: "Jim Nightshade", cursive;
@@ -10,6 +11,13 @@ body.register{
 :root {
 }
 
+div.keypad{
+  font-family: "Rubik Pixels", system-ui;
+}
+
+h2.title{
+  font-family: "Lacquer", system-ui, sans-serif;
+}
 @keyframes moveRight {
     from {
     transform: translateX(-200px);
@@ -23,7 +31,7 @@ body.register{
 .sky-scroll {
     background-repeat: repeat-x;
     background-size: cover;
-    will-change: background-position; 
+    will-change: background-position;
 }
 
 @keyframes panSky {

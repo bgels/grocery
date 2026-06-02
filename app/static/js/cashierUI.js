@@ -21,7 +21,7 @@ export function initCashierPage({
         display.className = "text-3xl text-green-200 font-bold mb-4 bg-black/40 px-4 py-2 border border-black-600 min-h-[50px] flex items-center justify-center select-none pointer-events-none";
         display.style = "background-image: url('{{ url_for('static', filename='images/keypad/keypadDisplay.png') }}'); image-rendering: pixelated;"
         display.innerText = "Change: $0.00";
-        
+
         const keypad = document.getElementById("keypad-container");
         keypad.parentNode.insertBefore(display, keypad);
     }
@@ -81,7 +81,7 @@ export function initCashierPage({
             if (btn) btn.click();
         }
         else if (key === "Enter") {
-            if (submitBtn) submitBtn.click();
+            if (sumbitBtn) sumbitBtn.click();
         }
         else if (key === "Backspace" || key === "Escape" || key.toLowerCase() === "c") {
             currentChange = "";
