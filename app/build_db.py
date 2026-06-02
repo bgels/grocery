@@ -56,8 +56,8 @@ c.executescript("""
     );
 
     CREATE TABLE Products (
-        username TEXT,
-        name TEXT PRIMARY KEY,
+        username TEXT PRIMARY KEY,
+        name TEXT,
         quantity INTEGER,
         buy_price INTEGER,
         sell_price INTEGER,

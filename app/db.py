@@ -131,10 +131,10 @@ def save_game(username, save_json):
     c.execute('DELETE FROM Products WHERE username=?', (username,))
     for product_name, data in stock.items():
         c.execute('''
-            INSERT OR REPLACE INTO Products (name, quantity, buy_price, sell_price, rarity)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT OR REPLACE INTO Products (username, name, quantity, buy_price, sell_price, rarity)
+            VALUES (?, ?, ?, ?, ?, ?)
         ''',
-        (
+        (   username,
             data.get('name', product_name),
             data.get('quantity', 0),
             data.get('buyPrice', 0),
