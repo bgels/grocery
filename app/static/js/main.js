@@ -445,6 +445,7 @@ const page = document.body.dataset.page;
 document.addEventListener("DOMContentLoaded", init);
 async function init() {
     await loadGame();
+    console.log(game);
     if (page === "cashier") {
         console.log("loading page cashier");
         const cashierUI = initCashierPage({
@@ -480,7 +481,6 @@ document.addEventListener("keydown", function(event){
         resetGame();
     }
 })
-
 // saveGame();
 
 

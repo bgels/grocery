@@ -84,6 +84,7 @@ def new_game(username):
             quantity = 3
         else:
             quantity = 0
+        print(username, name, quantity, buyPrice)
         c.execute('''INSERT INTO Products (username, name, quantity, buy_price, sell_price, rarity) VALUES(?, ?, ?, ?, ?, ?)''',
             (
                 username,
