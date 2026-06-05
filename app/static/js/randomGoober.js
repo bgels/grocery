@@ -2,7 +2,7 @@ const options = {
     body: ['body-yellow', 'body-red', 'body-pink', 'body-blue', 'body-green'],
     eyes: ['eyes-special', 'eyes-sideways', 'eyes-evil', 'eyes-joyful', 'eyes-sleepy', 'eyes-asian', 'eyes-heart'],
     mouth:['mouth-p', 'mouth-line', 'mouth-o', 'mouth-3', 'mouth-sad', 'mouth-slant', 'mouth-u'],
-    accessories:['accessories-brownHat', 'accessories-necklace', 'accessories-hair1', 'accessories-cat_ears']
+    accessories:['accessories-brownHat', 'accessories-necklace', 'accessories-hair1', 'accessories-cat_ears', 'accessories-glasses_nerd']
 };
 
 function pick(arr) {
