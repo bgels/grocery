@@ -13,10 +13,10 @@ c.execute("PRAGMA foreign_keys = ON;")
 c.executescript("""
     DROP TABLE IF EXISTS Game;
     DROP TABLE IF EXISTS Items;
-    DROP TABLE IF EXISTS User;
-    DROP TABLE IF EXISTS Customers;
     DROP TABLE IF EXISTS Products;
     DROP TABLE IF EXISTS Upgrades;
+    DROP TABLE IF EXISTS Customers;
+    DROP TABLE IF EXISTS User;
     """
 )
 

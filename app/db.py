@@ -80,11 +80,11 @@ def new_game(username):
         buyPrice = product["buyPrice"]
         sellPrice = product["sellPrice"]
         rarity = product["rarity"]
-        if (name == "milk" or name == "pilk" or name == "banana" or name == "apple"):
+        if (name == "Apple" or name == "Milk" or name == "Pilk" or name == "Bananana"):
             quantity = 3
         else:
             quantity = 0
-        print(username, name, quantity, buyPrice)
+        #print(username, name, quantity, buyPrice)
         c.execute('''INSERT INTO Products (username, name, quantity, buy_price, sell_price, rarity) VALUES(?, ?, ?, ?, ?, ?)''',
             (
                 username,

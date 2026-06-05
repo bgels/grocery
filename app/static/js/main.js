@@ -476,10 +476,6 @@ async function init() {
 
 document.addEventListener("keydown", function(event){
     console.log(event.key);
-    if(event.key === "r"){
-        console.log("Resetting save file...");
-        resetGame();
-    }
 })
 // saveGame();
 
