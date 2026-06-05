@@ -24,9 +24,9 @@
 {% block content %}
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <div class="fixed bottom-64 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md bg-black/50 border border-rounded">
+    <div class="fixed bottom-64 left-1/2 transform -translate-x-1/2 z-50 w-full bg-black/50 max-w-md border border-rounded">
       {% for message in messages %}
-        <div class="flash-container text-white px-6 py-3 rounded-lg shadow-lg text-xl text-center">
+        <div class="flash flash-container text-white px-6 py-3 rounded-lg shadow-lg text-xl text-center">
           {{ message }}
         </div>
       {% endfor %}

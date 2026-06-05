@@ -9,10 +9,6 @@ export function initCashierPage({
     const advanceButton = document.getElementById("advanceGame");
     const clearBtn = document.getElementById("numpad_clear");
     const sumbitBtn = document.getElementById("numpad_submit");
-    const audio_keypadPress = new Audio("static/audio/keypad.mp3");
-
-    console.log(audio_keypadPress.src);
-
     advanceButton.addEventListener("click", advanceGame);
 
     let currentChange = "";
@@ -49,8 +45,6 @@ export function initCashierPage({
                 } else {
                     currentChange += val;
                 }
-                audio_keypadPress.playbackRate = .67 + Math.random() * .5;
-                audio_keypadPress.play();
                 updateChangeDisplay();
             })
         }

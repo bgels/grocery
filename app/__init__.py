@@ -154,7 +154,12 @@ def reset():
     db.new_game(username)
     return redirect(url_for("homepage"))
 
+@app.route("/test")
+def test():
+    return render_template("test.html")
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
 
-# query the sqlite for yu and so he can use stuff from the database
+# query the sqlite for yu and so he can use stuff from the
+database

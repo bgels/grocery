@@ -15,6 +15,10 @@ div.keypad{
   font-family: "Rubik Pixels", system-ui;
 }
 
+div.flash{
+  font-family: "Lacquer", system-ui, sans-serif;
+}
+
 h2.title{
   font-family: "Lacquer", system-ui, sans-serif;
 }
