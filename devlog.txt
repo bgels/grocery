@@ -121,7 +121,7 @@ rickyL --2026-05-18 10:00
 -- Added more products to the js constants
 -- changed routing in which when you click new game on the homepage, if you aren't logged in, it'll redirect you to login
 
-yuL -- 2026-05-18 1:00
+yuL -- 2026-05-18 01:00
 -- revised customer cart to count quantity too instead of just appending every item as something unique (holy was inefficent)
 -- updated manager to have buy stock system, updated template aswell to prepare for art in manager page, moved avliable itesm u can purchase inside of constants so later we can easily create more grocery items
 -- added new renders for manager page as player interacts w it all, and moved page specific renders to other javascript files (keeping # of lines in mainjs lower)
@@ -137,9 +137,12 @@ rickyL --2026-05-20 21:00
 -- Unblock continue game
 -- added flash msges
 
-yuL -- 2026-05-21 8:00
+yuL -- 2026-05-21 08:00
 -- revised loading and saving logic in javascript and flask
 -- revised background image for homescreen
+
+emilyM -- 2026-05-22 10:49
+-- made new_game function to initialize tables for a new game or replacing a game
 
 junjieL -- 2026-05-27 23:24
 -- random goober now changes as new customer comes in
@@ -159,3 +162,18 @@ yuL -- 2026-06-01 23:00
 -- Frontend visuals for keypad and keypad display
 -- JS, now takes in keyboard input for change, linked buttons on the keypad to js to process
 
+rickyL -- 2026-06-02 11:00
+-- added constants.json file
+-- read product data from the json file and added them to database
+
+emilyM -- 2026-06-02 11:00
+-- helped Ricky with json file parsing and insertion into database
+
+yuL -- 2026-06-03 11:03
+-- audio is played when keypad is pressed
+
+junjieL -- 2026-06-03 11:04
+-- added more images of products
+
+emilyM -- 2026-06-05 01:12
+-- fixed problem with database tables deleting so now game should run even with data.db present
