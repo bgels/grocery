@@ -5,8 +5,11 @@ import { renderRandomCharacter } from "./animate.js";
 export { game };
 // To do:
 // GAME:
-// 1. need to calculate game state as soon as game loads later on, also customer queue
-// 2. add image link to stock
+// 1. Make function to decline a customer and generate a new one, this will incur a money penalty on the player by subtracting the store's current money by %2-3 percent
+// 2. Add a time limit for player to check out, if they don't check out in time incur a money penalty
+// 3. Make gun upgrade system, take a look at the amount of ammo in upgrades for stock, if there is sufficent ammo and player uses gun they skip to next customer instantly without incurring any money penalities
+// 4. Make other upgrades as needed
+
 
 const usingLocalstorage = false;
 

@@ -177,3 +177,6 @@ junjieL -- 2026-06-03 11:04
 
 emilyM -- 2026-06-05 01:12
 -- fixed problem with database tables deleting so now game should run even with data.db present
+
+junjieL --2026-06-05 08:00
+-- art now has placeholder imgs for certain stock
