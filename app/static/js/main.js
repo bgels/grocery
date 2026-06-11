@@ -2,7 +2,7 @@ import { GAMESTATE, CUSTOMER_PRESETS, PRODUCT_CATALOG } from "./constants.js";
 import { initCashierPage } from "./cashierUI.js";
 import { initManagerPage } from "./managerUI.js";
 import { renderRandomCharacter } from "./animate.js";
-export { game };
+export { game, rejectCustomer };
 // To do:
 // GAME:
 // 1. Make function to decline a customer and generate a new one, this will incur a money penalty on the player by subtracting the store's current money by %2-3 percent
@@ -11,12 +11,21 @@ export { game };
 // 4. Make other upgrades as needed
 
 
-const usingLocalstorage = false;
+const usingLocalstorage = true;
+const dailyMoneyGoal = 20;
+const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
+const budgetMultiplier = .5;
+const timeLimit = 10;
 
 async function saveGame(){
+    
+    const gameToSave = { ...game };
+    delete gameToSave.timeRemaining;
+    delete gameToSave.dailyGoal;
+
     if(usingLocalstorage){
         console.warn("saving game to localStorage...");
-        localStorage.setItem("saveFile", JSON.stringify(game));
+        localStorage.setItem("saveFile", JSON.stringify(gameToSave));
         console.warn("saved!");
     }else{
         console.warn("saving game to database...");
@@ -25,7 +34,7 @@ async function saveGame(){
             const response = await fetch(route, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(game),
+                body: JSON.stringify(gameToSave),
             });
             const result = await response.json();
             console.log(result);
@@ -83,11 +92,13 @@ const game = {
     day: 1,
     maxDay: 7,
     money: 100,
-    message: "Console here", // dont parse
-    state: GAMESTATE.DAY_START, // dont parse
+    dailyGoal: 0,
+    timeRemaining: 10,
+    message: "Console here",
+    state: GAMESTATE.DAY_START,
     hours: 2,
 
-    customerQueue: [],  // dont parse
+    customerQueue: [],
     currentCustomer: null,
 
     upgrades:{
@@ -97,7 +108,7 @@ const game = {
         firepower: 0
     },
     items:{
-        ammo: 20
+        ammo: 1
     },
 
     stock:{
@@ -105,7 +116,7 @@ const game = {
         milk: {...PRODUCT_CATALOG.milk, quantity: 10},
         pilk: {...PRODUCT_CATALOG.pilk, quantity: 10},
         banana: {...PRODUCT_CATALOG.banana, quantity: 10}
-    }, // prolly should add image link later, so need to change a lot of structures in functions below
+    },
     stats:{
         served: 0,
         killed: 0,
@@ -114,12 +125,87 @@ const game = {
 };
 // ----  Init and rendering starts below
 
-// Trys to advance game state when user clicks
+// ---- Cashier Timer
+let timerInterval = null;
+
+function startCustomerTimer() {
+    stopCustomerTimer();
+    if (game.day === 1 && game.stats.served === 0 && game.stats.killed === 0) {
+        game.timeRemaining = "∞";
+        render();
+        return;
+    }
+    game.timeRemaining = timeLimit; // 30 second limit per customer
+    timerInterval = setInterval(() => {
+        if (game.state === GAMESTATE.WAITING_FOR_CHANGE) return; // Pause timer while processing payment
+        
+        game.timeRemaining--;
+        if (game.timeRemaining <= 0) {
+            timeOutCustomer();
+        } else {
+            render(); // Update timer on screen every second
+        }
+    }, 1000);
+}
+
+function stopCustomerTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+async function timeOutCustomer() {
+    stopCustomerTimer();
+    const penalty = roundMoney((game.money * 0.05) + 2); // 5% + $2 flat penalty
+    game.money = roundMoney(game.money - penalty);
+    game.message = `Customer left angrily. -$${penalty.toFixed(2)} penalty.`;
+
+    checkBankruptcy();
+    if (game.state === GAMESTATE.GAME_OVER) return;
+
+    replaceCurrentCustomer();
+    await saveGame();
+    render();
+}
+
+async function rejectCustomer() {
+    if (!game.currentCustomer || game.state !== GAMESTATE.CUSTOMER_CHECKOUT) return;
+
+    stopCustomerTimer();
+    if (game.items.ammo > 0) {
+        game.items.ammo--;
+        game.stats.killed++;
+        game.message = `BANG. No Penalty Incurred.`;
+    } else {
+        const penalty = roundMoney((game.money * 0.05) + 2);
+        game.money = roundMoney(game.money - penalty);
+        game.message = `Warning: Kicked customer out! -$${penalty.toFixed(2)} penalty.`;
+        checkBankruptcy();
+    }
+
+    if (game.state === GAMESTATE.GAME_OVER) return;
+
+    replaceCurrentCustomer();
+    await saveGame();
+    render();
+}
+
+function checkBankruptcy() {
+    if (game.money <= 0) {
+        game.money = 0;
+        game.state = GAMESTATE.GAME_OVER;
+        game.message = "BANKRUPT! You ran out of money.";
+        stopCustomerTimer();
+        render();
+    }
+}
+
 async function advanceGame() {
     switch(game.state){
-
         case GAMESTATE.DAY_START:
-            getQueue(game.hours, 0.5); // change multiplier later
+            getQueue(game.hours, budgetMultiplier); // change multiplier later
+            game.dailyGoal = roundMoney(game.money + (game.day * dailyMoneyGoal)); // dailyMoneyGoal
             game.message = `Day ${game.day} has begun.\n${game.customerQueue.length} customers today.`;
             game.state = GAMESTATE.CUSTOMER_CHECKOUT;
             nextCustomer();
@@ -167,7 +253,6 @@ function getQueue(customerCount, multiplier){
     game.customerQueue = [];
 
     for (let i = 0; i < customerCount; i++) {
-        const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
         const customerBudget = Math.max(3, averageBudget + budgetVariance);
 
         const customer = generateCustomer(customerBudget);
@@ -260,6 +345,7 @@ function processPayment(changeGiven) {
     game.state = GAMESTATE.WAITING_FOR_CHANGE; // waiting on result
     const expectedChange = roundMoney(customer.moneyGiven - customer.totalCost);
     if (changeGiven === expectedChange) {
+        stopCustomerTimer();
         removeStockFromCart(customer.cart);
         game.money += customer.totalCost;
         game.stats.served++;
@@ -330,11 +416,13 @@ function roundMoney(amount) {
 }
 
 function nextCustomer() {
+    stopCustomerTimer();
     game.currentCustomer = game.customerQueue.shift() || null;
     if(game.currentCustomer){
         game.state = GAMESTATE.CUSTOMER_CHECKOUT;
         game.message = `${game.currentCustomer.name} has arrived`;
         renderRandomCharacter();
+        startCustomerTimer();
     }else{
         game.state = GAMESTATE.DAY_END;
         game.message = `No more customers for today. Head to the shop screen!`;
@@ -342,44 +430,71 @@ function nextCustomer() {
     render();
 }
 
+function replaceCurrentCustomer() {
+    const budgetPool = BudgetPool(budgetMultiplier); 
+    const averageBudget = Math.floor(budgetPool / game.hours);
+    const replacementBudget = Math.max(3, averageBudget + budgetVariance);
+
+    game.currentCustomer = generateCustomer(replacementBudget);
+    game.message += `\n${game.currentCustomer.name} steps up in line.`;
+    renderRandomCharacter();
+    startCustomerTimer();
+}
 function changeUrl(url){
     window.location.href = "/route/" + url;
 }
 
 const isLocalhost = () => {
     const hostname = window.location.hostname;
-    // Check for localhost, 127.0.0.1 (IPv4), or ::1 (IP6)
     return (
     hostname === 'localhost' ||
     hostname === '127.0.0.1' ||
-    hostname === '[::1]' // IPv6 loopback (note the brackets)
+    hostname === '[::1]'
     );
 };
 
 // -- Interactivity specifics
 // Cashier
-let main; // gameplay status on the left
-let gameMain; // console logs
-
+let main;
+let gameMain; 
 // Manager
-let manager_main; // gameplay status on the left
-let manager_console; // console logs
+let manager_main;
+let manager_console;
 
 let renderManagerShop;
 let renderSelectedProductPanel;
 
 function render() {
-    console.log(game.state);
-    let text = "";
+    console.log(`Render(): ${game.state}`);
+    if(game.timeRemaining){
+        console.log(`Render(): time remaining for this customer -> ${game.timeRemaining}`);
+    }
+    const timerUI = document.getElementById("timerDisplay");
+    if (timerUI) {
+        if (page === "cashier" && game.currentCustomer && game.state === GAMESTATE.CUSTOMER_CHECKOUT) {
+            timerUI.classList.remove("hidden");
+            timerUI.innerText = `${game.timeRemaining}`;
+            if (typeof game.timeRemaining === "number" && game.timeRemaining <= 5) {
+                timerUI.classList.add("animate-pulse", "animate-bounce", "text-red-400");
+                timerUI.classList.remove("text-red-500");
+            } else {
+                timerUI.classList.remove("animate-pulse", "animate-bounce", "text-red-400");
+                timerUI.classList.add("text-red-500");
+            }
+        } else {
+            timerUI.classList.add("hidden"); // Hide it during night/manager phases
+        }
+    }
 
+    let text = "";
     // --- GAME_OVER screen
-    if(game.state === GAMESTATE.GAME_OVER){ // need to change to home screen soon
-        main.innerText = `GG! You survived all ${game.maxDay} days!\n\nFinal Stats:\n  Money: $${game.money.toFixed(2)}\n  Customers Served: ${game.stats.served}\n  Total Revenue: $${game.stats.revenue.toFixed(2)}`;
+    if(game.state === GAMESTATE.GAME_OVER){
+        main.innerText = `GG! \n\nFinal Stats:\n  Money: $${game.money.toFixed(2)}\n  Customers Served: ${game.stats.served}\n  Total Revenue: $${game.stats.revenue.toFixed(2)}`;
         gameMain.innerText = `Game Over.\n\n`;
         return;
     }
 
-    // --- NIGHT_START screen (placeholder for shop/upgrade screen)
+    // --- NIGHT_START screen 
     if(game.state === GAMESTATE.NIGHT_START){
         if(page === "manager"){
             manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
@@ -392,6 +507,7 @@ function render() {
     text += `Day: ${game.day} / ${game.maxDay}\n`;
     // text += `State: ${game.state}\n`;
     text += `Money: $${game.money.toFixed(2)}\n`;
+    text += `Ammo: ${game.items.ammo}\n\n`;
     // text += `Served: ${game.stats.served}\n`;
     // text += `Revenue: $${game.stats.revenue.toFixed(2)}\n\n`;
 
@@ -453,11 +569,15 @@ async function init() {
         console.log("loading page cashier");
         const cashierUI = initCashierPage({
             advanceGame,
-            processPayment
+            processPayment,
+            rejectCustomer
         });
 
         main = cashierUI.main;
         gameMain = cashierUI.gameMain;
+        if (game.state === GAMESTATE.CUSTOMER_CHECKOUT && game.currentCustomer) {
+            startCustomerTimer();
+        }
     }
     if (page === "manager") {
         console.log("loading page manager");

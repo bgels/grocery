@@ -34,7 +34,7 @@
         <img data-art-layer="accessories" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;" src=""/>
       </div>
     </div>
-    <section class="flex flex-row mx-auto text-center text-2xl items-center justify-center">
+    <section class="fixed bottom-8 flex flex-row mx-auto text-center text-2xl items-center justify-center">
       <div class = "flex px-8 overflow-y-scroll">
         <p id="main" class=""> ... </p>
       </div>
@@ -77,17 +77,24 @@
             </div>
           </section>
         </div>
-        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">Next</button>
+        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">
+          NEXT
+          <img src="{{ url_for('static', filename='images/keypad/gunSprite.png') }}" class="w-16 h-16 image-rendering-pixelated" />
+        </button>
         <!--<button id="nextCustomer" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next Customer</button> -->
+        <button id="gunButton" class="hover:scale-150 transition-transform hover:translate-x-20">
+          <img src="{{ url_for('static', filename='images/keypad/gunSprite.png') }}" class="w-16 h-16 image-rendering-pixelated" />
+        </button>
+        <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
+        <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
+        Made by Resturant Simulator, SoftDev P04 | 2026
+        </a>
+        </footer>
       </div>
     </section>
   </main>
 
-  <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
-      <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
-      Made by Resturant Simulator, SoftDev P04 | 2026
-      </a>
-  </footer>
+
   <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
