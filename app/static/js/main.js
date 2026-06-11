@@ -5,20 +5,20 @@ import { renderRandomCharacter } from "./animate.js";
 export { game, rejectCustomer };
 // To do:
 // GAME:
-// 1. Make function to decline a customer and generate a new one, this will incur a money penalty on the player by subtracting the store's current money by %2-3 percent
+// 1. Make function to decline a customer and generate a new one, this will incur a money penalty on the player by subtracting the store's current money by %2-3 percent (DONE)
 // 2. Add a time limit for player to check out, if they don't check out in time incur a money penalty
-// 3. Make gun upgrade system, take a look at the amount of ammo in upgrades for stock, if there is sufficent ammo and player uses gun they skip to next customer instantly without incurring any money penalities
+// 3. Make gun upgrade system, take a look at the amount of ammo in upgrades for stock, if there is sufficent ammo and player uses gun they skip to next customer instantly without incurring any money penalities 
 // 4. Make other upgrades as needed
 
 
-const usingLocalstorage = true;
+const usingLocalstorage = false;
 const dailyMoneyGoal = 20;
 const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
 const budgetMultiplier = .5;
-const timeLimit = 10;
+const timeLimit = 5;
 
 async function saveGame(){
-    
+
     const gameToSave = { ...game };
     delete gameToSave.timeRemaining;
     delete gameToSave.dailyGoal;
@@ -138,7 +138,7 @@ function startCustomerTimer() {
     game.timeRemaining = timeLimit; // 30 second limit per customer
     timerInterval = setInterval(() => {
         if (game.state === GAMESTATE.WAITING_FOR_CHANGE) return; // Pause timer while processing payment
-        
+
         game.timeRemaining--;
         if (game.timeRemaining <= 0) {
             timeOutCustomer();
@@ -431,7 +431,7 @@ function nextCustomer() {
 }
 
 function replaceCurrentCustomer() {
-    const budgetPool = BudgetPool(budgetMultiplier); 
+    const budgetPool = BudgetPool(budgetMultiplier);
     const averageBudget = Math.floor(budgetPool / game.hours);
     const replacementBudget = Math.max(3, averageBudget + budgetVariance);
 
@@ -456,7 +456,7 @@ const isLocalhost = () => {
 // -- Interactivity specifics
 // Cashier
 let main;
-let gameMain; 
+let gameMain;
 // Manager
 let manager_main;
 let manager_console;
@@ -494,7 +494,7 @@ function render() {
         return;
     }
 
-    // --- NIGHT_START screen 
+    // --- NIGHT_START screen
     if(game.state === GAMESTATE.NIGHT_START){
         if(page === "manager"){
             manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
