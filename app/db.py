@@ -30,6 +30,12 @@ def get_user(username):
     DB_CURSOR.close()
     return cursorfetch
 
+def get_leaderboard():
+    DB_CURSOR = DB.cursor()
+    DB_CURSOR.execute("SELECT username, revenue, served, killed, money FROM Game ORDER BY revenue ASC")
+    cursorfetch = DB_CURSOR.fetchall()
+    return cursorfetch
+
 def check_password(username, password):
     user = get_user(username)
     if user == None:

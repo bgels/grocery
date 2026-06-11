@@ -157,6 +157,12 @@ def reset():
 @app.route("/test")
 def test():
     return render_template("test.html")
+# ts is test delete this later
+@app.route("/leaderboard", methods=["GET"])
+def leaderboard():
+    username = session['username']
+    print(db.get_leaderboard())
+    return render_template("test.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
