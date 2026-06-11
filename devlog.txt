@@ -180,3 +180,6 @@ emilyM -- 2026-06-05 01:12
 
 junjieL --2026-06-05 08:00
 -- art now has placeholder imgs for certain stock
+
+junjieL --2026-06-11 00:48
+-- art now has no more placeholder imgs for certain stock (the imgs were added)
