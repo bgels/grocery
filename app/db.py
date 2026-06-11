@@ -101,6 +101,14 @@ def new_game(username):
                 rarity
             )
     )
+    c.execute('''INSERT INTO Items (username, name, amount) VALUES (?, ? ,? )''',
+    (
+    username,
+    'ammo',
+    3
+    )
+)
+
     c.close()
     DB.commit()
 
