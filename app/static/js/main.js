@@ -11,14 +11,14 @@ export { game, rejectCustomer };
 // 4. Make other upgrades as needed
 
 
-const usingLocalstorage = true;
+const usingLocalstorage = false;
 const dailyMoneyGoal = 20;
 const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
 const budgetMultiplier = .5;
 const timeLimit = 10;
 
 async function saveGame(){
-    
+
     const gameToSave = { ...game };
     delete gameToSave.timeRemaining;
     delete gameToSave.dailyGoal;
@@ -138,7 +138,7 @@ function startCustomerTimer() {
     game.timeRemaining = timeLimit; // 30 second limit per customer
     timerInterval = setInterval(() => {
         if (game.state === GAMESTATE.WAITING_FOR_CHANGE) return; // Pause timer while processing payment
-        
+
         game.timeRemaining--;
         if (game.timeRemaining <= 0) {
             timeOutCustomer();
@@ -431,7 +431,7 @@ function nextCustomer() {
 }
 
 function replaceCurrentCustomer() {
-    const budgetPool = BudgetPool(budgetMultiplier); 
+    const budgetPool = BudgetPool(budgetMultiplier);
     const averageBudget = Math.floor(budgetPool / game.hours);
     const replacementBudget = Math.max(3, averageBudget + budgetVariance);
 
@@ -456,7 +456,7 @@ const isLocalhost = () => {
 // -- Interactivity specifics
 // Cashier
 let main;
-let gameMain; 
+let gameMain;
 // Manager
 let manager_main;
 let manager_console;
@@ -494,7 +494,7 @@ function render() {
         return;
     }
 
-    // --- NIGHT_START screen 
+    // --- NIGHT_START screen
     if(game.state === GAMESTATE.NIGHT_START){
         if(page === "manager"){
             manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
