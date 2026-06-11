@@ -183,3 +183,7 @@ junjieL --2026-06-05 08:00
 
 junjieL --2026-06-11 00:48
 -- art now has no more placeholder imgs for certain stock (the imgs were added)
+
+yuL -- 2026-06-01 23:00
+-- added customer rejection system 
+-- added time limit to serve customers
