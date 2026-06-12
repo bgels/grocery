@@ -1,4 +1,4 @@
-import { GAMESTATE, CUSTOMER_PRESETS, PRODUCT_CATALOG } from "./constants.js";
+import { GAMESTATE, CUSTOMER_PRESETS, PRODUCT_CATALOG, UPGRADES, ITEMS, RARITY_ORDER } from "./constants.js";
 import { initCashierPage } from "./cashierUI.js";
 import { initManagerPage } from "./managerUI.js";
 import { renderRandomCharacter } from "./animate.js";
@@ -11,11 +11,11 @@ export { game, rejectCustomer };
 // 4. Make other upgrades as needed
 
 
-const usingLocalstorage = false;
+const usingLocalstorage = true;
 const dailyMoneyGoal = 20;
 const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
 const budgetMultiplier = .5;
-const timeLimit = 5;
+const timeLimit = 10;
 
 async function saveGame(){
 
@@ -103,12 +103,12 @@ const game = {
 
     upgrades:{
         shelf: 0,
-        register: 0,
-        decor: 0,
+        register: 0, // advertising 
+        decor: 0, // decoration
         firepower: 0
     },
     items:{
-        ammo: 1
+        ammo: 6
     },
 
     stock:{
@@ -135,15 +135,16 @@ function startCustomerTimer() {
         render();
         return;
     }
-    game.timeRemaining = timeLimit; // 30 second limit per customer
+    const timeLimitBuff = game.upgrades.firepower * 2; 
+    game.timeRemaining = timeLimit + timeLimitBuff;
     timerInterval = setInterval(() => {
-        if (game.state === GAMESTATE.WAITING_FOR_CHANGE) return; // Pause timer while processing payment
+        if (game.state === GAMESTATE.WAITING_FOR_CHANGE) return;
 
         game.timeRemaining--;
         if (game.timeRemaining <= 0) {
             timeOutCustomer();
         } else {
-            render(); // Update timer on screen every second
+            render();
         }
     }, 1000);
 }
@@ -205,6 +206,8 @@ async function advanceGame() {
     switch(game.state){
         case GAMESTATE.DAY_START:
             getQueue(game.hours, budgetMultiplier); // change multiplier later
+            const currentCustomers = game.hours + game.upgrades.register;
+            const currentMultiplier = 0.5 + (game.upgrades.decor * 0.1);
             game.dailyGoal = roundMoney(game.money + (game.day * dailyMoneyGoal)); // dailyMoneyGoal
             game.message = `Day ${game.day} has begun.\n${game.customerQueue.length} customers today.`;
             game.state = GAMESTATE.CUSTOMER_CHECKOUT;
@@ -253,8 +256,10 @@ function getQueue(customerCount, multiplier){
     game.customerQueue = [];
 
     for (let i = 0; i < customerCount; i++) {
-        const customerBudget = Math.max(3, averageBudget + budgetVariance);
+        const varianceBase = 10 + (game.upgrades.decor * 4);
+        const budgetVariance = Math.floor(Math.random() * varianceBase) - 5; 
 
+        const customerBudget = Math.max(3, averageBudget + budgetVariance);
         const customer = generateCustomer(customerBudget);
         game.customerQueue.push(customer);
     }
@@ -287,7 +292,7 @@ function generateCustomer(customerBudget){
         cart,
         totalCost,
         moneyGiven
-    } // have to change accordingly to emily's table later
+    }
 }
 
 // generates a cart of items from current stock based on budget provided
@@ -342,21 +347,92 @@ function processPayment(changeGiven) {
         return;
     }
 
-    game.state = GAMESTATE.WAITING_FOR_CHANGE; // waiting on result
+    game.state = GAMESTATE.WAITING_FOR_CHANGE;
     const expectedChange = roundMoney(customer.moneyGiven - customer.totalCost);
     if (changeGiven === expectedChange) {
         stopCustomerTimer();
         removeStockFromCart(customer.cart);
-        game.money += customer.totalCost;
+
+        let tipAmount = 0;
+        const tipChance = game.upgrades.decor * 0.15;
+        if (game.upgrades.decor > 0 && Math.random() < tipChance) {
+            tipAmount = roundMoney(Math.random() * 6 + 1); 
+        }
+        let timeBonus = 0;
+        if (game.upgrades.firepower > 0 && typeof game.timeRemaining === "number") {
+            timeBonus = roundMoney(game.timeRemaining * (game.upgrades.firepower * 0.5));
+        }
+        const totalEarned = roundMoney(customer.totalCost + tipAmount + timeBonus);
+        game.money = roundMoney(game.money + totalEarned);
         game.stats.served++;
-        game.stats.revenue += customer.totalCost;
-        game.message = `Correct change! +$${customer.totalCost.toFixed(2)}`;
-        nextCustomer(); // sets state to CUSTOMER_CHECKOUT or DAY_END
+        game.stats.revenue += totalEarned;
+
+        let successMsg = `Correct change! +$${customer.totalCost.toFixed(2)}`;
+        if (tipAmount > 0) successMsg += ` (Tip: +$${tipAmount.toFixed(2)})`;
+        if (timeBonus > 0) successMsg += ` (Time Bonus: +$${timeBonus.toFixed(2)})`;
+        game.message = successMsg;
+        nextCustomer();
     } else {
-        game.state = GAMESTATE.CUSTOMER_CHECKOUT; // wrong — stay on this customer
+        game.state = GAMESTATE.CUSTOMER_CHECKOUT;
         game.message = `Wrong change! Expected: $${expectedChange.toFixed(2)}`;
         render();
     }
+}
+
+
+// Stock, Upgrades, and Items
+
+function getUpgradeCost(upgradeId) {
+    const upgrade = UPGRADES[upgradeId];
+    const level = game.upgrades[upgradeId];
+    return roundMoney(upgrade.baseCost * Math.pow(upgrade.costMultiplier, level));
+}
+
+function buyUpgrade(upgradeId) {
+    if (game.state !== GAMESTATE.NIGHT_START || !UPGRADES[upgradeId]) return false;
+    
+    if (game.upgrades[upgradeId] >= UPGRADES[upgradeId].maxLevel) {
+        game.message = "Upgrade is already at Max Level.";
+        render(); return false;
+    }
+
+    const cost = getUpgradeCost(upgradeId);
+    if (game.money < cost) {
+        game.message = `Need $${cost.toFixed(2)} to upgrade ${UPGRADES[upgradeId].name}.`;
+        render(); return false;
+    }
+
+    game.money = roundMoney(game.money - cost);
+    game.upgrades[upgradeId]++;
+    game.message = `Upgraded ${UPGRADES[upgradeId].name} to level ${game.upgrades[upgradeId]}!`;
+    render();
+    return true;
+}
+function buyItem(itemId, amount) {
+    amount = Number(amount);
+    if (!ITEMS[itemId] || !Number.isInteger(amount) || amount <= 0) return false;
+    
+    if (game.state !== GAMESTATE.NIGHT_START) {
+        game.message = "Shop is closed.";
+        render(); return false;
+    }
+
+    const item = ITEMS[itemId];
+    const totalCost = roundMoney(amount * item.price);
+
+    if (game.money < totalCost) {
+        game.message = `Need $${totalCost.toFixed(2)} to buy ${amount} ${item.name}.`;
+        render(); return false;
+    }
+
+    game.money = roundMoney(game.money - totalCost);
+    if (game.items[itemId] === undefined) {
+        game.items[itemId] = 0;
+    }
+    game.items[itemId] += amount;
+    game.message = `Bought ${amount} ${item.name}! Total: ${game.items[itemId]}`;
+    render();
+    return true;
 }
 
 function buyStock(productId, amount){
@@ -377,9 +453,21 @@ function buyStock(productId, amount){
         return false;
     }
     const product = PRODUCT_CATALOG[productId];
+    const requiredLevel = RARITY_ORDER.indexOf(product.rarity);
+    if (game.upgrades.shelf < requiredLevel) {
+        game.message = `Logistics Level ${requiredLevel} required to buy ${product.rarity} items.`;
+        render(); return false;
+    }
+    const maxStock = 20 + (game.upgrades.shelf * 20); 
+    const currentAmount = game.stock[productId] ? game.stock[productId].quantity : 0;
+    
+    if (currentAmount + amount > maxStock) {
+        game.message = `You can currently only store ${maxStock} units of ${product.name}.`;
+        render(); return false;
+    }
     const totalCost = roundMoney(amount * product.buyPrice);
     if(game.money < totalCost){
-        game.message = `not enough money to buy. need $${totalCost.toFixed(2)}`;
+        game.message = `Not enough money to buy. need $${totalCost.toFixed(2)}`;
         render();
         return false;
     }
@@ -539,8 +627,8 @@ function render() {
             stock += `${i}: ${game.stock[i].quantity}\n`;
         }
         manager_console.innerText = stock;
-        renderManagerShop();
-        renderSelectedProductPanel();
+        if (renderManagerShop) renderManagerShop();
+        if (renderSelectedProductPanel) renderSelectedProductPanel();
     }
 }
 
@@ -584,8 +672,14 @@ async function init() {
         const managerUI = initManagerPage({
             game,
             PRODUCT_CATALOG,
+            UPGRADES,
+            ITEMS,
+            RARITY_ORDER,
             advanceGame,
             buyStock,
+            buyUpgrade,
+            buyItem, 
+            getUpgradeCost,
             roundMoney
         });
 
@@ -601,6 +695,3 @@ document.addEventListener("keydown", function(event){
     console.log(event.key);
 })
 // saveGame();
-
-
-// add elementreference

@@ -16,12 +16,39 @@ export const CUSTOMER_PRESETS = {
     bills : [5, 7, 4.5, 11.5, 2.5, 8.5, 10, 20, 50, 3, 25, 40, 55, 75, 67, 52, 98, 36, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 120, 130, 140, 150, 160, 170, 180, 200, 220, 240, 260, 280, 300, 350, 400]
 };
 
-export const URLS = {
-
+export const UPGRADES = {
+    register: { 
+        name: "Advertising",
+        baseCost: 50,
+        costMultiplier: 1.5,
+        maxLevel: 5
+    },
+    decor: {
+        name: "Decoration",
+        baseCost: 100,
+        costMultiplier: 2,
+        maxLevel: 5
+    },
+    shelf: { 
+        name: "Logistics",
+        baseCost: 150,
+        costMultiplier: 2.2,
+        maxLevel: 5
+    },
+    firepower: { 
+        name: "Hospitality",
+        baseCost: 200,
+        costMultiplier: 2.5,
+        maxLevel: 5
+    }
 }
-
-
-
+export const ITEMS = {
+    ammo: {
+        name: "Ammo",
+        price: 5
+    }
+};
+export const RARITY_ORDER = ["common", "uncommon", "rare", "epic", "legendary", "hacker"];
 export const PRODUCT_CATALOG = {
     apple: {
         name: "Apple",
