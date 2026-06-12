@@ -45,10 +45,10 @@ export function initManagerPage({
     function renderManagerShop() {
         if (page !== "manager" || !productGrid) return;
         productGrid.innerHTML = "";
-        // const upgradeHeader = document.createElement("div");
-        // upgradeHeader.className = "col-span-2 text-left text-lg font-bold text-yellow-400 mt-2 mb-1 border-b border-gray-700 pb-1";
-        // upgradeHeader.innerText = "Upgrades";
-        // productGrid.appendChild(upgradeHeader);
+        const upgradeHeader = document.createElement("div");
+        upgradeHeader.className = "col-span-2 text-left text-lg font-bold text-yellow-400 mt-2 mb-1 border-b border-gray-700 pb-1";
+        upgradeHeader.innerText = "Upgrades";
+        productGrid.appendChild(upgradeHeader);
 
         for (const id in UPGRADES) {
             const btn = document.createElement("button");
@@ -61,10 +61,10 @@ export function initManagerPage({
             btn.onclick = () => selectShopItem(id, 'upgrade');
             productGrid.appendChild(btn);
         }
-        // const itemHeader = document.createElement("div");
-        // itemHeader.className = "col-span-2 text-left text-lg font-bold text-green-400 mt-4 mb-1 border-b border-gray-700 pb-1";
-        // itemHeader.innerText = "Items";
-        // productGrid.appendChild(itemHeader);
+        const itemHeader = document.createElement("div");
+        itemHeader.className = "col-span-2 text-left text-lg font-bold text-green-400 mt-4 mb-1 border-b border-gray-700 pb-1";
+        itemHeader.innerText = "Items";
+        productGrid.appendChild(itemHeader);
 
         for (const id in ITEMS) {
             const btn = document.createElement("button");
@@ -77,10 +77,10 @@ export function initManagerPage({
             btn.onclick = () => selectShopItem(id, 'item');
             productGrid.appendChild(btn);
         }
-        // const productHeader = document.createElement("div");
-        // productHeader.className = "col-span-2 text-left text-lg font-bold text-blue-400 mt-4 mb-1 border-b border-gray-700 pb-1";
-        // productHeader.innerText = "Products";
-        // productGrid.appendChild(productHeader);
+        const productHeader = document.createElement("div");
+        productHeader.className = "col-span-2 text-left text-lg font-bold text-blue-400 mt-4 mb-1 border-b border-gray-700 pb-1";
+        productHeader.innerText = "Products";
+        productGrid.appendChild(productHeader);
 
         for (const id in PRODUCT_CATALOG) {
             const product = PRODUCT_CATALOG[id];
