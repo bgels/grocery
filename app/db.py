@@ -64,6 +64,15 @@ def new_game(username):
     ))
     #Items tables
     c.execute("DELETE FROM Items WHERE username = ?", (username,))
+    c.execute('''
+        INSERT INTO Items (username, name, amount)
+        VALUES (?, ? ,? )
+    ''',
+    (
+        username,
+        'ammo',
+        3
+    ))
     #Upgrades tables
     c.execute("DELETE FROM Upgrades WHERE username = ?", (username,))
     c.execute('''
@@ -100,14 +109,7 @@ def new_game(username):
                 sellPrice,
                 rarity
             )
-    )
-    c.execute('''INSERT INTO Items (username, name, amount) VALUES (?, ? ,? )''',
-    (
-    username,
-    'ammo',
-    3
-    )
-)
+        )
 
     c.close()
     DB.commit()
@@ -234,13 +236,25 @@ def load_game(username):
         'stats': {'served': served, 'killed': killed, 'revenue': revenue}
     }
 
-#def get_leaderboard():
-#    list = {}
-#    c = DB.cursor()
-#    c.execute('SELECT username, revenue FROM Game ORDER BY revenue ASC')
-#    list = c.fetchall()
-#    c.close()
-#    return list
+def get_leaderboard(sort_by="revenue"):
+    allowed_columns = {
+        "revenue": "revenue",
+        "money": "money",
+        "served": "served",
+        "killed": "killed",
+        "day": "day"
+    }
+    column = allowed_columns.get(sort_by, "revenue")
+    c = DB.cursor()
+    #leaderboard = c.execute('SELECT username, revenue FROM Game ORDER BY revenue DESC').fetchall()
+    leaderboard = c.execute(f"""
+        SELECT username, revenue, money, served, killed, day
+        FROM Game
+        ORDER BY {column} DESC
+    """).fetchall()
+    c.close()
+    DB.commit()
+    return leaderboard
 
 #returns as list of dicts, where each item in the list is one row's entry, and each dict entry contains the selected data as the value for the column name as the key
 def select_query(query_string, parameters=()):

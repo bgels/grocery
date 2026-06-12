@@ -158,14 +158,15 @@ def reset():
 def test():
     return render_template("test.html")
 # ts is test delete this later
+
 @app.route("/leaderboard", methods=["GET"])
 def leaderboard():
-    username = session['username']
-    print(db.get_leaderboard())
-    return render_template("test.html")
+    sort_by = request.args.get("sort", "revenue")
+    print(db.get_leaderboard(sort_by))
+    data = db.get_leaderboard(sort_by)
+    return render_template("leaderboard.html", leaderboard=data, sort_by=sort_by)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
 
-# query the sqlite for yu and so he can use stuff from the
-database
+# query the sqlite for yu and so he can use stuff from the database
