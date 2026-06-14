@@ -23,6 +23,7 @@ export function initManagerPage({
     const selectedProductBuyPrice = document.getElementById("selectedProductBuyPrice");
     const selectedProductSellPrice = document.getElementById("selectedProductSellPrice");
     const selectedProductTotal = document.getElementById("selectedProductTotal");
+    const selectedProductImage = document.getElementById("selectedProductImage");
 
     const buySelectedStockButton = document.getElementById("buySelectedStock");
     const amountSelectorContainer = document.getElementById("amountSelectorContainer");
@@ -37,7 +38,16 @@ export function initManagerPage({
     function selectShopItem(id, type) {
         selectedId = id;
         selectedType = type;
-        selectedBuyAmount = 1; 
+        selectedBuyAmount = 1;
+        if(type === 'upgrade'){
+            selectedProductImage.src = `/static/images/upgrades/${UPGRADES[id].name}.png`;
+        }else if(type === 'items'){
+            selectedProductImage.src = `/static/images/items/${ITEMS[id].name}.png`;
+        }else{
+            selectedProductImage.src = `/static/images/ingredients/${PRODUCT_CATALOG[id].name}.png`;
+        }
+        selectedProductImage.classList.remove("hidden");
+        selectedProductImage.style.display = "block";
         renderSelectedProductPanel();
         renderManagerShop();
     }
