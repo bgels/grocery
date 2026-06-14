@@ -53,10 +53,10 @@ def register():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
-        flash("Sign up successful! Please log in.")
         if db.get_user(username) == None:
             db.add_user(username, password)
             db.new_game(username)
+            flash("Sign up successful! Please log in.")
             return redirect(url_for("login"))
         else:
             flash("Username is already taken")

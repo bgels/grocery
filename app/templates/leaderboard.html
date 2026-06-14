@@ -14,13 +14,20 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen flex flex-col bg-[var(--steam-bg)]">
-    <h2 class="mx-auto text-center text-2xl">Costgo!!</h2>
+<body class="min-h-screen flex flex-col relative overflow-auto" data-page="cashier">
+  <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute inset-0 -z-20 sky-scroll" style="background-image: url('{{ url_for('static', filename='images/cloudDay.gif') }}');"></div>
+    <img src="{{ url_for('static', filename='images/wipMenu_night_rolling.png') }}" class="absolute inset-0 w-full h-full object-cover render-pixel opacity-65">
+  </div><br>
+
+  <div class="px-6 z-10">
+   <h2 class="text-center text-3xl font-bold tracking-wide text-gray-100 mt-6 mb-6"
+       style="text-shadow: 2px 2px 0 #293b65, -2px 2px 0 #293b65, 2px -2px 0 #293b65, -2px -2px 0 #293b65;">Leaderboard</h2>
     
     <form method="GET" action="/leaderboard">
-        <label>Sort by:</label>
+        <label class="text-gray-100">Sort by:</label>
 
-        <select name="sort" onchange="this.form.submit()">
+        <select name="sort" onchange="this.form.submit()" class="bg-slate-800 border border-slate-700 rounded-md px-2 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-600">
             <option value="revenue" {% if sort_by == "revenue" %}selected{% endif %}>Revenue</option>
             <option value="money" {% if sort_by == "money" %}selected{% endif %}>Money</option>
             <option value="served" {% if sort_by == "served" %}selected{% endif %}>Served</option>
@@ -29,32 +36,32 @@
         </select>
     </form>
     <br>
-
-    <table border="1">
-    <tr>
-        <th>Rank</th>
-        <th>Username</th>
-        <th>Revenue</th>
-        <th>Money</th>
-        <th>Served</th>
-        <th>Killed</th>
-        <th>Day</th>
+    
+    <table class="w-full border border-slate-700 bg-slate-800/80 text-slate-100 rounded-lg overflow-hidden">
+    <tr class="hover:bg-slate-500/50">
+        <th class="border border-gray-300 px-4 py-2 text-center">Rank</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Username</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Revenue</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Money</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Served</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Killed</th>
+        <th class="border border-gray-300 px-4 py-2 text-center">Day</th>
     </tr>
     {% for player in leaderboard %}
-    <tr>
-        <td>{{ loop.index }}</td>
-        <td>{{ player[0] }}</td> 
-        <td>{{ player[1] }}</td>
-        <td>{{ player[2] }}</td>
-        <td>{{ player[3] }}</td>
-        <td>{{ player[4] }}</td>
-        <td>{{ player[5] }}</td>
+    <tr class="hover:bg-slate-500/50">
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ loop.index }}</td>
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ player[0] }}</td> 
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ player[1] }}</td>
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ player[2] }}</td>
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ player[3] }}</td>
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ player[4] }}</td>
+        <td class="border border-gray-300 px-4 py-2 text-center">{{ player[5] }}</td>
     </tr>
     {% endfor %}
     </table>
-
-  <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
-      <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
+  </div>
+  <footer class="mt-auto text-center mb-12 pr-6 pt-6 text-sm/8 text-gray-100">
+      <a href="https://github.com/bgels/grocery" class="select-none hover:text-gray-300 transition">
       Made by Restaurant Simulator, SoftDev P04 | 2026
       </a>
   </footer>
