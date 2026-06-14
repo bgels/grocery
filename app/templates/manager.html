@@ -15,67 +15,63 @@
 </head>
 
 
-<body class=" min-h-screen flex flex-col relative" data-page="manager">
-  <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-  </div>
+<body class="register min-h-screen bg-[#1a1a24] flex items-center justify-center font-sans text-gray-900 select-none" data-page="manager">
+  
+  <main class="relative w-full max-w-[1920px] aspect-video overflow-hidden shadow-2xl">
+    
+    <img src="{{ url_for('static', filename='images/manager.png') }}" class="absolute inset-0 w-full h-full object-fill render-pixel pointer-events-none -z-10">
 
-  <h2 class="mx-auto text-center text-2xl">Manager!!</h2>
-  <main class="flex flex-col items-center justify-center">
-    <div style="display: flex; gap: 50px; align-items: center;">
-    </div>
-
-  <section class="grid grid-cols-3 gap-8 mx-auto w-full px-8 text-center text-xl items-start justify-center">
-
-  <div class="flex flex-col px-4">
-    <h3 class="text-2xl mb-4">Store Info</h3>
-    <p id="main">Hasnt been changed</p>
-  </div>
-
-  <div class="flex flex-col px-4 max-h-[1000px] max-w-[800px] overflow-x-auto">
-    <div id="productGrid" class="grid grid-cols-2 gap-4 pb-4">
-      <div class="col-span-2 text-left text-lg font-bold text-yellow-400 mt-2 mb-1 border-b border-gray-700 pb-1">Upgrades</div>
-      <div class="col-span-2 text-left text-lg font-bold text-green-400 mt-4 mb-1 border-b border-gray-700 pb-1">Items</div>
-      <div class="col-span-2 text-left text-lg font-bold text-blue-400 mt-4 mb-1 border-b border-gray-700 pb-1">Products</div>
-    </div>
-  </div>
-
-  <div class="flex flex-col px-4 gap-4">
-    <h3 class="text-2xl mb-4">Selected Item</h3>
-
-    <div class="border border-gray-400 rounded-xl p-4 min-h-[260px] text-left">
-      <p id="selectedProductName" class="text-2xl mb-3 text-center">Select an item</p>
-      <p id="selectedProductOwned">Owned: --</p>
-      <p id="selectedProductBuyPrice">Buy Price: --</p>
-      <p id="selectedProductSellPrice">Sell Price: --</p>
-      <p id="selectedProductTotal" class="mt-2 text-green-400">Total Cost: --</p>
-
-      <div class="flex flex-row mt-8 px-4 gap-4 items-center">
-        <button id="buySelectedStock" class="flex border px-4 py-2 rounded hover:bg-gray-200 hover:text-black transition hidden">
-          Buy
-        </button>
+    <section class="absolute top-[12%] left-[8%] w-[35%] h-[73%] overflow-y-auto px-6 py-4">
+      <div id="productGrid" class="grid grid-cols-2 lg:grid-cols-3 gap-6 pb-8 pt-4">
         
-        <div id="amountSelectorContainer" class="flex justify-center gap-2 hidden">
-          <button class="select-none border px-3 py-1 rounded buyAmountButton hover:bg-gray-200 hover:text-black transition" data-amount="1">x1</button>
-          <button class="select-none border px-3 py-1 rounded buyAmountButton hover:bg-gray-200 hover:text-black transition" data-amount="5">x5</button>
-          <button class="select-none border px-3 py-1 rounded buyAmountButton hover:bg-gray-200 hover:text-black transition" data-amount="10">x10</button>
-        </div>
+        <div class="col-span-full text-left text-xl font-bold text-yellow-700 mt-2 mb-1 border-b border-gray-400 pb-2">Upgrades</div>
+        <div class="col-span-full text-left text-xl font-bold text-green-700 mt-6 mb-1 border-b border-gray-400 pb-2">Items</div>
+        <div class="col-span-full text-left text-xl font-bold text-blue-700 mt-6 mb-1 border-b border-gray-400 pb-2">Products</div>
+      
       </div>
-    </div>
+    </section>
 
-    <p id="main2" class="text-left text-m text-gray-400">This hasn't been changed</p>
-    <button id="advanceGame" class="select-none border border-gray-400 px-4 py-2 rounded hover:bg-gray-200 hover:text-black hover:-translate-y-1 transition">
-      Next
-    </button>
-  </div>
-  </section>
-  </main>
+    <section class="flash absolute top-[11%] left-[49%] w-[22%] h-[31%] flex flex-col items-center justify-center px-4 text-center">
+        <p id="main" class="text-lg font-medium">Hasn't been changed</p>
+        <p id="main2" class="text-sm text-gray-600 mt-2 mb-4">This hasn't been changed</p>
+        
+        <button id="advanceGame" class="mt-2 select-none border-2 border-gray-800 px-6 py-2 rounded hover:bg-gray-800 hover:text-white transition font-bold shadow-sm">
+          Next
+        </button>
+    </section>
 
-  <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-gray-100">
-      <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
-      Made by Resturant Simulator, SoftDev P04 | 2026
-      </a>
-  </footer>
+    <section class="absolute top-[56%] left-[49%] w-[43%] h-[30%] px-8 py-4 flex flex-col justify-between">
+        
+        <div class="w-full">
+          <p id="selectedProductName" class="text-2xl font-bold mb-3 border-b border-gray-400 pb-2 text-center">Select an item</p>
+          
+          <div class="grid grid-cols-2 gap-4 text-lg px-4">
+            <div class="flex flex-col gap-1">
+              <p id="selectedProductOwned">Owned: --</p>
+              <p id="selectedProductBuyPrice">Buy Price: --</p>
+            </div>
+            <div class="flex flex-col gap-1">
+              <p id="selectedProductSellPrice">Sell Price: --</p>
+              <p id="selectedProductTotal" class="text-green-700 font-bold">Total Cost: --</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 items-center mt-2">
+          <button id="buySelectedStock" class="w-1/2 border-2 border-gray-800 px-4 py-2 rounded hover:bg-gray-800 hover:text-white transition hidden font-bold">
+            Buy
+          </button>
+          
+          <div id="amountSelectorContainer" class="flex justify-center gap-3 hidden">
+            <button class="select-none border-2 border-gray-800 px-4 py-1 rounded buyAmountButton hover:bg-gray-800 hover:text-white transition font-bold" data-amount="1">x1</button>
+            <button class="select-none border-2 border-gray-800 px-4 py-1 rounded buyAmountButton hover:bg-gray-800 hover:text-white transition font-bold" data-amount="5">x5</button>
+            <button class="select-none border-2 border-gray-800 px-4 py-1 rounded buyAmountButton hover:bg-gray-800 hover:text-white transition font-bold" data-amount="10">x10</button>
+          </div>
+        </div>
+
+    </section>
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
+  </main>
 </body>
 </html>
