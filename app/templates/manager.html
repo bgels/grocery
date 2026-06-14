@@ -17,6 +17,8 @@
 
 <body class=" min-h-screen flex flex-col relative" data-page="manager">
   <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+    <img src="{{ url_for('static', filename='images/table.png') }}">
+  </div>
   </div>
 
   <h2 class="mx-auto text-center text-2xl">Manager!!</h2>
@@ -26,12 +28,12 @@
 
   <section class="grid grid-cols-3 gap-8 mx-auto w-full px-8 text-center text-xl items-start justify-center">
 
-  <div class="flex flex-col px-4">
+  <div class="paper p-4 min-h-[260px] text-left">
     <h3 class="text-2xl mb-4">Store Info</h3>
     <p id="main">Hasnt been changed</p>
   </div>
 
-  <div class="flex flex-col px-4 max-h-[1000px] max-w-[800px] overflow-x-auto">
+  <div class="paper flex flex-col px-4">
     <div id="productGrid" class="grid grid-cols-2 gap-4 pb-4">
       <div class="col-span-2 text-left text-lg font-bold text-yellow-400 mt-2 mb-1 border-b border-gray-700 pb-1">Upgrades</div>
       <div class="col-span-2 text-left text-lg font-bold text-green-400 mt-4 mb-1 border-b border-gray-700 pb-1">Items</div>
@@ -42,7 +44,7 @@
   <div class="flex flex-col px-4 gap-4">
     <h3 class="text-2xl mb-4">Selected Item</h3>
 
-    <div class="border border-gray-400 rounded-xl p-4 min-h-[260px] text-left">
+    <div class="paper p-4 min-h-[260px] text-left">
       <p id="selectedProductName" class="text-2xl mb-3 text-center">Select an item</p>
       <p id="selectedProductOwned">Owned: --</p>
       <p id="selectedProductBuyPrice">Buy Price: --</p>
