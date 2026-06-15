@@ -201,3 +201,8 @@ rickyL -- 2026-06-14 20:00
 -- frontend of settings page
 -- navbar
 
+yuL -- 2026-06-14 21:00
+-- Backgrounds for cashier + manager, front end polish for both screens
+-- set local tailwind instead of using cdn for speed
+-- proper routing and goober generations in js
+
