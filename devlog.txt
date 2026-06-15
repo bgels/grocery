@@ -184,6 +184,9 @@ junjieL --2026-06-05 08:00
 junjieL --2026-06-11 00:48
 -- art now has no more placeholder imgs for certain stock (the imgs were added)
 
+rickyL -- 2026-06-11 08:00
+-- added leaderboard functions
+
 yuL -- 2026-06-11 23:00
 -- added customer rejection system 
 -- added time limit to serve customers
@@ -193,3 +196,8 @@ emilyM -- 2026-06-12 03:20
 
 yuL -- 2026-06-012 08:00
 -- upgrades system
+
+rickyL -- 2026-06-14 20:00
+-- frontend of settings page
+-- navbar
+

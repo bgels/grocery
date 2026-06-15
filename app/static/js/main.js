@@ -162,7 +162,7 @@ async function timeOutCustomer() {
     game.money = roundMoney(game.money - penalty);
     game.message = `Customer left angrily. -$${penalty.toFixed(2)} penalty.`;
 
-    checkBankruptcy();
+    await checkBankruptcy();
     if (game.state === GAMESTATE.GAME_OVER) return;
 
     replaceCurrentCustomer();
@@ -182,7 +182,7 @@ async function rejectCustomer() {
         const penalty = roundMoney((game.money * 0.05) + 2);
         game.money = roundMoney(game.money - penalty);
         game.message = `Warning: Kicked customer out! -$${penalty.toFixed(2)} penalty.`;
-        checkBankruptcy();
+        await checkBankruptcy();
     }
 
     if (game.state === GAMESTATE.GAME_OVER) return;
@@ -192,12 +192,13 @@ async function rejectCustomer() {
     render();
 }
 
-function checkBankruptcy() {
+async function checkBankruptcy() {
     if (game.money <= 0) {
         game.money = 0;
         game.state = GAMESTATE.GAME_OVER;
         game.message = "BANKRUPT! You ran out of money.";
         stopCustomerTimer();
+        await saveGame();
         render();
     }
 }
@@ -229,6 +230,10 @@ async function advanceGame() {
             await saveGame();
             changeUrl("cashier");
             break;
+
+        case GAMESTATE.GAME_OVER:
+        window.location.href = "/leaderboard";
+        break;
 
         default:
             game.message = "Cannot do that right now.";
@@ -589,6 +594,11 @@ function render() {
             manager_console.innerText = `${game.message}\n\n`;
             return;
         }
+    }
+    if(game.state === GAMESTATE.GAME_OVER){
+        main.innerText = `GG! \n\nFinal Stats:\n  Money: $${game.money.toFixed(2)}\n  Customers Served: ${game.stats.served}\n  Total Revenue: $${game.stats.revenue.toFixed(2)}`;
+        gameMain.innerText = `Game Over.\n\nPress 'Next' to view the Leaderboard.`;
+        return;
     }
 
     // --- Normal gameplay screen
