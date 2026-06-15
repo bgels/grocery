@@ -76,5 +76,60 @@
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
   </main>
+   <div class="fixed left-6 top-1/2 -translate-y-1/2 flex flex-col gap-4">
+    <a href="/"
+       class="group flex items-center justify-center w-14 h-14 rounded-full bg-blue-500 text-white overflow-hidden transition-all duration-300 hover:w-40 hover:rounded-2xl">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="w-6 h-6 flex-shrink-0"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l9-9 9 9M5 10v10h14V10"/>
+        </svg>
+
+        <span class="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover:max-w-24 group-hover:ml-3">
+            Home
+        </span>
+    </a>
+    <a href="/settings"
+       class="group flex items-center justify-center w-14 h-14 rounded-full bg-gray-700 text-white overflow-hidden transition-all duration-300 hover:w-40 hover:rounded-2xl">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="w-6 h-6 flex-shrink-0"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11.983 5.25a1.5 1.5 0 013.034 0l.168 1.2a6.75 6.75 0 012.007.831l1.106-.493a1.5 1.5 0 011.964.803l.72 1.56a1.5 1.5 0 01-.488 1.888l-.938.77a6.78 6.78 0 010 1.662l.938.77a1.5 1.5 0 01.488 1.888l-.72 1.56a1.5 1.5 0 01-1.964.803l-1.106-.493a6.75 6.75 0 01-2.007.831l-.168 1.2a1.5 1.5 0 01-3.034 0l-.168-1.2a6.75 6.75 0 01-2.007-.831l-1.106.493a1.5 1.5 0 01-1.964-.803l-.72-1.56a1.5 1.5 0 01.488-1.888l.938-.77a6.78 6.78 0 010-1.662l-.938-.77a1.5 1.5 0 01-.488-1.888l.72-1.56a1.5 1.5 0 011.964-.803l1.106.493a6.75 6.75 0 012.007-.831l.168-1.2z"/>
+        </svg>
+
+        <span class="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover:max-w-24 group-hover:ml-3">
+            Settings
+        </span>
+    </a>
+
+    <a href="/logout"
+       class="group flex items-center justify-center w-14 h-14 rounded-full bg-red-500 text-white overflow-hidden transition-all duration-300 hover:w-40 hover:rounded-2xl">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="w-6 h-6 flex-shrink-0"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H9m4 8H5a2 2 0 01-2-2V6a2 2 0 012-2h8"/>
+        </svg>
+
+        <span class="max-w-0 overflow-hidden whitespace-nowrap transition-all duration-300 group-hover:max-w-24 group-hover:ml-3">
+            Logout
+        </span>
+    </a>
+
+</div>
 </body>
 </html>
