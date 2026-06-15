@@ -15,7 +15,6 @@ c.executescript("""
     DROP TABLE IF EXISTS Items;
     DROP TABLE IF EXISTS Products;
     DROP TABLE IF EXISTS Upgrades;
-    DROP TABLE IF EXISTS Customers;
     DROP TABLE IF EXISTS User;
     """
 )
@@ -24,14 +23,6 @@ c.executescript("""
     CREATE TABLE User (
         username TEXT PRIMARY KEY,
         password TEXT
-    );
-
-    CREATE TABLE Customers (
-        customer_id TEXT PRIMARY KEY,
-        name TEXT,
-        sprite TEXT,
-        traits TEXT,
-        budget INTEGER
     );
 
     CREATE TABLE Game (
@@ -44,8 +35,7 @@ c.executescript("""
         killed INTEGER,
         revenue INTEGER,
         state TEXT,
-        FOREIGN KEY (username) REFERENCES User(username),
-        FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+        FOREIGN KEY (username) REFERENCES User(username)
     );
 
     CREATE TABLE Items (
