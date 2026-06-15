@@ -1,50 +1,39 @@
 <!DOCTYPE html>
-<!--
-  no coupon works // teamname
-  Roster: Yu Lu, Ricky Lin, Jun Jie Li, Emily Mai
-  SoftDev
- -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grocery Simulator</title>
-
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{{ url_for('static', filename='js/tailwindcss.js') }}"></script>
 </head>
 
-<body class="min-h-screen flex flex-col relative overflow-auto" data-page="cashier">
-  <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-    <img src="{{ url_for('static', filename='images/wipStoreInside.png') }}" class="absolute inset-0 w-full h-full object-cover render-pixel opacity-90">
-  </div>
+<body class="register min-h-screen bg-black flex items-center justify-center overflow-hidden" data-page="cashier">
+  
+  <main class="relative w-full max-w-[1920px] aspect-video bg-black-200 shadow-2xl overflow-hidden">
+    
+    <img src="{{ url_for('static', filename='images/day_StoreInside.png') }}" class="absolute inset-0 w-full h-full object-cover opacity-75 z-0" style="image-rendering: pixelated;">
 
-  <main class="flex flex-col items-center">
-    <div style="display: flex; align-items: center;">
-      <div class="fixed">
-        <div style="position: fixed; top: 45%; left: 0; width: 1000px; height: 500px;">
-          <img src="/static/images/body/body-blue.png" style="position: absolute; top: -30%; left: 0%; width: 40%; height: 100%; image-rendering: pixelated;"/>
-          <img src="/static/images/eyes/eyes-joyful.png" style="position: absolute; top: -30%; left: 0%; width: 40%; height: 100%; image-rendering: pixelated;"/>
-          <img src="/static/images/mouth/mouth-u.png" style="position: absolute; top: -30%; left: 0%; width: 40%; height: 100%; image-rendering: pixelated;"/>
-          <img src="/static/images/cash_register.png" style="position: absolute; top: -2.5%; left: 0%; width: 100%; height: 100%; image-rendering: pixelated;"/>
-        </div>
-        </div>
-      <div class="character" style="position: fixed; top: 35%; left: 70%; width: 500px; height: 500px;">
-        <img data-art-layer="body" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;" src=""/>
-        <img data-art-layer="eyes" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;" src=""/>
-        <img data-art-layer="mouth" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;" src=""/>
-        <img data-art-layer="accessories" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; image-rendering: pixelated;" src=""/>
+    <div class="character absolute left-[36%] bottom-[12%] w-[25%] h-[65%] z-10 pointer-events-none">
+      <img data-art-layer="body" class="absolute inset-0 w-full h-full object-contain" style="image-rendering: pixelated;" src=""/>
+      <img data-art-layer="eyes" class="absolute inset-0 w-full h-full object-contain" style="image-rendering: pixelated;" src=""/>
+      <img data-art-layer="mouth" class="absolute inset-0 w-full h-full object-contain" style="image-rendering: pixelated;" src=""/>
+      <img data-art-layer="accessories" class="absolute inset-0 w-full h-full object-contain" style="image-rendering: pixelated;" src=""/>
+    </div>
+
+    <div class="absolute left-[2%] bottom-[10%] w-[33%] flex flex-col justify-end z-30">
+      <div class="w-full bg-white/95 border-4 border-gray-800 rounded-lg p-8 text-center text-xl font-bold shadow-lg h-[500px] flex flex-col justify-center gap-6 select-none">
+          <p id="main" class="text-gray-500"> ... </p>
+          <p id="main2" class="text-black"> ... </p>
       </div>
     </div>
-    <section class="fixed bottom-8 flex flex-row mx-auto text-center text-2xl items-center justify-center bg-white/90">
-      <div class = "flex px-8 overflow-y-scroll">
-        <p id="main" class=""> ... </p>
-      </div>
-      <div class = "flex flex-col px-8">
-        <p id="main2"> ... </p>
-        <div id="keypad-container" class="relative z-40 mt-4 select-none">
-          <section class="flex flex-col items-center justify-center w-[375px] h-[250px] rounded-lg shadow-2xl bg-[length:100%_100%] bg-no-repeat bg-center" style="background-image: url('{{ url_for('static', filename='images/keypad/keypadbase.png') }}'); image-rendering: pixelated;">
-            <div class="keypad flex flex-row gap-[0px] w-full justify-left">
+
+    <div class="absolute right-[5%] bottom-[8%] w-[35%] flex flex-col items-center justify-end z-30">
+
+      <div id="keypad-container" class="relative select-none scale-125 transform origin-bottom mt-8 mb-12">
+        <section class="flex flex-col items-center justify-center w-[375px] h-[250px] rounded-lg shadow-2xl bg-[length:100%_100%] bg-no-repeat bg-center" style="background-image: url('{{ url_for('static', filename='images/keypad/keypadbase.png') }}'); image-rendering: pixelated;">
+          
+          <div class="keypad flex flex-row gap-[0px] w-full justify-left">
               <div class="ml-[31px] grid grid-cols-[60px_14px_55px_20px_56px] grid-rows-[40px_45px_40px_40px] gap-x-[0px] gap-y-[11px]">
                 <button id="numpad_1" type="button" value="1" class="relative flex items-center justify-center w-full h-[full] text-black font-bold text-2xl bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/baseButton.png') }}'); image-rendering: pixelated;">1</button>
                 <div></div>
@@ -76,28 +65,32 @@
                 <button id="numpad_submit" type="button" class="flex-1 relative flex items-center justify-center w-full bg-[length:100%_100%] bg-no-repeat bg-center active:scale-[0.98] active:translate-y-1 transition-transform drop-shadow-md" style="background-image: url('{{ url_for('static', filename='images/keypad/enterButton.png') }}'); image-rendering: pixelated;"></button>
                 <button type="button" value="C" class="flex-1 relative flex items-center justify-center w-full bg-[length:100%_100%] bg-no-repeat bg-center active:scale-95 active:translate-y-1 transition-transform drop-shadow-md"></button>
               </div>
-            </div>
-          </section>
-        </div>
-        <button id="advanceGame" class="select-none hover:text-gray-300 hover:-translate-y-1 transition letter-hover-text">
-          NEXT
-          <img src="{{ url_for('static', filename='images/items/Ammo.png') }}" class="w-16 h-16 image-rendering-pixelated" />
-        </button>
-        <!--<button id="nextCustomer" class="select-none hover:text-gray-300 hover:-translate-y-1 transition">Next Customer</button> -->
-        <button id="gunButton" class="hover:scale-150 transition-transform hover:translate-x-20">
-          <img src="{{ url_for('static', filename='images/items/Ammo.png') }}" class="w-16 h-16 image-rendering-pixelated" />
-        </button>
-        <footer class="mb-12 pr-6 pt-6 text-center text-sm/8 text-black-100">
-        <a href="https://github.com/bgels/RestaurantSimulator" class="select-none hover:text-gray-300 transition">
-        Made by Resturant Simulator, SoftDev P04 | 2026
-        </a>
-        </footer>
+          </div>
+        </section>
       </div>
-    </section>
+
+      <div class="flex flex-row gap-12 mt-4 items-center justify-center w-full">
+        <button id="gunButton" class="hover:scale-110 transition-transform active:scale-95 drop-shadow-xl">
+          <img src="{{ url_for('static', filename='images/items/Ammo.png') }}" class="w-20 h-20" style="image-rendering: pixelated;" />
+          <p class="text-red-400">Skip customer?</p>
+          <p class="text-red-400">(-1 ammo OR money penalty!)</p>
+        </button>
+        <button id="advanceGame" class="bg-gray-800 text-white font-bold text-3xl px-8 py-4 rounded-xl border-4 border-gray-600 hover:bg-gray-700 active:scale-95 transition-transform flex items-center gap-4 shadow-xl">
+          GO TO MANAGEMENT
+        </button>
+      </div>
+      
+    </div>
+
+    <footer class="absolute bottom-4 w-full text-center text-sm font-bold text-white/40 z-40">
+      <a href="https://github.com/bgels/RestaurantSimulator" class="hover:text-white transition">
+        Made by Restaurant Simulator, SoftDev P04 | 2026
+      </a>
+    </footer>
   </main>
 
-
   <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/tailwindcss.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script type="module" src="{{ url_for('static', filename='js/animate.js') }}"></script>
 </body>

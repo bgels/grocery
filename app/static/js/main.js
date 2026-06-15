@@ -15,7 +15,7 @@ const usingLocalstorage = true;
 const dailyMoneyGoal = 20;
 const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
 const budgetMultiplier = .5;
-const timeLimit = 10;
+const timeLimit = 15;
 
 async function saveGame(){
 
@@ -96,7 +96,7 @@ const game = {
     timeRemaining: 10,
     message: "Console here",
     state: GAMESTATE.DAY_START,
-    hours: 2,
+    hours: 12,
 
     customerQueue: [],
     currentCustomer: null,
@@ -575,7 +575,19 @@ function render() {
                 timerUI.classList.add("text-red-500");
             }
         } else {
-            timerUI.classList.add("hidden"); // Hide it during night/manager phases
+            timerUI.classList.add("hidden");
+        }
+    }
+    const advanceBtn = document.getElementById("advanceGame");
+    if (advanceBtn) {
+        if (game.state === GAMESTATE.DAY_END || game.state === GAMESTATE.GAME_OVER) {
+            advanceBtn.disabled = false;
+            advanceBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            advanceBtn.classList.add("hover:bg-gray-700", "active:scale-95");
+        } else {
+            advanceBtn.disabled = true;
+            advanceBtn.classList.add("opacity-50", "cursor-not-allowed");
+            advanceBtn.classList.remove("hover:bg-gray-700", "active:scale-95");
         }
     }
 
@@ -590,7 +602,7 @@ function render() {
     // --- NIGHT_START screen
     if(game.state === GAMESTATE.NIGHT_START){
         if(page === "manager"){
-            manager_main.innerText = `[Shop Screen]\n\nDay ${game.day - 1} complete!\n\nMoney: $${game.money.toFixed(2)}\n\nPreparing for Day ${game.day}...`;
+            manager_main.innerText = `Day ${game.day - 1} complete!\nMoney: $${game.money.toFixed(2)}\nPreparing for Day ${game.day}...`;
             manager_console.innerText = `${game.message}\n\n`;
             return;
         }
@@ -675,6 +687,7 @@ async function init() {
         gameMain = cashierUI.gameMain;
         if (game.state === GAMESTATE.CUSTOMER_CHECKOUT && game.currentCustomer) {
             startCustomerTimer();
+            renderRandomCharacter();
         }
     }
     if (page === "manager") {

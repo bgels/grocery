@@ -19,7 +19,7 @@ export function initCashierPage({
     if (!timerDisplay) {
         timerDisplay = document.createElement("div");
         timerDisplay.id = "timerDisplay";
-        timerDisplay.className = "keypad fixed bottom-8 right-8 text-4xl text-red-500 font-bold bg-black/80 px-6 py-4 border-4 border-red-900 z-50 select-none pointer-events-none shadow-lg hidden";
+        timerDisplay.className = "keypad fixed top-8 text-4xl text-red-500 font-bold bg-black/80 px-6 py-4 border-4 border-red-900 z-50 select-none pointer-events-none shadow-lg hidden";
         timerDisplay.style = "image-rendering: pixelated;"; 
         document.body.appendChild(timerDisplay);
     }
