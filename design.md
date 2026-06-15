@@ -94,7 +94,7 @@ Each member must own meaningful deliverables.
 ---
 
 # Database Design
-![Database Algorithm](https://www.dropbox.com/scl/fi/7mjuj7mddsr1s0fxbd4o6/database_diagram-Emily-Mai.png?rlkey=hd45j6xurq6l4g9v8vmwat27k&st=653ttjg8&raw=1){ width=40% }
+![Database Algorithm](https://www.dropbox.com/scl/fi/z5up35gj4gjlx5woeqldk/Screenshot_2026-06-15_at_1.43.07_AM.png?rlkey=z121o4fmwro12brenzhukm7sb&st=4ymyf3c4&dl=0&raw=1){ width=40% }
 
 # Component map
 ![Component Map](https://www.dropbox.com/scl/fi/aqi3a8w8mifv67vmjqv3i/Screenshot-2026-05-12-051555-Ricky.png?rlkey=tqrsy5woufeyw7z3dcppncws9&st=m69otn3a&raw=1){ width=60% }
