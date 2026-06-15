@@ -379,7 +379,7 @@ function processPayment(changeGiven) {
         nextCustomer();
     } else {
         game.state = GAMESTATE.CUSTOMER_CHECKOUT;
-        game.message = `Wrong change! Expected: $${expectedChange.toFixed(2)}`;
+        game.message = `Wrong change!`;
         render();
     }
 }
