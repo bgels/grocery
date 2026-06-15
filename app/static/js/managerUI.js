@@ -57,7 +57,7 @@ export function initManagerPage({
         productGrid.innerHTML = "";
         const upgradeHeader = document.createElement("div");
         upgradeHeader.className = "col-span-2 text-left text-lg font-bold text-yellow-400 mt-2 mb-1 border-b border-gray-700 pb-1";
-        upgradeHeader.innerText = "Upgrades";
+        upgradeHeader.textContent = "Upgrades";
         productGrid.appendChild(upgradeHeader);
 
         for (const id in UPGRADES) {
@@ -73,7 +73,7 @@ export function initManagerPage({
         }
         const itemHeader = document.createElement("div");
         itemHeader.className = "col-span-2 text-left text-lg font-bold text-green-400 mt-4 mb-1 border-b border-gray-700 pb-1";
-        itemHeader.innerText = "Items";
+        itemHeader.textContent = "Items";
         productGrid.appendChild(itemHeader);
 
         for (const id in ITEMS) {
@@ -89,7 +89,7 @@ export function initManagerPage({
         }
         const productHeader = document.createElement("div");
         productHeader.className = "col-span-2 text-left text-lg font-bold text-blue-400 mt-4 mb-1 border-b border-gray-700 pb-1";
-        productHeader.innerText = "Products";
+        productHeader.textContent = "Products";
         productGrid.appendChild(productHeader);
 
         for (const id in PRODUCT_CATALOG) {
@@ -121,11 +121,11 @@ export function initManagerPage({
     function renderSelectedProductPanel() {
         if (page !== "manager" || !selectedProductName) return;
         if (!selectedId) {
-            selectedProductName.innerText = "Select an item";
-            selectedProductOwned.innerText = "Owned: --";
-            selectedProductBuyPrice.innerText = "Buy Price: --";
-            selectedProductSellPrice.innerText = "Sell Price: --";
-            selectedProductTotal.innerText = "Total Cost: --";
+            selectedProductName.textContent = "Select an item";
+            selectedProductOwned.textContent = "Owned: --";
+            selectedProductBuyPrice.textContent = "Buy Price: --";
+            selectedProductSellPrice.textContent = "Sell Price: --";
+            selectedProductTotal.textContent = "Total Cost: --";
             if (buySelectedStockButton) buySelectedStockButton.classList.add("hidden");
             if (amountSelectorContainer) amountSelectorContainer.classList.add("hidden");
             return;
@@ -140,11 +140,11 @@ export function initManagerPage({
             const isMax = currentLevel >= upgrade.maxLevel;
             const cost = isMax ? 0 : getUpgradeCost(selectedId);
 
-            selectedProductName.innerText = upgrade.name;
-            selectedProductOwned.innerText = `Level: ${currentLevel} / ${upgrade.maxLevel}`;
-            selectedProductBuyPrice.innerText = isMax ? `Buy Price: MAXED` : `Buy Price: $${cost.toFixed(2)}`;
-            selectedProductSellPrice.innerText = `Sell Price: You can't sell this y'know...`;
-            selectedProductTotal.innerText = isMax ? `Total Cost: N/A` : `Total Cost: $${cost.toFixed(2)}`;
+            selectedProductName.textContent = upgrade.name;
+            selectedProductOwned.textContent = `Level: ${currentLevel} / ${upgrade.maxLevel}`;
+            selectedProductBuyPrice.textContent = isMax ? `Buy Price: MAXED` : `Buy Price: $${cost.toFixed(2)}`;
+            selectedProductSellPrice.textContent = `Sell Price: You can't sell this y'know...`;
+            selectedProductTotal.textContent = isMax ? `Total Cost: N/A` : `Total Cost: $${cost.toFixed(2)}`;
         } 
         else if (selectedType === 'item') {
             if (amountSelectorContainer) amountSelectorContainer.classList.remove("hidden");
@@ -153,11 +153,11 @@ export function initManagerPage({
             const cost = item.price;
             const totalCost = roundMoney(cost * selectedBuyAmount);
 
-            selectedProductName.innerText = item.name;
-            selectedProductOwned.innerText = `Owned: ${owned}`;
-            selectedProductBuyPrice.innerText = `Buy Price: $${cost.toFixed(2)}`;
-            selectedProductSellPrice.innerText = `Sell Price: You can't sell this y'know...`;
-            selectedProductTotal.innerText = `Total Cost: $${totalCost.toFixed(2)} for x${selectedBuyAmount}`;
+            selectedProductName.textContent = item.name;
+            selectedProductOwned.textContent = `Owned: ${owned}`;
+            selectedProductBuyPrice.textContent = `Buy Price: $${cost.toFixed(2)}`;
+            selectedProductSellPrice.textContent = `Sell Price: You can't sell this y'know...`;
+            selectedProductTotal.textContent = `Total Cost: $${totalCost.toFixed(2)} for x${selectedBuyAmount}`;
         } 
         else if (selectedType === 'product') {
             if (amountSelectorContainer) amountSelectorContainer.classList.remove("hidden");
@@ -165,11 +165,11 @@ export function initManagerPage({
             const owned = game.stock[selectedId] ? game.stock[selectedId].quantity : 0;
             const totalCost = roundMoney(product.buyPrice * selectedBuyAmount);
 
-            selectedProductName.innerText = product.name;
-            selectedProductOwned.innerText = `Owned: ${owned}`;
-            selectedProductBuyPrice.innerText = `Buy Price: $${product.buyPrice.toFixed(2)}`;
-            selectedProductSellPrice.innerText = `Sell Price: $${product.sellPrice.toFixed(2)}`;
-            selectedProductTotal.innerText = `Total Cost: $${totalCost.toFixed(2)} for x${selectedBuyAmount}`;
+            selectedProductName.textContent = product.name;
+            selectedProductOwned.textContent = `Owned: ${owned}`;
+            selectedProductBuyPrice.textContent = `Buy Price: $${product.buyPrice.toFixed(2)}`;
+            selectedProductSellPrice.textContent = `Sell Price: $${product.sellPrice.toFixed(2)}`;
+            selectedProductTotal.textContent = `Total Cost: $${totalCost.toFixed(2)} for x${selectedBuyAmount}`;
         }
     }
 

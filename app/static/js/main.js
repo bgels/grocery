@@ -11,7 +11,7 @@ export { game, rejectCustomer };
 // 4. Make other upgrades as needed
 
 
-const usingLocalstorage = true;
+const usingLocalstorage = false;
 const dailyMoneyGoal = 20;
 const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
 const budgetMultiplier = .5;
