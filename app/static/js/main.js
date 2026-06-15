@@ -94,7 +94,7 @@ const game = {
     money: 100,
     dailyGoal: 0,
     timeRemaining: 10,
-    message: "Console here",
+    message: "Console here! Click the Next button to begin a day!",
     state: GAMESTATE.DAY_START,
     hours: 12,
 

@@ -41,7 +41,7 @@ export function initManagerPage({
         selectedBuyAmount = 1;
         if(type === 'upgrade'){
             selectedProductImage.src = `/static/images/upgrades/${UPGRADES[id].name}.png`;
-        }else if(type === 'items'){
+        }else if(type === 'item'){
             selectedProductImage.src = `/static/images/items/${ITEMS[id].name}.png`;
         }else{
             selectedProductImage.src = `/static/images/ingredients/${PRODUCT_CATALOG[id].name}.png`;
