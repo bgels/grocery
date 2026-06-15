@@ -11,7 +11,7 @@ export { game, rejectCustomer };
 // 4. Make other upgrades as needed
 
 
-const usingLocalstorage = true;
+const usingLocalstorage = false;
 const dailyMoneyGoal = 20;
 const budgetVariance = Math.floor(Math.random() * 10) - 5; // change/nerf later
 const budgetMultiplier = .5;
@@ -579,17 +579,7 @@ function render() {
         }
     }
     const advanceBtn = document.getElementById("advanceGame");
-    if (advanceBtn) {
-        if (game.state === GAMESTATE.DAY_END || game.state === GAMESTATE.GAME_OVER) {
-            advanceBtn.disabled = false;
-            advanceBtn.classList.remove("opacity-50", "cursor-not-allowed");
-            advanceBtn.classList.add("hover:bg-gray-700", "active:scale-95");
-        } else {
-            advanceBtn.disabled = true;
-            advanceBtn.classList.add("opacity-50", "cursor-not-allowed");
-            advanceBtn.classList.remove("hover:bg-gray-700", "active:scale-95");
-        }
-    }
+   
 
     let text = "";
     // --- GAME_OVER screen
